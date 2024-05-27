@@ -1,5 +1,5 @@
 G01 - Marcin Targoński 247810*, Piotr Sokoliński 247790, Maciej Dominiak 247644
-* lider
+ - Lider (*)
 
 Płytka:
 LPC 1768/9
