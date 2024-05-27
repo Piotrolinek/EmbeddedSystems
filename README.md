@@ -1,4 +1,5 @@
 ***Systemy Wbudowane 2024, Politechnika Łódzka - informatyka stosowana***
+
 G01 - Marcin Targoński 247810*, Piotr Sokoliński 247790, Maciej Dominiak 247644
  - Lider (*)
 
