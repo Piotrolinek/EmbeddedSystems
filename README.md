@@ -2,10 +2,10 @@ G01 - Marcin Targoński 247810*, Piotr Sokoliński 247790, Maciej Dominiak 24764
  - Lider (*)
 
 Płytka:
-LPC 1768/9
+***LPC 1768/9***
 
 Nazwa projektu:
-Kontroler rolet okiennych
+***Kontroler rolet okiennych***
 
 Wymagane peryferia:
 Płytka
@@ -25,5 +25,5 @@ Funkcjonalności:
 9. Przycisk do sterowania ręcznego
 10. Dźwięki przy przyciskach
 
-Checkpoint:
+- [x] Checkpoint:
 Podłączenie silnika i sterowanie nim
