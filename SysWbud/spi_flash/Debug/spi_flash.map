@@ -1,0 +1,1027 @@
+Archive member included to satisfy reference by file (symbol)
+
+C:\Users\247810\Downloads\sysWbud24_05\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
+                              ./src/cr_startup_lpc17.o (SystemInit)
+C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+                              ./src/main.o (flash_init)
+C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+                              C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o) (GPIO_SetDir)
+C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+                              ./src/main.o (PINSEL_ConfigPin)
+C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+                              ./src/main.o (SSP_Init)
+C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+                              ./src/main.o (Timer0_Wait)
+C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+                              ./src/main.o (UART_Init)
+C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+                              C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o) (CLKPWR_SetPCLKDiv)
+c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/thumb/v7-m/nofp\libgcc.a(_aeabi_uldivmod.o)
+                              C:\Users\247810\Downloads\sysWbud24_05\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o) (__aeabi_uldivmod)
+c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/thumb/v7-m/nofp\libgcc.a(_udivmoddi4.o)
+                              c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/thumb/v7-m/nofp\libgcc.a(_aeabi_uldivmod.o) (__udivmoddi4)
+c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/thumb/v7-m/nofp\libgcc.a(_dvmd_tls.o)
+                              c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/thumb/v7-m/nofp\libgcc.a(_aeabi_uldivmod.o) (__aeabi_ldiv0)
+c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libc.a(lib_a-memset.o)
+                              ./src/main.o (memset)
+c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libc.a(lib_a-strlen-stub.o)
+                              C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o) (strlen)
+
+Discarded input sections
+
+ .group         0x00000000        0xc ./src/cr_startup_lpc17.o
+ .group         0x00000000        0xc ./src/cr_startup_lpc17.o
+ .group         0x00000000        0xc ./src/cr_startup_lpc17.o
+ .group         0x00000000        0xc ./src/cr_startup_lpc17.o
+ .group         0x00000000        0xc ./src/cr_startup_lpc17.o
+ .group         0x00000000        0xc ./src/cr_startup_lpc17.o
+ .group         0x00000000        0xc ./src/cr_startup_lpc17.o
+ .text          0x00000000        0x0 ./src/cr_startup_lpc17.o
+ .data          0x00000000        0x0 ./src/cr_startup_lpc17.o
+ .bss           0x00000000        0x0 ./src/cr_startup_lpc17.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .group         0x00000000        0xc ./src/main.o
+ .text          0x00000000        0x0 ./src/main.o
+ .debug_macro   0x00000000      0xaa8 ./src/main.o
+ .debug_macro   0x00000000       0x22 ./src/main.o
+ .debug_macro   0x00000000       0x8e ./src/main.o
+ .debug_macro   0x00000000       0x51 ./src/main.o
+ .debug_macro   0x00000000      0x103 ./src/main.o
+ .debug_macro   0x00000000       0x6a ./src/main.o
+ .debug_macro   0x00000000      0x1df ./src/main.o
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
+ .text          0x00000000        0x0 C:\Users\247810\Downloads\sysWbud24_05\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
+ .bss           0x00000000        0x0 C:\Users\247810\Downloads\sysWbud24_05\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
+ .text.SystemCoreClockUpdate
+                0x00000000      0x274 C:\Users\247810\Downloads\sysWbud24_05\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
+ .debug_macro   0x00000000       0x1c C:\Users\247810\Downloads\sysWbud24_05\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
+ .debug_macro   0x00000000      0x2c7 C:\Users\247810\Downloads\sysWbud24_05\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .text          0x00000000        0x0 C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .text.flash_setToBinaryPageSize
+                0x00000000       0x54 C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .debug_macro   0x00000000      0xaa2 C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .debug_macro   0x00000000       0x1c C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .debug_macro   0x00000000       0x22 C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .debug_macro   0x00000000       0x10 C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .debug_macro   0x00000000      0x12e C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .debug_macro   0x00000000      0x5b3 C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .debug_macro   0x00000000      0x7b7 C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .debug_macro   0x00000000      0x2c7 C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .debug_macro   0x00000000       0x64 C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .debug_macro   0x00000000      0x2a6 C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .text          0x00000000        0x0 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .data          0x00000000        0x0 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .bss           0x00000000        0x0 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .text.FIO_HalfWordGetPointer
+                0x00000000       0x70 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .text.FIO_ByteGetPointer
+                0x00000000       0x70 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .text.GPIO_ReadValue
+                0x00000000       0x2a C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .text.GPIO_IntCmd
+                0x00000000       0x70 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .text.GPIO_GetIntStatus
+                0x00000000       0xa0 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .text.GPIO_ClearInt
+                0x00000000       0x38 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .text.FIO_SetDir
+                0x00000000       0x24 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .text.FIO_SetValue
+                0x00000000       0x1e C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .text.FIO_ClearValue
+                0x00000000       0x1e C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .text.FIO_ReadValue
+                0x00000000       0x1c C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .text.FIO_IntCmd
+                0x00000000       0x24 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .text.FIO_GetIntStatus
+                0x00000000       0x26 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .text.FIO_ClearInt
+                0x00000000       0x1e C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .text.FIO_SetMask
+                0x00000000       0x4a C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .text.FIO_HalfWordSetDir
+                0x00000000       0xa2 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .text.FIO_HalfWordSetMask
+                0x00000000       0xa2 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .text.FIO_HalfWordSetValue
+                0x00000000       0x3e C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .text.FIO_HalfWordClearValue
+                0x00000000       0x3e C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .text.FIO_HalfWordReadValue
+                0x00000000       0x40 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .text.FIO_ByteSetDir
+                0x00000000       0x7c C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .text.FIO_ByteSetMask
+                0x00000000       0x88 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .text.FIO_ByteSetValue
+                0x00000000       0x3a C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .text.FIO_ByteClearValue
+                0x00000000       0x3a C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .text.FIO_ByteReadValue
+                0x00000000       0x3c C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .debug_macro   0x00000000      0xaa2 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .debug_macro   0x00000000       0x1c C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .debug_macro   0x00000000       0x22 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .debug_macro   0x00000000       0x10 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .debug_macro   0x00000000      0x12e C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .debug_macro   0x00000000      0x5b3 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .debug_macro   0x00000000      0x7b7 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .debug_macro   0x00000000      0x2c7 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .debug_macro   0x00000000       0x64 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .debug_macro   0x00000000       0x40 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .text          0x00000000        0x0 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .data          0x00000000        0x0 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .bss           0x00000000        0x0 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .text.PINSEL_ConfigTraceFunc
+                0x00000000       0x40 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .text.PINSEL_SetI2C0Pins
+                0x00000000       0x38 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .debug_macro   0x00000000      0xaa2 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .debug_macro   0x00000000       0x1c C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .debug_macro   0x00000000       0x22 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .debug_macro   0x00000000       0x10 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .debug_macro   0x00000000      0x12e C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .debug_macro   0x00000000      0x5b3 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .debug_macro   0x00000000      0x7b7 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .debug_macro   0x00000000      0x2c7 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .debug_macro   0x00000000       0x64 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .debug_macro   0x00000000      0x140 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .text          0x00000000        0x0 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .data          0x00000000        0x0 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .bss           0x00000000        0x0 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .text.SSP_DeInit
+                0x00000000       0x5c C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .text.SSP_LoopBackCmd
+                0x00000000       0x6c C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .text.SSP_SlaveOutputCmd
+                0x00000000       0x70 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .text.SSP_GetStatus
+                0x00000000       0x74 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .text.SSP_IntConfig
+                0x00000000       0x64 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .text.SSP_GetRawIntStatus
+                0x00000000       0x6c C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .text.SSP_GetRawIntStatusReg
+                0x00000000       0x3c C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .text.SSP_GetIntStatus
+                0x00000000       0x6c C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .text.SSP_ClearIntPending
+                0x00000000       0x54 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .text.SSP_DMACmd
+                0x00000000       0x90 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .debug_macro   0x00000000      0xaa2 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .debug_macro   0x00000000       0x1c C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .debug_macro   0x00000000       0x22 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .debug_macro   0x00000000       0x10 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .debug_macro   0x00000000      0x12e C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .debug_macro   0x00000000      0x5b3 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .debug_macro   0x00000000      0x7b7 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .debug_macro   0x00000000      0x2c7 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .debug_macro   0x00000000       0x64 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .debug_macro   0x00000000       0xda C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .text          0x00000000        0x0 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .data          0x00000000        0x0 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .bss           0x00000000        0x0 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .text.TIM_GetIntCaptureStatus
+                0x00000000       0x9c C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .text.TIM_ClearIntCapturePending
+                0x00000000       0x88 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .text.TIM_ConfigStructInit
+                0x00000000       0x38 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .text.TIM_DeInit
+                0x00000000       0x9c C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .text.TIM_ResetCounter
+                0x00000000       0x64 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .text.TIM_UpdateMatchValue
+                0x00000000       0x90 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .text.TIM_ConfigCapture
+                0x00000000       0xdc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .text.TIM_GetCaptureValue
+                0x00000000       0x74 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .text.Timer0_us_Wait
+                0x00000000       0x74 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .debug_macro   0x00000000      0xaa2 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .debug_macro   0x00000000       0x1c C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .debug_macro   0x00000000       0x22 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .debug_macro   0x00000000       0x10 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .debug_macro   0x00000000      0x12e C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .debug_macro   0x00000000      0x5b3 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .debug_macro   0x00000000      0x7b7 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .debug_macro   0x00000000      0x2c7 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .debug_macro   0x00000000       0x64 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .debug_macro   0x00000000      0x2fa C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .debug_macro   0x00000000       0xda C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .text          0x00000000        0x0 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .data          0x00000000        0x0 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .bss           0x00000000        0x0 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .text.UART_DeInit
+                0x00000000       0x9c C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .text.UART_ConfigStructInit
+                0x00000000       0x2c C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .text.UART_ReceiveByte
+                0x00000000       0x64 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .text.UART_Receive
+                0x00000000       0xba C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .text.UART_ForceBreak
+                0x00000000       0x78 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .text.UART_IntConfig
+                0x00000000      0x184 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .text.UART_GetLineStatus
+                0x00000000       0x64 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .text.UART_GetIntId
+                0x00000000       0x58 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .text.UART_CheckBusy
+                0x00000000       0x26 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .text.UART_FIFOConfig
+                0x00000000      0x15c C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .text.UART_FIFOConfigStructInit
+                0x00000000       0x2a C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .text.UART_ABCmd
+                0x00000000      0x134 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .text.UART_ABClearIntPending
+                0x00000000       0x74 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .text.UART_IrDAInvtInputCmd
+                0x00000000       0x7c C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .text.UART_IrDACmd
+                0x00000000       0x74 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .text.UART_IrDAPulseDivConfig
+                0x00000000       0x9c C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .text.UART_FullModemForcePinState
+                0x00000000       0xac C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .text.UART_FullModemConfigMode
+                0x00000000       0xc0 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .text.UART_FullModemGetStatus
+                0x00000000       0x30 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .text.UART_RS485Config
+                0x00000000      0x184 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .text.UART_RS485ReceiverCmd
+                0x00000000       0x46 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .text.UART_RS485Send
+                0x00000000       0x7a C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .text.UART_RS485SendSlvAddr
+                0x00000000       0x20 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .text.UART_RS485SendData
+                0x00000000       0x22 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .debug_macro   0x00000000      0xaa2 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .debug_macro   0x00000000       0x1c C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .debug_macro   0x00000000       0x22 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .debug_macro   0x00000000       0x10 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .debug_macro   0x00000000      0x12e C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .debug_macro   0x00000000      0x5b3 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .debug_macro   0x00000000      0x7b7 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .debug_macro   0x00000000      0x2c7 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .debug_macro   0x00000000       0x64 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .debug_macro   0x00000000      0x2fa C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .debug_macro   0x00000000       0xda C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+ .group         0x00000000        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+ .text          0x00000000        0x0 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+ .data          0x00000000        0x0 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+ .bss           0x00000000        0x0 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+ .text.__WFI    0x00000000        0xe C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+ .text.CLKPWR_Sleep
+                0x00000000       0x18 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+ .text.CLKPWR_DeepSleep
+                0x00000000       0x24 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+ .text.CLKPWR_PowerDown
+                0x00000000       0x24 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+ .text.CLKPWR_DeepPowerDown
+                0x00000000       0x24 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+ .debug_macro   0x00000000      0xaa2 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+ .debug_macro   0x00000000       0x1c C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+ .debug_macro   0x00000000       0x22 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+ .debug_macro   0x00000000       0x10 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+ .debug_macro   0x00000000      0x12e C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+ .debug_macro   0x00000000      0x5b3 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+ .debug_macro   0x00000000      0x7b7 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+ .debug_macro   0x00000000      0x2c7 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+ .debug_macro   0x00000000       0x64 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+ .data          0x00000000        0x0 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/thumb/v7-m/nofp\libgcc.a(_aeabi_uldivmod.o)
+ .bss           0x00000000        0x0 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/thumb/v7-m/nofp\libgcc.a(_aeabi_uldivmod.o)
+ .data          0x00000000        0x0 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/thumb/v7-m/nofp\libgcc.a(_udivmoddi4.o)
+ .bss           0x00000000        0x0 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/thumb/v7-m/nofp\libgcc.a(_udivmoddi4.o)
+ .ARM.extab     0x00000000        0x0 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/thumb/v7-m/nofp\libgcc.a(_udivmoddi4.o)
+ .data          0x00000000        0x0 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/thumb/v7-m/nofp\libgcc.a(_dvmd_tls.o)
+ .bss           0x00000000        0x0 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/thumb/v7-m/nofp\libgcc.a(_dvmd_tls.o)
+ .text          0x00000000        0x0 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libc.a(lib_a-memset.o)
+ .data          0x00000000        0x0 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libc.a(lib_a-memset.o)
+ .bss           0x00000000        0x0 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libc.a(lib_a-memset.o)
+ .text          0x00000000        0x0 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libc.a(lib_a-strlen-stub.o)
+ .data          0x00000000        0x0 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libc.a(lib_a-strlen-stub.o)
+ .bss           0x00000000        0x0 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libc.a(lib_a-strlen-stub.o)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+MFlash512        0x00000000         0x00080000         xr
+RamLoc32         0x10000000         0x00008000         xrw
+RamAHB32         0x2007c000         0x00008000         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD ./src/cr_startup_lpc17.o
+LOAD ./src/main.o
+LOAD C:\Users\247810\Downloads\sysWbud24_05\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a
+LOAD C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a
+LOAD C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a
+START GROUP
+LOAD c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/thumb/v7-m/nofp\libgcc.a
+LOAD c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libc.a
+LOAD c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libm.a
+LOAD c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libcr_newlib_semihost.a
+END GROUP
+                0x00000000                __base_MFlash512 = 0x0
+                0x00000000                __base_Flash = 0x0
+                0x00080000                __top_MFlash512 = 0x80000
+                0x00080000                __top_Flash = 0x80000
+                0x10000000                __base_RamLoc32 = 0x10000000
+                0x10000000                __base_RAM = 0x10000000
+                0x10008000                __top_RamLoc32 = 0x10008000
+                0x10008000                __top_RAM = 0x10008000
+                0x2007c000                __base_RamAHB32 = 0x2007c000
+                0x2007c000                __base_RAM2 = 0x2007c000
+                0x20084000                __top_RamAHB32 = 0x20084000
+                0x20084000                __top_RAM2 = 0x20084000
+
+.text           0x00000000     0x28d8
+ FILL mask 0xff
+                0x00000000                __vectors_start__ = ABSOLUTE (.)
+ *(.isr_vector)
+ .isr_vector    0x00000000       0xcc ./src/cr_startup_lpc17.o
+                0x00000000                g_pfnVectors
+                0x000000cc                . = ALIGN (0x4)
+                0x000000cc                __section_table_start = .
+                0x000000cc                __data_section_table = .
+                0x000000cc        0x4 LONG 0x28e0 LOADADDR (.data)
+                0x000000d0        0x4 LONG 0x10000000 ADDR (.data)
+                0x000000d4        0x4 LONG 0x58 SIZEOF (.data)
+                0x000000d8        0x4 LONG 0x28e0 LOADADDR (.data_RAM2)
+                0x000000dc        0x4 LONG 0x2007c000 ADDR (.data_RAM2)
+                0x000000e0        0x4 LONG 0x0 SIZEOF (.data_RAM2)
+                0x000000e4                __data_section_table_end = .
+                0x000000e4                __bss_section_table = .
+                0x000000e4        0x4 LONG 0x10000058 ADDR (.bss)
+                0x000000e8        0x4 LONG 0x18 SIZEOF (.bss)
+                0x000000ec        0x4 LONG 0x2007c000 ADDR (.bss_RAM2)
+                0x000000f0        0x4 LONG 0x0 SIZEOF (.bss_RAM2)
+                0x000000f4                __bss_section_table_end = .
+                0x000000f4                __section_table_end = .
+ *(.after_vectors*)
+ *(.text*)
+ .text.ResetISR
+                0x000000f4       0x58 ./src/cr_startup_lpc17.o
+                0x000000f4                ResetISR
+ .text.NMI_Handler
+                0x0000014c        0x6 ./src/cr_startup_lpc17.o
+                0x0000014c                NMI_Handler
+ .text.HardFault_Handler
+                0x00000152        0x6 ./src/cr_startup_lpc17.o
+                0x00000152                HardFault_Handler
+ .text.MemManage_Handler
+                0x00000158        0x6 ./src/cr_startup_lpc17.o
+                0x00000158                MemManage_Handler
+ .text.BusFault_Handler
+                0x0000015e        0x6 ./src/cr_startup_lpc17.o
+                0x0000015e                BusFault_Handler
+ .text.UsageFault_Handler
+                0x00000164        0x6 ./src/cr_startup_lpc17.o
+                0x00000164                UsageFault_Handler
+ .text.SVCall_Handler
+                0x0000016a        0x6 ./src/cr_startup_lpc17.o
+                0x0000016a                SVCall_Handler
+ .text.DebugMon_Handler
+                0x00000170        0x6 ./src/cr_startup_lpc17.o
+                0x00000170                DebugMon_Handler
+ .text.PendSV_Handler
+                0x00000176        0x6 ./src/cr_startup_lpc17.o
+                0x00000176                PendSV_Handler
+ .text.SysTick_Handler
+                0x0000017c        0x6 ./src/cr_startup_lpc17.o
+                0x0000017c                SysTick_Handler
+ .text.IntDefaultHandler
+                0x00000182        0x6 ./src/cr_startup_lpc17.o
+                0x00000182                TIMER2_IRQHandler
+                0x00000182                RIT_IRQHandler
+                0x00000182                I2C0_IRQHandler
+                0x00000182                USBActivity_IRQHandler
+                0x00000182                PWM1_IRQHandler
+                0x00000182                I2C1_IRQHandler
+                0x00000182                EINT2_IRQHandler
+                0x00000182                UART1_IRQHandler
+                0x00000182                EINT3_IRQHandler
+                0x00000182                CANActivity_IRQHandler
+                0x00000182                TIMER3_IRQHandler
+                0x00000182                UART0_IRQHandler
+                0x00000182                IntDefaultHandler
+                0x00000182                PLL0_IRQHandler
+                0x00000182                CAN_IRQHandler
+                0x00000182                PLL1_IRQHandler
+                0x00000182                SSP0_IRQHandler
+                0x00000182                I2S_IRQHandler
+                0x00000182                I2C2_IRQHandler
+                0x00000182                RTC_IRQHandler
+                0x00000182                TIMER0_IRQHandler
+                0x00000182                SPI_IRQHandler
+                0x00000182                EINT1_IRQHandler
+                0x00000182                TIMER1_IRQHandler
+                0x00000182                UART2_IRQHandler
+                0x00000182                ADC_IRQHandler
+                0x00000182                SSP1_IRQHandler
+                0x00000182                USB_IRQHandler
+                0x00000182                BOD_IRQHandler
+                0x00000182                WDT_IRQHandler
+                0x00000182                QEI_IRQHandler
+                0x00000182                EINT0_IRQHandler
+                0x00000182                DMA_IRQHandler
+                0x00000182                UART3_IRQHandler
+                0x00000182                MCPWM_IRQHandler
+                0x00000182                ENET_IRQHandler
+ .text.intToString
+                0x00000188       0xc8 ./src/main.o
+ .text.init_uart
+                0x00000250       0x5c ./src/main.o
+ .text.init_ssp
+                0x000002ac       0x78 ./src/main.o
+ .text.main     0x00000324      0x1b0 ./src/main.o
+                0x00000324                main
+ .text.check_failed
+                0x000004d4        0xc ./src/main.o
+                0x000004d4                check_failed
+ .text.SystemInit
+                0x000004e0      0x140 C:\Users\247810\Downloads\sysWbud24_05\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
+                0x000004e0                SystemInit
+ .text.SSPSend  0x00000620       0x30 C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .text.SSPReceive
+                0x00000650       0x30 C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+                0x00000650                SSPReceive
+ .text.exitDeepPowerDown
+                0x00000680       0x2c C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .text.readDeviceId
+                0x000006ac       0x38 C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .text.readStatus
+                0x000006e4       0x3c C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .text.pollIsBusy
+                0x00000720       0x3c C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .text.setAddressBytes
+                0x0000075c       0xf0 C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .text.flash_init
+                0x0000084c      0x148 C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+                0x0000084c                flash_init
+ .text.flash_write
+                0x00000994      0x10c C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+                0x00000994                flash_write
+ .text.flash_read
+                0x00000aa0       0x80 C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+                0x00000aa0                flash_read
+ .text.flash_getPageSize
+                0x00000b20       0x14 C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+                0x00000b20                flash_getPageSize
+ .text.GPIO_GetPointer
+                0x00000b34       0x70 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .text.GPIO_SetDir
+                0x00000ba4       0x4a C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+                0x00000ba4                GPIO_SetDir
+ .text.GPIO_SetValue
+                0x00000bee       0x2a C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+                0x00000bee                GPIO_SetValue
+ .text.GPIO_ClearValue
+                0x00000c18       0x2a C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+                0x00000c18                GPIO_ClearValue
+ *fill*         0x00000c42        0x2 ff
+ .text.set_PinFunc
+                0x00000c44       0x80 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .text.set_ResistorMode
+                0x00000cc4       0x80 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .text.set_OpenDrainMode
+                0x00000d44       0x68 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .text.PINSEL_ConfigPin
+                0x00000dac       0x46 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+                0x00000dac                PINSEL_ConfigPin
+ *fill*         0x00000df2        0x2 ff
+ .text.setSSPclock
+                0x00000df4       0xc4 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .text.SSP_Init
+                0x00000eb8       0x9c C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+                0x00000eb8                SSP_Init
+ .text.SSP_GetDataSize
+                0x00000f54       0x40 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+                0x00000f54                SSP_GetDataSize
+ .text.SSP_ConfigStructInit
+                0x00000f94       0x3c C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+                0x00000f94                SSP_ConfigStructInit
+ .text.SSP_Cmd  0x00000fd0       0x6c C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+                0x00000fd0                SSP_Cmd
+ .text.SSP_SendData
+                0x0000103c       0x40 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+                0x0000103c                SSP_SendData
+ .text.SSP_ReceiveData
+                0x0000107c       0x3c C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+                0x0000107c                SSP_ReceiveData
+ .text.SSP_ReadWrite
+                0x000010b8      0x34e C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+                0x000010b8                SSP_ReadWrite
+ *fill*         0x00001406        0x2 ff
+ .text.getPClock
+                0x00001408       0x58 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .text.converUSecToVal
+                0x00001460       0x5c C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .text.converPtrToTimeNum
+                0x000014bc       0x5c C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .text.TIM_GetIntStatus
+                0x00001518       0x98 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+                0x00001518                TIM_GetIntStatus
+ .text.TIM_ClearIntPending
+                0x000015b0       0x88 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+                0x000015b0                TIM_ClearIntPending
+ .text.TIM_Init
+                0x00001638      0x184 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+                0x00001638                TIM_Init
+ .text.TIM_Cmd  0x000017bc       0x70 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+                0x000017bc                TIM_Cmd
+ .text.TIM_ConfigMatch
+                0x0000182c      0x184 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+                0x0000182c                TIM_ConfigMatch
+ .text.Timer0_Wait
+                0x000019b0       0x76 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+                0x000019b0                Timer0_Wait
+ *fill*         0x00001a26        0x2 ff
+ .text.uart_set_divisors
+                0x00001a28      0x2a8 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .text.UART_Init
+                0x00001cd0      0x2e4 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+                0x00001cd0                UART_Init
+ .text.UART_SendByte
+                0x00001fb4       0x68 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+                0x00001fb4                UART_SendByte
+ .text.UART_Send
+                0x0000201c       0xea C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+                0x0000201c                UART_Send
+ *fill*         0x00002106        0x2 ff
+ .text.UART_TxCmd
+                0x00002108       0xc8 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+                0x00002108                UART_TxCmd
+ .text.UART_SendString
+                0x000021d0       0x28 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+                0x000021d0                UART_SendString
+ .text.CLKPWR_SetPCLKDiv
+                0x000021f8       0x90 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+                0x000021f8                CLKPWR_SetPCLKDiv
+ .text.CLKPWR_GetPCLKSEL
+                0x00002288       0x48 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+                0x00002288                CLKPWR_GetPCLKSEL
+ .text.CLKPWR_GetPCLK
+                0x000022d0       0x64 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+                0x000022d0                CLKPWR_GetPCLK
+ .text.CLKPWR_ConfigPPWR
+                0x00002334       0x58 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+                0x00002334                CLKPWR_ConfigPPWR
+ .text          0x0000238c       0x30 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/thumb/v7-m/nofp\libgcc.a(_aeabi_uldivmod.o)
+                0x0000238c                __aeabi_uldivmod
+ .text          0x000023bc      0x2c4 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/thumb/v7-m/nofp\libgcc.a(_udivmoddi4.o)
+                0x000023bc                __udivmoddi4
+ .text          0x00002680        0x4 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/thumb/v7-m/nofp\libgcc.a(_dvmd_tls.o)
+                0x00002680                __aeabi_idiv0
+                0x00002680                __aeabi_ldiv0
+ .text.memset   0x00002684       0xa0 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libc.a(lib_a-memset.o)
+                0x00002684                memset
+ .text.strlen   0x00002724       0x5c c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libc.a(lib_a-strlen-stub.o)
+                0x00002724                strlen
+ *(.rodata .rodata.* .constdata .constdata.*)
+ .rodata.str1.4
+                0x00002780      0x115 ./src/main.o
+ *fill*         0x00002895        0x3 ff
+ .rodata.str1.4
+                0x00002898        0xb C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ *fill*         0x000028a3        0x1 ff
+ .rodata.str1.4
+                0x000028a4        0xf C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ *fill*         0x000028b3        0x1 ff
+ .rodata.str1.4
+                0x000028b4       0x11 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ *fill*         0x000028c5        0x3 ff
+ .rodata.str1.4
+                0x000028c8       0x10 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+                0x000028d8                . = ALIGN (0x4)
+
+.glue_7         0x000028d8        0x0
+ .glue_7        0x000028d8        0x0 linker stubs
+
+.glue_7t        0x000028d8        0x0
+ .glue_7t       0x000028d8        0x0 linker stubs
+
+.vfp11_veneer   0x000028d8        0x0
+ .vfp11_veneer  0x000028d8        0x0 linker stubs
+
+.v4_bx          0x000028d8        0x0
+ .v4_bx         0x000028d8        0x0 linker stubs
+
+.iplt           0x000028d8        0x0
+ .iplt          0x000028d8        0x0 ./src/cr_startup_lpc17.o
+
+.ARM.extab
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+
+.ARM.exidx      0x000028d8        0x8
+                0x000028d8                __exidx_start = .
+ *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+ .ARM.exidx     0x000028d8        0x8 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/thumb/v7-m/nofp\libgcc.a(_udivmoddi4.o)
+                0x000028e0                __exidx_end = .
+                0x000028e0                _etext = .
+
+.rel.dyn        0x000028e0        0x0
+ .rel.iplt      0x000028e0        0x0 ./src/cr_startup_lpc17.o
+
+.data_RAM2      0x2007c000        0x0 load address 0x000028e0
+ FILL mask 0xff
+                [!provide]                PROVIDE (__start_data_RAM2 = .)
+                [!provide]                PROVIDE (__start_data_RamAHB32 = .)
+ *(.ramfunc.$RAM2)
+ *(.ramfunc.$RamAHB32)
+ *(.data.$RAM2)
+ *(.data.$RamAHB32)
+ *(.data.$RAM2.*)
+ *(.data.$RamAHB32.*)
+                0x2007c000                . = ALIGN (0x4)
+                [!provide]                PROVIDE (__end_data_RAM2 = .)
+                [!provide]                PROVIDE (__end_data_RamAHB32 = .)
+
+.uninit_RESERVED
+                0x10000000        0x0
+                0x10000000                _start_uninit_RESERVED = .
+ *(.bss.$RESERVED*)
+                0x10000000                . = ALIGN (0x4)
+                0x10000000                _end_uninit_RESERVED = .
+
+.data           0x10000000       0x58 load address 0x000028e0
+ FILL mask 0xff
+                0x10000000                _data = .
+                [!provide]                PROVIDE (__start_data_RAM = .)
+                [!provide]                PROVIDE (__start_data_RamLoc32 = .)
+ *(vtable)
+ *(.ramfunc*)
+ *(CodeQuickAccess)
+ *(DataQuickAccess)
+ *(RamFunction)
+ *(.data*)
+ .data          0x10000000        0x4 ./src/main.o
+ .data          0x10000004        0x4 C:\Users\247810\Downloads\sysWbud24_05\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
+                0x10000004                SystemCoreClock
+ .data          0x10000008       0x50 C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+                0x10000058                . = ALIGN (0x4)
+                0x10000058                _edata = .
+                [!provide]                PROVIDE (__end_data_RAM = .)
+                [!provide]                PROVIDE (__end_data_RamLoc32 = .)
+
+.igot.plt       0x10000058        0x0 load address 0x00002938
+ .igot.plt      0x10000058        0x0 ./src/cr_startup_lpc17.o
+
+.bss_RAM2       0x2007c000        0x0
+                [!provide]                PROVIDE (__start_bss_RAM2 = .)
+                [!provide]                PROVIDE (__start_bss_RamAHB32 = .)
+ *(.bss.$RAM2)
+ *(.bss.$RamAHB32)
+ *(.bss.$RAM2.*)
+ *(.bss.$RamAHB32.*)
+                0x2007c000                . = ALIGN ((. != 0x0)?0x4:0x1)
+                [!provide]                PROVIDE (__end_bss_RAM2 = .)
+                [!provide]                PROVIDE (__end_bss_RamAHB32 = .)
+
+.bss            0x10000058       0x18
+                0x10000058                _bss = .
+                [!provide]                PROVIDE (__start_bss_RAM = .)
+                [!provide]                PROVIDE (__start_bss_RamLoc32 = .)
+ *(.bss*)
+ .bss           0x10000058        0xa ./src/main.o
+ *fill*         0x10000062        0x2 
+ .bss           0x10000064        0xc C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ *(COMMON)
+                0x10000070                . = ALIGN (0x4)
+                0x10000070                _ebss = .
+                [!provide]                PROVIDE (__end_bss_RAM = .)
+                [!provide]                PROVIDE (__end_bss_RamLoc32 = .)
+                [!provide]                PROVIDE (end = .)
+
+.noinit_RAM2    0x2007c000        0x0
+                [!provide]                PROVIDE (__start_noinit_RAM2 = .)
+                [!provide]                PROVIDE (__start_noinit_RamAHB32 = .)
+ *(.noinit.$RAM2)
+ *(.noinit.$RamAHB32)
+ *(.noinit.$RAM2.*)
+ *(.noinit.$RamAHB32.*)
+                0x2007c000                . = ALIGN (0x4)
+                [!provide]                PROVIDE (__end_noinit_RAM2 = .)
+                [!provide]                PROVIDE (__end_noinit_RamAHB32 = .)
+
+.noinit         0x10000070        0x0
+                0x10000070                _noinit = .
+                [!provide]                PROVIDE (__start_noinit_RAM = .)
+                [!provide]                PROVIDE (__start_noinit_RamLoc32 = .)
+ *(.noinit*)
+                0x10000070                . = ALIGN (0x4)
+                0x10000070                _end_noinit = .
+                [!provide]                PROVIDE (__end_noinit_RAM = .)
+                [!provide]                PROVIDE (__end_noinit_RamLoc32 = .)
+                [!provide]                PROVIDE (_pvHeapStart = DEFINED (__user_heap_base)?__user_heap_base:.)
+                0x10008000                PROVIDE (_vStackTop = DEFINED (__user_stack_top)?__user_stack_top:(__top_RamLoc32 - 0x0))
+                [!provide]                PROVIDE (__valid_user_code_checksum = (0x0 - ((((((_vStackTop + (ResetISR + 0x1)) + (NMI_Handler + 0x1)) + (HardFault_Handler + 0x1)) + (DEFINED (MemManage_Handler)?MemManage_Handler:0x0 + 0x1)) + (DEFINED (BusFault_Handler)?BusFault_Handler:0x0 + 0x1)) + (DEFINED (UsageFault_Handler)?UsageFault_Handler:0x0 + 0x1))))
+                0x00000000                _image_start = LOADADDR (.text)
+                0x00002938                _image_end = (LOADADDR (.data) + SIZEOF (.data))
+                0x00002938                _image_size = (_image_end - _image_start)
+OUTPUT(spi_flash.axf elf32-littlearm)
+LOAD linker stubs
+
+.debug_info     0x00000000     0x5074
+ .debug_info    0x00000000      0x1fe ./src/cr_startup_lpc17.o
+ .debug_info    0x000001fe      0x6f0 ./src/main.o
+ .debug_info    0x000008ee      0x345 C:\Users\247810\Downloads\sysWbud24_05\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
+ .debug_info    0x00000c33      0x668 C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .debug_info    0x0000129b      0xe1a C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .debug_info    0x000020b5      0x4cd C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .debug_info    0x00002582      0x7b5 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .debug_info    0x00002d37      0x977 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .debug_info    0x000036ae     0x139c C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .debug_info    0x00004a4a      0x62a C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+
+.debug_abbrev   0x00000000     0x13ab
+ .debug_abbrev  0x00000000       0xc8 ./src/cr_startup_lpc17.o
+ .debug_abbrev  0x000000c8      0x223 ./src/main.o
+ .debug_abbrev  0x000002eb      0x11c C:\Users\247810\Downloads\sysWbud24_05\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
+ .debug_abbrev  0x00000407      0x2a7 C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .debug_abbrev  0x000006ae      0x26b C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .debug_abbrev  0x00000919      0x196 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .debug_abbrev  0x00000aaf      0x21b C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .debug_abbrev  0x00000cca      0x25d C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .debug_abbrev  0x00000f27      0x287 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .debug_abbrev  0x000011ae      0x1fd C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+
+.debug_aranges  0x00000000      0x548
+ .debug_aranges
+                0x00000000       0x70 ./src/cr_startup_lpc17.o
+ .debug_aranges
+                0x00000070       0x40 ./src/main.o
+ .debug_aranges
+                0x000000b0       0x28 C:\Users\247810\Downloads\sysWbud24_05\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
+ .debug_aranges
+                0x000000d8       0x78 C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .debug_aranges
+                0x00000150       0xf8 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .debug_aranges
+                0x00000248       0x48 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .debug_aranges
+                0x00000290       0xa8 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .debug_aranges
+                0x00000338       0xa8 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .debug_aranges
+                0x000003e0      0x108 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .debug_aranges
+                0x000004e8       0x60 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+
+.debug_ranges   0x00000000      0x4a8
+ .debug_ranges  0x00000000       0x60 ./src/cr_startup_lpc17.o
+ .debug_ranges  0x00000060       0x30 ./src/main.o
+ .debug_ranges  0x00000090       0x18 C:\Users\247810\Downloads\sysWbud24_05\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
+ .debug_ranges  0x000000a8       0x68 C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .debug_ranges  0x00000110       0xe8 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .debug_ranges  0x000001f8       0x38 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .debug_ranges  0x00000230       0x98 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .debug_ranges  0x000002c8       0x98 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .debug_ranges  0x00000360       0xf8 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .debug_ranges  0x00000458       0x50 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+
+.debug_macro    0x00000000     0x5167
+ .debug_macro   0x00000000       0x79 ./src/cr_startup_lpc17.o
+ .debug_macro   0x00000079      0xaa8 ./src/cr_startup_lpc17.o
+ .debug_macro   0x00000b21       0x22 ./src/cr_startup_lpc17.o
+ .debug_macro   0x00000b43       0x8e ./src/cr_startup_lpc17.o
+ .debug_macro   0x00000bd1       0x51 ./src/cr_startup_lpc17.o
+ .debug_macro   0x00000c22      0x103 ./src/cr_startup_lpc17.o
+ .debug_macro   0x00000d25       0x6a ./src/cr_startup_lpc17.o
+ .debug_macro   0x00000d8f      0x1df ./src/cr_startup_lpc17.o
+ .debug_macro   0x00000f6e       0xdb ./src/main.o
+ .debug_macro   0x00001049       0x1c ./src/main.o
+ .debug_macro   0x00001065       0x22 ./src/main.o
+ .debug_macro   0x00001087      0x7b7 ./src/main.o
+ .debug_macro   0x0000183e      0x2c7 ./src/main.o
+ .debug_macro   0x00001b05       0x64 ./src/main.o
+ .debug_macro   0x00001b69      0x140 ./src/main.o
+ .debug_macro   0x00001ca9       0x46 ./src/main.o
+ .debug_macro   0x00001cef      0x2a6 ./src/main.o
+ .debug_macro   0x00001f95      0x33f ./src/main.o
+ .debug_macro   0x000022d4       0xed ./src/main.o
+ .debug_macro   0x000023c1      0x113 C:\Users\247810\Downloads\sysWbud24_05\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
+ .debug_macro   0x000024d4      0xaa2 C:\Users\247810\Downloads\sysWbud24_05\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
+ .debug_macro   0x00002f76       0x10 C:\Users\247810\Downloads\sysWbud24_05\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
+ .debug_macro   0x00002f86      0x12e C:\Users\247810\Downloads\sysWbud24_05\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
+ .debug_macro   0x000030b4      0x5b3 C:\Users\247810\Downloads\sysWbud24_05\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
+ .debug_macro   0x00003667      0x7d5 C:\Users\247810\Downloads\sysWbud24_05\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
+ .debug_macro   0x00003e3c       0xf9 C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .debug_macro   0x00003f35       0x40 C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .debug_macro   0x00003f75       0x83 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .debug_macro   0x00003ff8       0xda C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .debug_macro   0x000040d2       0x7a C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .debug_macro   0x0000414c       0x8c C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .debug_macro   0x000041d8      0x2a0 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .debug_macro   0x00004478      0x2fa C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .debug_macro   0x00004772       0x95 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .debug_macro   0x00004807       0xe7 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .debug_macro   0x000048ee      0x146 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .debug_macro   0x00004a34       0x8c C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .debug_macro   0x00004ac0      0x339 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .debug_macro   0x00004df9       0x7a C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+ .debug_macro   0x00004e73      0x2f4 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+
+.debug_line     0x00000000     0x409d
+ .debug_line    0x00000000      0x43d ./src/cr_startup_lpc17.o
+ .debug_line    0x0000043d      0x5e6 ./src/main.o
+ .debug_line    0x00000a23      0x3eb C:\Users\247810\Downloads\sysWbud24_05\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
+ .debug_line    0x00000e0e      0x593 C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .debug_line    0x000013a1      0x713 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .debug_line    0x00001ab4      0x353 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .debug_line    0x00001e07      0x8a8 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .debug_line    0x000026af      0x836 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .debug_line    0x00002ee5      0xde3 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .debug_line    0x00003cc8      0x3d5 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+
+.debug_str      0x00000000     0xfec1
+ .debug_str     0x00000000     0x3cbc ./src/cr_startup_lpc17.o
+                               0x3e26 (size before relaxing)
+ .debug_str     0x00003cbc     0x7a43 ./src/main.o
+                               0xb748 (size before relaxing)
+ .debug_str     0x0000b6ff     0x1a9b C:\Users\247810\Downloads\sysWbud24_05\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
+                               0x8868 (size before relaxing)
+ .debug_str     0x0000d19a      0x3cc C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+                               0x9c06 (size before relaxing)
+ .debug_str     0x0000d566      0x5c1 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+                               0x8dd6 (size before relaxing)
+ .debug_str     0x0000db27      0x20b C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+                               0x8cfd (size before relaxing)
+ .debug_str     0x0000dd32     0x13de C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+                               0xac5d (size before relaxing)
+ .debug_str     0x0000f110      0x465 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+                               0xaa76 (size before relaxing)
+ .debug_str     0x0000f575      0x833 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+                               0xbad6 (size before relaxing)
+ .debug_str     0x0000fda8      0x119 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+                               0x9a5c (size before relaxing)
+
+.comment        0x00000000       0x4c
+ .comment       0x00000000       0x4c ./src/cr_startup_lpc17.o
+                                 0x4d (size before relaxing)
+ .comment       0x0000004c       0x4d ./src/main.o
+ .comment       0x0000004c       0x4d C:\Users\247810\Downloads\sysWbud24_05\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
+ .comment       0x0000004c       0x4d C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .comment       0x0000004c       0x4d C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .comment       0x0000004c       0x4d C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .comment       0x0000004c       0x4d C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .comment       0x0000004c       0x4d C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .comment       0x0000004c       0x4d C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .comment       0x0000004c       0x4d C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+
+.ARM.attributes
+                0x00000000       0x2d
+ .ARM.attributes
+                0x00000000       0x2d ./src/cr_startup_lpc17.o
+ .ARM.attributes
+                0x0000002d       0x2d ./src/main.o
+ .ARM.attributes
+                0x0000005a       0x2d C:\Users\247810\Downloads\sysWbud24_05\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
+ .ARM.attributes
+                0x00000087       0x2d C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .ARM.attributes
+                0x000000b4       0x2d C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .ARM.attributes
+                0x000000e1       0x2d C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .ARM.attributes
+                0x0000010e       0x2d C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .ARM.attributes
+                0x0000013b       0x2d C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .ARM.attributes
+                0x00000168       0x2d C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .ARM.attributes
+                0x00000195       0x2d C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+ .ARM.attributes
+                0x000001c2       0x1d c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/thumb/v7-m/nofp\libgcc.a(_aeabi_uldivmod.o)
+ .ARM.attributes
+                0x000001df       0x2d c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/thumb/v7-m/nofp\libgcc.a(_udivmoddi4.o)
+ .ARM.attributes
+                0x0000020c       0x1d c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/thumb/v7-m/nofp\libgcc.a(_dvmd_tls.o)
+ .ARM.attributes
+                0x00000229       0x2d c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libc.a(lib_a-memset.o)
+ .ARM.attributes
+                0x00000256       0x2d c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libc.a(lib_a-strlen-stub.o)
+
+.debug_frame    0x00000000     0x14b8
+ .debug_frame   0x00000000      0x120 ./src/cr_startup_lpc17.o
+ .debug_frame   0x00000120       0xc4 ./src/main.o
+ .debug_frame   0x000001e4       0x50 C:\Users\247810\Downloads\sysWbud24_05\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
+ .debug_frame   0x00000234      0x1c0 C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(flash.o)
+ .debug_frame   0x000003f4      0x428 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .debug_frame   0x0000081c       0xfc C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .debug_frame   0x00000918      0x2a0 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .debug_frame   0x00000bb8      0x2a4 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_timer.o)
+ .debug_frame   0x00000e5c      0x468 C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_uart.o)
+ .debug_frame   0x000012c4      0x13c C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+ .debug_frame   0x00001400       0x2c c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/thumb/v7-m/nofp\libgcc.a(_aeabi_uldivmod.o)
+ .debug_frame   0x0000142c       0x34 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/thumb/v7-m/nofp\libgcc.a(_udivmoddi4.o)
+ .debug_frame   0x00001460       0x38 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libc.a(lib_a-memset.o)
+ .debug_frame   0x00001498       0x20 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libc.a(lib_a-strlen-stub.o)

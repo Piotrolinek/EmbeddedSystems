@@ -1,0 +1,14 @@
+ethmac.c:32:6:WriteToPHY	24	static
+ethmac.c:46:16:ReadFromPHY	24	static
+ethmac.c:105:6:Init_EthMAC	32	static
+ethmac.c:357:6:WriteFrame_EthMAC	16	static
+ethmac.c:385:6:CopyToFrame_EthMAC	24	static
+ethmac.c:457:16:ReadFrame_EthMAC	4	static
+ethmac.c:491:16:ReadFrameBE_EthMAC	16	static
+ethmac.c:547:6:CopyFromFrame_EthMAC	32	static
+ethmac.c:569:6:DummyReadFrame_EthMAC	16	static
+ethmac.c:590:6:RequestSend	24	static
+ethmac.c:601:14:Rdy4Tx	4	static
+ethmac.c:619:16:StartReadingFrame	16	static
+ethmac.c:632:6:StopReadingFrame	16	static
+ethmac.c:641:14:CheckIfFrameReceived	4	static

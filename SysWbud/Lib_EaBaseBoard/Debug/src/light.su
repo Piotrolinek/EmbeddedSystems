@@ -1,0 +1,16 @@
+light.c:78:12:I2CRead	72	static
+light.c:96:12:I2CWrite	72	static
+light.c:115:16:readCommandReg	16	static
+light.c:127:16:readControlReg	16	static
+light.c:148:6:light_init	4	static
+light.c:159:6:light_enable	16	static
+light.c:179:10:light_read	16	static
+light.c:212:6:light_setMode	24	static
+light.c:236:6:light_setWidth	24	static
+light.c:275:6:light_setRange	24	static
+light.c:314:6:light_setHiThreshold	24	static
+light.c:335:6:light_setLoThreshold	24	static
+light.c:358:6:light_setIrqInCycles	24	static
+light.c:382:9:light_getIrqStatus	16	static
+light.c:395:6:light_clearIrqStatus	16	static
+light.c:415:6:light_shutdown	16	static

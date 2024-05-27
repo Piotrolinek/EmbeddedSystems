@@ -1,0 +1,2 @@
+joystick.c:52:6:joystick_init	8	static
+joystick.c:76:9:joystick_read	24	static

@@ -1,0 +1,7 @@
+usbcore.c:83:6:USB_ResetCore	4	static
+usbcore.c:99:6:USB_SetupStage	8	static
+usbcore.c:110:6:USB_DataInStage	16	static
+usbcore.c:130:6:USB_DataOutStage	16	static
+usbcore.c:145:6:USB_StatusInStage	8	static
+usbcore.c:156:6:USB_StatusOutStage	8	static
+usbcore.c:509:6:USB_EndPoint0	16	static

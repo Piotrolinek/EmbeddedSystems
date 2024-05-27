@@ -1,0 +1,10 @@
+core_cm3.h:1204:22:__enable_irq	4	static
+core_cm3.h:1205:22:__disable_irq	4	static
+lpc17xx_wdt.c:61:16:WDT_SetTimeOut	24	static
+lpc17xx_wdt.c:164:6:WDT_Init	16	static
+lpc17xx_wdt.c:184:6:WDT_Start	24	static
+lpc17xx_wdt.c:201:12:WDT_ReadTimeOutFlag	4	static
+lpc17xx_wdt.c:211:6:WDT_ClrTimeOutFlag	4	static
+lpc17xx_wdt.c:221:6:WDT_UpdateTimeOut	24	static
+lpc17xx_wdt.c:238:6:WDT_Feed	8	static
+lpc17xx_wdt.c:253:10:WDT_GetCurrentCount	4	static

@@ -1,0 +1,4 @@
+usbhost_uart.c:44:7:UART_Init	32	static
+usbhost_uart.c:93:7:UART_PrintChar	16	static
+usbhost_uart.c:113:7:UART_PrintStr	16	static
+usbhost_uart.c:139:7:UART_Printf	16	static

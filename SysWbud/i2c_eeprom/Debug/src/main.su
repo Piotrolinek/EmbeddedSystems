@@ -1,0 +1,4 @@
+main.c:22:13:init_i2c	16	static
+main.c:44:13:init_uart	24	static
+main.c:70:5:main	216	static
+main.c:126:6:check_failed	16	static

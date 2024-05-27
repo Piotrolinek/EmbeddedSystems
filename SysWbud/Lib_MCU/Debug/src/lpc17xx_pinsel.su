@@ -1,0 +1,6 @@
+lpc17xx_pinsel.c:94:13:set_PinFunc	32	static
+lpc17xx_pinsel.c:159:6:set_ResistorMode	32	static
+lpc17xx_pinsel.c:225:6:set_OpenDrainMode	24	static
+lpc17xx_pinsel.c:251:6:PINSEL_ConfigTraceFunc	16	static
+lpc17xx_pinsel.c:273:6:PINSEL_SetI2C0Pins	24	static
+lpc17xx_pinsel.c:296:6:PINSEL_ConfigPin	16	static

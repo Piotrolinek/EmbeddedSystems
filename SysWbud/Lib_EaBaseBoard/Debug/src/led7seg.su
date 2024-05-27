@@ -1,0 +1,2 @@
+led7seg.c:85:6:led7seg_init	8	static
+led7seg.c:105:6:led7seg_setChar	48	static
