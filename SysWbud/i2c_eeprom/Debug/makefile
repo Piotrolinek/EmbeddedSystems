@@ -29,7 +29,7 @@ all: i2c_eeprom.axf
 i2c_eeprom.axf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: MCU Linker'
-	arm-none-eabi-gcc -nostdlib -L"C:\Users\247810\Downloads\sysWbud24_05\Lib_CMSISv1p30_LPC17xx\Debug" -L"C:\Users\247810\Downloads\sysWbud24_05\Lib_EaBaseBoard\Debug" -L"C:\Users\247810\Downloads\sysWbud24_05\Lib_MCU\Debug" -Xlinker --gc-sections -Xlinker -Map=i2c_eeprom.map -mcpu=cortex-m3 -mthumb -T "rdb1768cmsis_uart_Debug.ld" -o "i2c_eeprom.axf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-gcc -nostdlib -L"C:\Users\247644\Desktop\EmbeddedSystems\SysWbud\Lib_CMSISv1p30_LPC17xx\Debug" -L"C:\Users\247644\Desktop\EmbeddedSystems\SysWbud\Lib_EaBaseBoard\Debug" -L"C:\Users\247644\Desktop\EmbeddedSystems\SysWbud\Lib_MCU\Debug" -Xlinker --gc-sections -Xlinker -Map=i2c_eeprom.map -mcpu=cortex-m3 -mthumb -T "rdb1768cmsis_uart_Debug.ld" -o "i2c_eeprom.axf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 	$(MAKE) --no-print-directory post-build

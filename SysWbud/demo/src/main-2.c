@@ -240,7 +240,26 @@ static uint8_t * song = (uint8_t*)"C2.C2,D4,C4,F4,E8,";
         //(uint8_t*)"C2.C2,D4,C4,F4,E8,C2.C2,D4,C4,G4,F8,C2.C2,c4,A4,F4,E4,D4,A2.A2,H4,F4,G4,F8,";
         //"D4,B4,B4,A4,A4,G4,E4,D4.D2,E4,E4,A4,F4,D8.D4,d4,d4,c4,c4,B4,G4,E4.E2,F4,F4,A4,A4,G8,";
 
+uint32_t len(uint32_t val){
+	uint32_t i = 0;
+	while(val > 0) {
+		i++;
+		val/=10;
+	}
+	return i;
+}
 
+char* uint32_t_to_str(uint32_t val, char* str){
+	uint32_t val_len = len(val);
+	for(int32_t i = val_len - 1; i >= 0; i--){
+		str[i] = (char)(val%10 + '0');
+		val/=10;
+	}
+	for(int32_t i = val_len; i<6; i++){
+		str[i] = ' ';
+	}
+	str[5] = '\0';
+}
 
 static void init_ssp(void)
 {
@@ -336,8 +355,7 @@ void PWM_vInit(void)
   LPC_PWM1->MCR = (1<<1);           // reset on MR0
   LPC_PWM1->MR0 = 4;                // set PWM cycle 0,25Hz (according to manual)
   LPC_PWM1->MR1 = 2;                // set duty to 50%
-  LPC_PWM1->MR2 = 2;                // set duty to 50%
-  LPC_PWM1->LER = (1<<0)|(1<<1);    // latch MR0 & MR1
+  LPC_PWM1->LER = (1<<0);    // latch MR0 & MR1
   LPC_PWM1->PCR |= (3<<9);           // PWM1 output enable
   LPC_PWM1->TCR = (1<<1)|(1<<0)|(1<<3);// counter enable, PWM enable
   LPC_PWM1->TCR = (1<<0)|(1<<3);    // counter enable, PWM enable
@@ -426,7 +444,14 @@ uint32_t getMsTicks(void){
 void showOurTemp(void){
     char naszString[7];
     write_temp_on_screen(&naszString);
-    oled_putString(1, 1, &naszString, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
+    oled_putString(1, 0, &naszString, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
+}
+
+void showLuxometerReading(void){
+	uint32_t light_val = light_read();
+	char* xdd[6];
+	uint32_t_to_str(light_val, xdd); //co
+	oled_putString(1, 36, &xdd, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
 }
 
 void showPresentTime(void){
@@ -499,8 +524,8 @@ void showPresentTime(void){
 					sec = sec / 10;
 			}
 	time_str[8] = '\0';
-	oled_putString(1, 10, &date_str, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
-	oled_putString(1, 20, &time_str, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
+	oled_putString(1, 12, &date_str, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
+	oled_putString(1, 24, &time_str, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
 
 }
 
@@ -521,31 +546,32 @@ char* valToString(uint16_t value, char* str) {
 struct pos {
 	uint8_t x;
 	uint8_t y;
-	uint16_t value;
+	uint8_t length;
 };
-void chooseAnHour(struct pos (*map)[2][3]){
-	char* str[4];
-	valToString(map[0][0]->value, str);
-	for(uint32_t i=0; i < 4; i++){
-		oled_putChar(map[0][0]->x, map[0][0]->y, &str, OLED_COLOR_BLACK, OLED_COLOR_WHITE);
-	}
-}
-uint32_t len(uint32_t val){
-	uint32_t i = 0;
-	while(val > 0) {
-		i++;
-		val/=10;
-	}
-	return i;
+//void chooseTime(struct pos (*map)[2][3], int32_t *LPC_values){
+//	//char* str[4];
+//	char* str = "2024";
+//	//valToString(LPC_values[0], str);
+//
+//	for(uint32_t i=0; i < map[0][0]->length; i++){
+//		oled_putChar(map[0][0]->x, map[0][0]->y, &str, OLED_COLOR_BLACK, OLED_COLOR_WHITE);
+//		//oled_putPixel(x, y, color);
+//	}
+//}
+void chooseTime(struct pos (*map)[3], int32_t *LPC_values){
+	char* str[5];
+	//char* str = "2024\0";
+	valToString(LPC_values[0], str);
+	str[4] = "\0";
+	uint8_t xdddd = 0;
+	oled_putString(map[0]->x, map[0]->y, str, OLED_COLOR_BLACK, OLED_COLOR_WHITE);
+//	for(uint32_t i=0; i < map[0]->length; i++){
+//		//oled_putChar(map[0]->x + i * 6, map[0]->y, &str[i], OLED_COLOR_BLACK, OLED_COLOR_WHITE);
+//
+//		//oled_putPixel(x, y, color);
+//	}
 }
 
-char* uint32_t_to_str(uint32_t val, char* str){
-	uint32_t val_len = len(val);
-	for(int32_t i = val_len - 1; i >= 0; i--){
-		str[i] = (char)(val%10 + '0');
-		val/=10;
-	}
-}
 
 int main (void) {
 
@@ -641,10 +667,12 @@ int main (void) {
     LPC_RTC->SEC = 5;
     LPC_RTC->CCR = 1;
 
-
+    int32_t LPC_values[] = {LPC_RTC->YEAR, LPC_RTC->MONTH, LPC_RTC->DOM, LPC_RTC->HOUR, LPC_RTC->MIN, LPC_RTC->SEC};
 //    struct pos map[2][3] ={{{1,10, LPC_RTC->YEAR}, {37,10, LPC_RTC->MONTH}, {55,10, LPC_RTC->DOM}},{{1,20, LPC_RTC->HOUR}, {25,20, LPC_RTC->MIN}, {43,20, LPC_RTC->SEC}}};
-//    struct pos map[2][3] ={{{1,10, 2024}, {37,10, 05}, {55,10, 24}},{{1,20, 13}, {25,20, 26}, {43,20, 00}}};
-//    chooseAnHour(&map);
+    struct pos line1[3] = {{1,12,4}, {37,12,2}, {55,12,2}};
+    struct pos line2[3] = {{1,24,2}, {25,24,2}, {43,24,2}};
+    //struct pos map[2][] ={line1,line2};
+    chooseTime(&line1, LPC_values);
 
     PWM_ChangeDirection();
     GPIO_SetDir(0,1<<4,0);
@@ -654,26 +682,46 @@ int main (void) {
 
     char naszString[4];
     write_temp_on_screen(&naszString);
-    oled_putString(1, 1, &naszString, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
-
+    oled_putString(1, 0, &naszString, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
+    showLuxometerReading();
     moveBar(1, dir);
 	PWM_Stop_Mov();
 	uint32_t ifCheckTheTemp;
+
+
+	Bool editing = FALSE;
+	Bool prevStateJoy = TRUE;
     while (1) {
+    	uint32_t joyClick = ((GPIO_ReadValue(0) & (1<<17))>>17);
+
+
+        	Bool joyClickDiff = joyClick - prevStateJoy;
+
+        	if((joyClickDiff)&&(!editing)&&(!joyClick)){
+        		editing = TRUE;
+        		prevStateJoy = 0;
+        		joyClickDiff = FALSE;
+        	}
+
+        	if((joyClickDiff)&&(editing)&&(!joyClick)){
+        		editing = FALSE;
+        		prevStateJoy = 0;
+        	}
+        	prevStateJoy = joyClick;
+
 
 
 
     	showPresentTime();
-    	ifCheckTheTemp++;
+		ifCheckTheTemp++;
+
     	if((ifCheckTheTemp%(1<<8))==0){
         	showOurTemp();
-        	uint32_t light_val = light_read();
-			char* xdd[len(light_val) + 1];
-			xdd[len(light_val)] = '\0';
-			uint32_t_to_str(light_val, xdd); //co
-			oled_putString(1, 30, &xdd, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
+			showLuxometerReading();
+		}
+    	if((ifCheckTheTemp%(1<<3))==0) {
+    		chooseTime(&line1, LPC_values);
     	}
-
     	uint32_t but1 = ((GPIO_ReadValue(0) >> 4) & 0x01);
     	uint32_t but2 = ((GPIO_ReadValue(1) >> 31) & 0x01);
     	if(but1==0){
