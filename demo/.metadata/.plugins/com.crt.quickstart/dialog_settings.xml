@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="ExternalProjectImportWizard">
+		<item key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID" value="true"/>
+		<item key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED" value="true"/>
+	</section>
+	<section name="com.crt.quickstart.views.wizards.examples.QSExampleSelectionPage">
+		<item key="dirname" value="C:\Users\247810\Desktop\demo"/>
+	</section>
+</section>

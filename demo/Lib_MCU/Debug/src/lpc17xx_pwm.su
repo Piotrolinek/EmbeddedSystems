@@ -1,0 +1,15 @@
+lpc17xx_pwm.c:70:11:PWM_GetIntStatus	16	static
+lpc17xx_pwm.c:95:6:PWM_ClearIntPending	16	static
+lpc17xx_pwm.c:121:6:PWM_ConfigStructInit	24	static
+lpc17xx_pwm.c:156:6:PWM_Init	48	static
+lpc17xx_pwm.c:217:6:PWM_DeInit	16	static
+lpc17xx_pwm.c:236:6:PWM_Cmd	16	static
+lpc17xx_pwm.c:260:6:PWM_CounterCmd	16	static
+lpc17xx_pwm.c:280:6:PWM_ResetCounter	16	static
+lpc17xx_pwm.c:296:6:PWM_ConfigMatch	16	static
+lpc17xx_pwm.c:347:6:PWM_ConfigCapture	16	static
+lpc17xx_pwm.c:394:10:PWM_GetCaptureValue	16	static
+lpc17xx_pwm.c:425:6:PWM_MatchUpdate	24	static
+lpc17xx_pwm.c:486:6:PWM_MultiMatchUpdate	32	static
+lpc17xx_pwm.c:528:6:PWM_ChannelConfig	16	static
+lpc17xx_pwm.c:557:6:PWM_ChannelCmd	16	static

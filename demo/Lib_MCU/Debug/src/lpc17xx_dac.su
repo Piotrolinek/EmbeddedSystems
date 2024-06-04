@@ -1,0 +1,5 @@
+lpc17xx_dac.c:60:6:DAC_Init	16	static
+lpc17xx_dac.c:75:6:DAC_UpdateValue	24	static
+lpc17xx_dac.c:92:6:DAC_SetBias	16	static
+lpc17xx_dac.c:111:6:DAC_ConfigDAConverterControl	16	static
+lpc17xx_dac.c:129:6:DAC_SetDMATimeOut	16	static

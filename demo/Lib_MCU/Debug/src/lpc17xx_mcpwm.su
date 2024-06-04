@@ -1,0 +1,15 @@
+lpc17xx_mcpwm.c:60:6:MCPWM_Init	16	static
+lpc17xx_mcpwm.c:90:6:MCPWM_ConfigChannel	24	static
+lpc17xx_mcpwm.c:150:6:MCPWM_WriteToShadow	24	static
+lpc17xx_mcpwm.c:178:6:MCPWM_ConfigCapture	24	static
+lpc17xx_mcpwm.c:217:6:MCPWM_ClearCapture	16	static
+lpc17xx_mcpwm.c:229:10:MCPWM_GetCapture	16	static
+lpc17xx_mcpwm.c:255:6:MCPWM_CountConfig	24	static
+lpc17xx_mcpwm.c:293:6:MCPWM_Start	32	static
+lpc17xx_mcpwm.c:318:6:MCPWM_Stop	32	static
+lpc17xx_mcpwm.c:337:6:MCPWM_ACMode	16	static
+lpc17xx_mcpwm.c:372:6:MCPWM_DCMode	24	static
+lpc17xx_mcpwm.c:413:6:MCPWM_IntConfig	24	static
+lpc17xx_mcpwm.c:441:6:MCPWM_IntSet	16	static
+lpc17xx_mcpwm.c:465:6:MCPWM_IntClear	16	static
+lpc17xx_mcpwm.c:488:12:MCPWM_GetIntStatus	16	static
