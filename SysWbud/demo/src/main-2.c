@@ -29,7 +29,12 @@
 //Global vars
 static uint8_t barPos = 2;
 uint32_t msTicks = 0;
-
+Bool editing = FALSE;
+Bool prevStateJoyClick = TRUE;
+Bool prevStateJoyRight = TRUE;
+Bool prevStateJoyLeft = TRUE;
+Bool prevStateJoyUp = TRUE;
+Bool prevStateJoyDown = TRUE;
 //////////////////////////////////////////////
 
 
@@ -351,7 +356,7 @@ void PWM_vInit(void)
   LPC_PINCON->PINSEL4 &=~(15<<0);    // reset
   LPC_PINCON->PINSEL4 |= (1<<0);    // set PWM1.1 at P2.0
   LPC_PWM1->TCR = (1<<1);           // counter reset
-  LPC_PWM1->PR  = (96000000UL-1)>>9;     // clock /96000000 / prescaler (= PR +1) = 1 s
+  LPC_PWM1->PR  = (100000000UL-1)>>13;     // clock /96000000 / prescaler (= PR +1) = 1 s
   LPC_PWM1->MCR = (1<<1);           // reset on MR0
   LPC_PWM1->MR0 = 4;                // set PWM cycle 0,25Hz (according to manual)
   LPC_PWM1->MR1 = 2;                // set duty to 50%
@@ -572,6 +577,74 @@ void chooseTime(struct pos (*map)[3], int32_t *LPC_values){
 //	}
 }
 
+//void JoystickControls(char key){
+//	uint32_t joyClick = ((GPIO_ReadValue(0) & (1<<17))>>17);
+//	Bool joyClickDiff = joyClick - prevStateJoy;
+//	if((joyClickDiff)&&(!editing)&&(!joyClick)){
+//		editing = TRUE;
+//		prevStateJoy = 0;
+//		joyClickDiff = FALSE;
+//	}
+//	if((joyClickDiff)&&(editing)&&(!joyClick)){
+//		editing = FALSE;
+//		prevStateJoyClick = 0;
+//		prevStateJoyClick = joyClick;
+//	}
+//}
+
+Bool JoystickControls(char key, Bool output){
+	uint8_t pin = 0;
+	uint8_t portNum = 0;
+	Bool prevStateJoy;
+	if (key == 'u' || key == 'U'){
+		portNum = 2;
+		pin = 3;
+		prevStateJoy = prevStateJoyUp;
+	} else if (key == 'd' || key == 'D'){
+		portNum = 0;
+		pin = 15;
+		prevStateJoy = prevStateJoyDown;
+	} else if (key == 'r' || key == 'R'){
+		portNum = 0;
+		pin = 16;
+		prevStateJoy = prevStateJoyRight;
+	} else if (key == 'l' || key == 'L'){
+		portNum = 2;
+		pin = 4;
+		prevStateJoy = prevStateJoyLeft;
+	}
+	uint32_t joyClick = ((GPIO_ReadValue(portNum) & (1<<pin))>>pin);
+	Bool joyClickDiff = joyClick - prevStateJoy;
+	if((joyClickDiff)&&(!editing)&&(!joyClick)){
+		output = TRUE;
+		prevStateJoy = 0;
+		joyClickDiff = FALSE;
+	}
+	if((joyClickDiff)&&(editing)&&(!joyClick)){
+		output = FALSE;
+		prevStateJoy = 0;
+		prevStateJoy = joyClick;
+	}
+	switch(key){
+		case 'u':
+		case 'U':
+			prevStateJoyUp = prevStateJoy;
+			break;
+		case 'd':
+		case 'D':
+			prevStateJoyDown = prevStateJoy;
+			break;
+		case 'l':
+		case 'L':
+			prevStateJoyLeft = prevStateJoy;
+			break;
+		case 'r':
+		case 'R':
+			prevStateJoyRight = prevStateJoy;
+			break;
+	}
+	return output;
+}
 
 int main (void) {
 
@@ -598,6 +671,7 @@ int main (void) {
     init_ssp();
     init_adc();
 
+    uint8_t positionInGUI = 0;
 //    rotary_init();
 //    led7seg_init();
 //
@@ -688,29 +762,50 @@ int main (void) {
 	PWM_Stop_Mov();
 	uint32_t ifCheckTheTemp;
 
-
-	Bool editing = FALSE;
-	Bool prevStateJoy = TRUE;
+	Bool joystickOutput;
+	Bool output = FALSE;
+	uint16_t posss = 0;
     while (1) {
     	uint32_t joyClick = ((GPIO_ReadValue(0) & (1<<17))>>17);
 
 
-        	Bool joyClickDiff = joyClick - prevStateJoy;
+        	Bool joyClickDiff = joyClick - prevStateJoyClick;
 
         	if((joyClickDiff)&&(!editing)&&(!joyClick)){
         		editing = TRUE;
-        		prevStateJoy = 0;
+        		prevStateJoyClick = 0;
         		joyClickDiff = FALSE;
         	}
 
         	if((joyClickDiff)&&(editing)&&(!joyClick)){
         		editing = FALSE;
-        		prevStateJoy = 0;
+        		prevStateJoyClick = 0;
         	}
-        	prevStateJoy = joyClick;
+        	prevStateJoyClick = joyClick;
 
 
+        if (JoystickControls('u', output)){
+        	posss += 3;
+        }
+        output = FALSE;
+        if (JoystickControls('d', output)){
+        	posss -= 3;
+		}
+        output = FALSE;
+        if (JoystickControls('l', output)){
+        	posss += 1;
+		}
+        output = FALSE;
+        if (JoystickControls('r', output)){
+        	posss -= 1;
+		}
+        output = FALSE;
 
+
+        char CHARACTER[3];
+//        char* outval = valToString(posss, CHARACTER);
+        sprintf(CHARACTER, "%d",posss);
+        oled_putString(0, 70, CHARACTER, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
 
     	showPresentTime();
 		ifCheckTheTemp++;
@@ -724,11 +819,12 @@ int main (void) {
     	}
     	uint32_t but1 = ((GPIO_ReadValue(0) >> 4) & 0x01);
     	uint32_t but2 = ((GPIO_ReadValue(1) >> 31) & 0x01);
+    	PWM_Stop_Mov();
     	if(but1==0){
-    		PWM_Left();
+    		//PWM_Left();
     	}
     	else if(but2==0){
-            PWM_Right();
+            //PWM_Right();
     	}else
     	{
     		PWM_Stop_Mov();
