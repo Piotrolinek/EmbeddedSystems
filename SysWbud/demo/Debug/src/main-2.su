@@ -24,9 +24,10 @@ main-2.c:441:6:SysTick_Handler	4	static
 main-2.c:445:10:getMsTicks	4	static
 main-2.c:449:6:showOurTemp	24	static
 main-2.c:455:6:showLuxometerReading	48	static
-main-2.c:462:6:showPresentTime	56	static
-main-2.c:537:7:valToString	32	static
-main-2.c:566:6:chooseTime	48	static
-main-2.c:595:6:JoystickControls	24	static
-main-2.c:649:5:main	128	static
-main-2.c:846:6:check_failed	16	static
+main-2.c:462:6:showEditmode	24	static
+main-2.c:472:6:showPresentTime	56	static
+main-2.c:547:7:valToString	32	static
+main-2.c:576:6:chooseTime	56	static
+main-2.c:605:6:JoystickControls	24	static
+main-2.c:659:5:main	120	static
+main-2.c:854:6:check_failed	16	static

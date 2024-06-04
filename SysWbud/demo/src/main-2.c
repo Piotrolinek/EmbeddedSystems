@@ -459,6 +459,16 @@ void showLuxometerReading(void){
 	oled_putString(1, 36, &xdd, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
 }
 
+void showEditmode(Bool editmode) {
+	oled_line(86, 0, 91, 0, OLED_COLOR_WHITE);
+	oled_line(85, 0, 85, 8, OLED_COLOR_WHITE);
+	if (editmode) {
+		oled_putChar(86, 1, 'E', OLED_COLOR_BLACK, OLED_COLOR_WHITE);
+	} else {
+		oled_putChar(86, 1, 'M', OLED_COLOR_BLACK, OLED_COLOR_WHITE);
+	}
+}
+
 void showPresentTime(void){
     char date_str[10];
     uint16_t year = LPC_RTC->YEAR;
@@ -563,13 +573,13 @@ struct pos {
 //		//oled_putPixel(x, y, color);
 //	}
 //}
-void chooseTime(struct pos (*map)[3], int32_t *LPC_values){
+void chooseTime(struct pos map[][3], int32_t LPC_values[], int8_t x, int8_t y){
 	char* str[5];
 	//char* str = "2024\0";
-	valToString(LPC_values[0], str);
-	str[4] = "\0";
+	valToString(LPC_values[x*3+y], str);
+	str[map[x][y].length] = "\0";
 	uint8_t xdddd = 0;
-	oled_putString(map[0]->x, map[0]->y, str, OLED_COLOR_BLACK, OLED_COLOR_WHITE);
+	oled_putString(map[x][y].x, map[x][y].y, str, OLED_COLOR_BLACK, OLED_COLOR_WHITE);
 //	for(uint32_t i=0; i < map[0]->length; i++){
 //		//oled_putChar(map[0]->x + i * 6, map[0]->y, &str[i], OLED_COLOR_BLACK, OLED_COLOR_WHITE);
 //
@@ -742,11 +752,7 @@ int main (void) {
     LPC_RTC->CCR = 1;
 
     int32_t LPC_values[] = {LPC_RTC->YEAR, LPC_RTC->MONTH, LPC_RTC->DOM, LPC_RTC->HOUR, LPC_RTC->MIN, LPC_RTC->SEC};
-//    struct pos map[2][3] ={{{1,10, LPC_RTC->YEAR}, {37,10, LPC_RTC->MONTH}, {55,10, LPC_RTC->DOM}},{{1,20, LPC_RTC->HOUR}, {25,20, LPC_RTC->MIN}, {43,20, LPC_RTC->SEC}}};
-    struct pos line1[3] = {{1,12,4}, {37,12,2}, {55,12,2}};
-    struct pos line2[3] = {{1,24,2}, {25,24,2}, {43,24,2}};
-    //struct pos map[2][] ={line1,line2};
-    chooseTime(&line1, LPC_values);
+    struct pos map[2][3] ={{{1,12, 4}, {37,12, 2}, {55,12, 2}},{{1,24, 2}, {25,24, 2}, {43,24, 2}}};
 
     PWM_ChangeDirection();
     GPIO_SetDir(0,1<<4,0);
@@ -764,48 +770,50 @@ int main (void) {
 
 	Bool joystickOutput;
 	Bool output = FALSE;
-	uint16_t posss = 0;
+	int8_t posX = 0;
+	int8_t posY = 0;
     while (1) {
     	uint32_t joyClick = ((GPIO_ReadValue(0) & (1<<17))>>17);
 
 
-        	Bool joyClickDiff = joyClick - prevStateJoyClick;
+		Bool joyClickDiff = joyClick - prevStateJoyClick;
 
-        	if((joyClickDiff)&&(!editing)&&(!joyClick)){
-        		editing = TRUE;
-        		prevStateJoyClick = 0;
-        		joyClickDiff = FALSE;
-        	}
+		if((joyClickDiff)&&(!editing)&&(!joyClick)){
+			editing = TRUE;
+			prevStateJoyClick = 0;
+			joyClickDiff = FALSE;
+		}
 
-        	if((joyClickDiff)&&(editing)&&(!joyClick)){
-        		editing = FALSE;
-        		prevStateJoyClick = 0;
-        	}
-        	prevStateJoyClick = joyClick;
+		if((joyClickDiff)&&(editing)&&(!joyClick)){
+			editing = FALSE;
+			prevStateJoyClick = 0;
+		}
+		prevStateJoyClick = joyClick;
 
+        showEditmode(editing);
 
         if (JoystickControls('u', output)){
-        	posss += 3;
+        	posY += 1;
+        	posY = posY % 2;
         }
         output = FALSE;
         if (JoystickControls('d', output)){
-        	posss -= 3;
+        	posY -= 1;
+        	posY = posY % 2;
 		}
         output = FALSE;
         if (JoystickControls('l', output)){
-        	posss += 1;
+        	posX -= 1;
+        	posX = posX % 3;
 		}
         output = FALSE;
         if (JoystickControls('r', output)){
-        	posss -= 1;
-		}
+        	posX += 1;
+        	posX = posX % 3;
+        }
         output = FALSE;
 
-
-        char CHARACTER[3];
-//        char* outval = valToString(posss, CHARACTER);
-        sprintf(CHARACTER, "%d",posss);
-        oled_putString(0, 70, CHARACTER, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
+        chooseTime(map, LPC_values, posX, posY);
 
     	showPresentTime();
 		ifCheckTheTemp++;
@@ -815,7 +823,7 @@ int main (void) {
 			showLuxometerReading();
 		}
     	if((ifCheckTheTemp%(1<<3))==0) {
-    		chooseTime(&line1, LPC_values);
+    		//chooseTime(&line1, LPC_values);
     	}
     	uint32_t but1 = ((GPIO_ReadValue(0) >> 4) & 0x01);
     	uint32_t but2 = ((GPIO_ReadValue(1) >> 31) & 0x01);
