@@ -15,6 +15,8 @@
 #include "lpc17xx_timer.h"
 #include "lpc17xx_systick.h"
 #include "temp.h"
+#include "lpc17xx_dac.h"
+
 
 #include "joystick.h"
 #include "pca9532.h"
@@ -24,6 +26,8 @@
 #include "oled.h"
 #include "rgb.h"
 #include "light.h"
+
+#define NUM_SAMPLES 1000
 
 //////////////////////////////////////////////
 //Global vars
@@ -35,215 +39,13 @@ Bool prevStateJoyRight = TRUE;
 Bool prevStateJoyLeft = TRUE;
 Bool prevStateJoyUp = TRUE;
 Bool prevStateJoyDown = TRUE;
+uint32_t sample_index = 0;
+uint32_t samples[NUM_SAMPLES];
 //////////////////////////////////////////////
 
 
-static void moveBar(uint8_t steps, uint8_t dir)
-{
-    uint16_t ledOn = 0;
-
-    if (barPos == 0)
-        ledOn = (1 << 0) | (3 << 14);
-    else if (barPos == 1)
-        ledOn = (3 << 0) | (1 << 15);
-    else
-        ledOn = 0x07 << (barPos-2);
-
-    barPos += (dir*steps);
-    barPos = (barPos % 16);
-
-    pca9532_setLeds(ledOn, 0xffff);
-}
-
-static uint8_t ch7seg = '0';
-static void change7Seg(uint8_t rotaryDir)
-{
-
-    if (rotaryDir != ROTARY_WAIT) {
-
-        if (rotaryDir == ROTARY_RIGHT) {
-            ch7seg++;
-        }
-        else {
-            ch7seg--;
-        }
-
-        if (ch7seg > '9')
-            ch7seg = '0';
-        else if (ch7seg < '0')
-            ch7seg = '9';
-
-        led7seg_setChar(ch7seg, FALSE);
-
-    }
-}
-
-static void drawOled(uint8_t joyState)
-{
-    static int wait = 0;
-    static uint8_t currX = 48;
-    static uint8_t currY = 32;
-    static uint8_t lastX = 0;
-    static uint8_t lastY = 0;
-
-    if ((joyState & JOYSTICK_CENTER) != 0) {
-        oled_clearScreen(OLED_COLOR_BLACK);
-        return;
-    }
-
-    if (wait++ < 3)
-        return;
-
-    wait = 0;
-
-    if ((joyState & JOYSTICK_UP) != 0 && currY > 0) {
-        currY--;
-    }
-
-    if ((joyState & JOYSTICK_DOWN) != 0 && currY < OLED_DISPLAY_HEIGHT-1) {
-        currY++;
-    }
-
-    if ((joyState & JOYSTICK_RIGHT) != 0 && currX < OLED_DISPLAY_WIDTH-1) {
-        currX++;
-    }
-
-    if ((joyState & JOYSTICK_LEFT) != 0 && currX > 0) {
-        currX--;
-    }
-
-    if (lastX != currX || lastY != currY) {
-        oled_putPixel(currX, currY, OLED_COLOR_WHITE);
-        lastX = currX;
-        lastY = currY;
-    }
-}
-
-static void changeRgbLeds(uint32_t value)
-{
-    uint8_t leds = 0;
-
-    leds = value / 128;
-
-    rgb_setLeds(leds);
-}
-
-#define NOTE_PIN_HIGH() GPIO_SetValue(0, 1<<26);
-#define NOTE_PIN_LOW()  GPIO_ClearValue(0, 1<<26);
 
 
-
-
-static uint32_t notes[] = {
-        2272, // A - 440 Hz
-        2024, // B - 494 Hz
-        3816, // C - 262 Hz
-        3401, // D - 294 Hz
-        3030, // E - 330 Hz
-        2865, // F - 349 Hz
-        2551, // G - 392 Hz
-        1136, // a - 880 Hz
-        1012, // b - 988 Hz
-        1912, // c - 523 Hz
-        1703, // d - 587 Hz
-        1517, // e - 659 Hz
-        1432, // f - 698 Hz
-        1275, // g - 784 Hz
-};
-
-static void playNote(uint32_t note, uint32_t durationMs) {
-
-    uint32_t t = 0;
-
-    if (note > 0) {
-
-        while (t < (durationMs*1000)) {
-            NOTE_PIN_HIGH();
-            Timer0_us_Wait(note / 2);
-            //delay32Us(0, note / 2);
-
-            NOTE_PIN_LOW();
-            Timer0_us_Wait(note / 2);
-            //delay32Us(0, note / 2);
-
-            t += note;
-        }
-
-    }
-    else {
-    	Timer0_Wait(durationMs);
-        //delay32Ms(0, durationMs);
-    }
-}
-
-static uint32_t getNote(uint8_t ch)
-{
-    if (ch >= 'A' && ch <= 'G')
-        return notes[ch - 'A'];
-
-    if (ch >= 'a' && ch <= 'g')
-        return notes[ch - 'a' + 7];
-
-    return 0;
-}
-
-static uint32_t getDuration(uint8_t ch)
-{
-    if (ch < '0' || ch > '9')
-        return 400;
-
-    /* number of ms */
-
-    return (ch - '0') * 200;
-}
-
-static uint32_t getPause(uint8_t ch)
-{
-    switch (ch) {
-    case '+':
-        return 0;
-    case ',':
-        return 5;
-    case '.':
-        return 20;
-    case '_':
-        return 30;
-    default:
-        return 5;
-    }
-}
-
-static void playSong(uint8_t *song) {
-    uint32_t note = 0;
-    uint32_t dur  = 0;
-    uint32_t pause = 0;
-
-    /*
-     * A song is a collection of tones where each tone is
-     * a note, duration and pause, e.g.
-     *
-     * "E2,F4,"
-     */
-
-    while(*song != '\0') {
-        note = getNote(*song++);
-        if (*song == '\0')
-            break;
-        dur  = getDuration(*song++);
-        if (*song == '\0')
-            break;
-        pause = getPause(*song++);
-
-        playNote(note, dur);
-        //delay32Ms(0, pause);
-        Timer0_Wait(pause);
-
-    }
-}
-
-static uint8_t * song = (uint8_t*)"C2.C2,D4,C4,F4,E8,";
-        //(uint8_t*)"C2.C2,D4,C4,F4,E8,C2.C2,D4,C4,G4,F8,C2.C2,c4,A4,F4,E4,D4,A2.A2,H4,F4,G4,F8,";
-        //"D4,B4,B4,A4,A4,G4,E4,D4.D2,E4,E4,A4,F4,D8.D4,d4,d4,c4,c4,B4,G4,E4.E2,F4,F4,A4,A4,G8,";
 
 uint32_t len(uint32_t val){
 	uint32_t i = 0;
@@ -346,17 +148,17 @@ static void init_adc(void)
 	ADC_ChannelCmd(LPC_ADC,ADC_CHANNEL_0,ENABLE);
 
 }
-// Note: CPU is running @96MHz
+// Note: CPU is running @100MHz
 void PWM_vInit(void)
 {
   //init PWM
   LPC_SC->PCLKSEL0 &=~(3<<12);      // reset
-  LPC_SC->PCLKSEL0 |= (1<<12);      // set PCLK to full CPU speed (96MHz)
+  LPC_SC->PCLKSEL0 |= (1<<12);      // set PCLK to full CPU speed (100MHz)
   LPC_SC->PCONP |= (1 << 6);        // PWM on
   LPC_PINCON->PINSEL4 &=~(15<<0);    // reset
   LPC_PINCON->PINSEL4 |= (1<<0);    // set PWM1.1 at P2.0
   LPC_PWM1->TCR = (1<<1);           // counter reset
-  LPC_PWM1->PR  = (100000000UL-1)>>13;     // clock /96000000 / prescaler (= PR +1) = 1 s
+  LPC_PWM1->PR  = (100000000UL-1)>>13;     // clock /100000000 / prescaler (= PR +1) = 1 s
   LPC_PWM1->MCR = (1<<1);           // reset on MR0
   LPC_PWM1->MR0 = 4;                // set PWM cycle 0,25Hz (according to manual)
   LPC_PWM1->MR1 = 2;                // set duty to 50%
@@ -508,7 +310,7 @@ void showPresentTime(void){
 
 	for(int8_t i = 1; i >= 0; i--) {
 		time_str[i] = (char)(hour % 10 + '0');
-				if(hour <= 0) {
+				if(hour < 0) {
 					break;
 				}
 				hour = hour / 10;
@@ -521,7 +323,7 @@ void showPresentTime(void){
 
 	for(uint8_t i = 4; i >= 3; i--) {
 		time_str[i] = (char)(minute % 10 + '0');
-				if(minute <= 0) {
+				if(minute < 0) {
 					break;
 				}
 				minute = minute / 10;
@@ -533,7 +335,7 @@ void showPresentTime(void){
 	uint8_t sec = LPC_RTC->SEC;
 	for(uint8_t i = 7; i >= 6; i--) {
 		time_str[i] = (char)(sec % 10 + '0');
-					if(sec <= 0) {
+					if(sec < 0) {
 						break;
 					}
 					sec = sec / 10;
@@ -563,7 +365,7 @@ struct pos {
 	uint8_t length;
 };
 
-char* valToString(uint32_t value, char* str, uint8_t len) {
+void valToString(uint32_t value, char* str, uint8_t len) {
 	int i = len;
 	uint16_t tmp = value;
 	str[i] = '\0';
@@ -584,7 +386,7 @@ char* valToString(uint32_t value, char* str, uint8_t len) {
 //	}
 //}
 void chooseTime(struct pos map[2][3], int32_t LPC_values[], int8_t x, int8_t y){
-	char* str[5];
+	char str[5];
 	//char* str = "2024\0";
 	uint8_t len = map[y][x].length;
 	valToString(LPC_values[x+y*3], str, len);
@@ -612,7 +414,7 @@ void chooseTime(struct pos map[2][3], int32_t LPC_values[], int8_t x, int8_t y){
 //	}
 //}
 
-Bool JoystickControls(char key, Bool output){
+Bool JoystickControls(char key, Bool output, Bool edit){
 	uint8_t pin = 0;
 	uint8_t portNum = 0;
 	Bool prevStateJoy;
@@ -635,16 +437,30 @@ Bool JoystickControls(char key, Bool output){
 	}
 	uint32_t joyClick = ((GPIO_ReadValue(portNum) & (1<<pin))>>pin);
 	Bool joyClickDiff = joyClick - prevStateJoy;
-	if((joyClickDiff)&&(!editing)&&(!joyClick)){
-		output = TRUE;
-		prevStateJoy = 0;
-		joyClickDiff = FALSE;
+	if(edit){
+		if((joyClickDiff)&&(editing)&&(!joyClick)){
+			output = TRUE;
+			prevStateJoy = 0;
+			joyClickDiff = FALSE;
+		}
+		if((joyClickDiff)&&(!editing)&&(!joyClick)){
+			output = FALSE;
+			prevStateJoy = 0;
+			prevStateJoy = joyClick;
+		}
+	} else {
+		if((joyClickDiff)&&(!editing)&&(!joyClick)){
+			output = TRUE;
+			prevStateJoy = 0;
+			joyClickDiff = FALSE;
+		}
+		if((joyClickDiff)&&(editing)&&(!joyClick)){
+			output = FALSE;
+			prevStateJoy = 0;
+			prevStateJoy = joyClick;
+		}
 	}
-	if((joyClickDiff)&&(editing)&&(!joyClick)){
-		output = FALSE;
-		prevStateJoy = 0;
-		prevStateJoy = joyClick;
-	}
+
 	switch(key){
 		case 'u':
 		case 'U':
@@ -664,6 +480,79 @@ Bool JoystickControls(char key, Bool output){
 			break;
 	}
 	return output;
+}
+
+void initTimer1(void){
+	LPC_SC->PCONP |= (1<<2); //Wlaczenie zasilania
+
+	LPC_TIM1->TCR = 0x02;
+	LPC_TIM1->PR = 0;
+	LPC_TIM1->MR0 = 100000000;
+	LPC_TIM1->MCR |= (1<<0) | (1<<1);
+
+	NVIC_EnableIRQ(TIMER1_IRQn);
+	LPC_TIM1->TCR = 0x01; //wlaczanie timera
+
+}
+
+void TIMER1_IRQHandler1(void){
+	if(LPC_TIM1->IR & (1<<0)) {
+		LPC_TIM1->IR = (1<<0);
+
+	}
+}
+
+void generate_samples(void) {
+	for (uint32_t i = 0; i < NUM_SAMPLES; i++){
+		samples[i] = (sin(2*3.14159*i/ NUM_SAMPLES)+ 1) * 512;
+	}
+}
+void changeValue(int16_t value, int32_t LPC_values[], uint8_t x, uint8_t y) {
+	uint8_t pos_on_map = y*3+x;
+	int32_t tmp = LPC_values[pos_on_map] + value;
+	switch (pos_on_map){
+	case 0:
+		if(tmp > 2100) tmp = 2000;
+		else if(tmp < 2000) tmp = 2100;
+		LPC_RTC->YEAR = tmp;
+		break;
+	case 1:
+		if(tmp > 12) tmp = 1;
+		else if(tmp < 1) tmp = 12;
+		LPC_RTC->MONTH = tmp;
+		break;
+	case 2:
+		if(LPC_values[1] == 1 || LPC_values[1] == 3 || LPC_values[1] == 5 || LPC_values[1] == 7
+				|| LPC_values[1] == 8 || LPC_values[1] == 10 || LPC_values[1] == 12){
+			if(tmp > 31) tmp = 1;
+			else if(tmp < 1) tmp = 31;
+		}
+		else if(LPC_values[1] == 4 || LPC_values[1] == 6 || LPC_values[1] == 9 || LPC_values[1] == 11){
+			if(tmp > 30) tmp = 1;
+			else if(tmp < 1) tmp = 30;
+		}
+		else if(LPC_values[1] == 2){
+			if(tmp > 28) tmp = 1;
+			else if(tmp < 1) tmp = 28;
+		}
+		LPC_RTC->DOM= tmp;
+		break;
+	case 3:
+		if(tmp > 23) tmp = 0;
+		else if(tmp < 0) tmp = 23;
+		LPC_RTC->HOUR= tmp;
+		break;
+	case 4:
+		if(tmp > 59) tmp = 0;
+		else if(tmp < 0) tmp = 59;
+		LPC_RTC->MIN= tmp;
+		break;
+	case 5:
+		if(tmp > 59) tmp = 0;
+		else if(tmp < 0) tmp = 59;
+		LPC_RTC->SEC= tmp;
+		break;
+	}
 }
 
 int main (void) {
@@ -694,7 +583,7 @@ int main (void) {
     SYSTICK_InternalInit(1);
     SYSTICK_Cmd(ENABLE);
 
-
+    generate_samples();
 
     if (SysTick_Config(SystemCoreClock / 1000)) {
             while(1); // error
@@ -704,6 +593,24 @@ int main (void) {
 
 
     PWM_vInit();
+
+    uint32_t cnt = 0;
+	  uint32_t off = 0;
+	  uint32_t sampleRate = 0;
+	  uint32_t delay = 0;
+
+	  GPIO_SetDir(2, 1<<0, 1);
+	  GPIO_SetDir(2, 1<<1, 1);
+
+	  GPIO_SetDir(0, 1<<27, 1);
+	  GPIO_SetDir(0, 1<<28, 1);
+	  GPIO_SetDir(2, 1<<13, 1);
+	  GPIO_SetDir(0, 1<<26, 1);
+
+	  GPIO_ClearValue(0, 1<<27); //LM4811-clk
+	  GPIO_ClearValue(0, 1<<28); //LM4811-up/dn
+	  GPIO_ClearValue(2, 1<<13); //LM4811-shutdn
+
 
     light_enable();
     light_setMode(LIGHT_MODE_D1); //visible + infrared
@@ -717,13 +624,27 @@ int main (void) {
     LPC_RTC->MONTH = 7;
     LPC_RTC->DOM = 06;
 
-    LPC_RTC->HOUR = 5;
-    LPC_RTC->MIN = 5;
-    LPC_RTC->SEC = 5;
+    LPC_RTC->HOUR = 23;
+    LPC_RTC->MIN = 59;
+    LPC_RTC->SEC = 50;
     LPC_RTC->CCR = 1;
 
+
+    //Z przykladu ustawienie wyjcia z DAC
+
+	PINSEL_CFG_Type PinCfg;
+
+	PinCfg.Funcnum = 2;
+	PinCfg.OpenDrain = 0;
+	PinCfg.Pinmode = 0;
+	PinCfg.Pinnum = 26;
+	PinCfg.Portnum = 0;
+	PINSEL_ConfigPin(&PinCfg);
+
+    DAC_Init(LPC_DAC);
+
+
     int32_t LPC_values[] = {LPC_RTC->YEAR, LPC_RTC->MONTH, LPC_RTC->DOM, LPC_RTC->HOUR, LPC_RTC->MIN, LPC_RTC->SEC};
-    struct pos map[2][3] ={{{1,12, 4}, {31,12, 2}, {49,12, 2}},{{1,24, 2}, {19,24, 2}, {37,24, 2}}};
 
     PWM_ChangeDirection();
     GPIO_SetDir(0,1<<4,0);
@@ -735,7 +656,9 @@ int main (void) {
     write_temp_on_screen(&naszString);
     oled_putString(1, 0, &naszString, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
     showLuxometerReading();
-    moveBar(1, dir);
+
+    //initTimer1();
+
 	PWM_Stop_Mov();
 	uint32_t ifCheckTheTemp;
 
@@ -743,6 +666,11 @@ int main (void) {
 	Bool output = FALSE;
 	uint8_t posX = 0;
 	uint8_t posY = 0;
+
+//	map[0][0].x = 1;
+//	map[0][0].y = 12;
+//	map[0][0].length = 4;
+    struct pos map[2][3] ={{{1,12, 4}, {31,12, 2}, {49,12, 2}},{{1,24, 2}, {19,24, 2}, {37,24, 2}}};
     while (1) {
     	uint32_t joyClick = ((GPIO_ReadValue(0) & (1<<17))>>17);
 
@@ -763,26 +691,47 @@ int main (void) {
 
         showEditmode(editing);
 
-        if (JoystickControls('u', output)){
-        	posY += 3;
-        	posY = posY % 2;
+        if(!editing) {
+			if (JoystickControls('u', output, FALSE)){
+				posY += 3;
+				posY = posY % 2;
+			}
+			output = FALSE;
+			if (JoystickControls('d', output, FALSE)){
+				posY += 1;
+				posY = posY % 2;
+			}
+			output = FALSE;
+			if (JoystickControls('l', output, FALSE)){
+				posX += 2;
+				posX = posX % 3;
+			}
+			output = FALSE;
+			if (JoystickControls('r', output, FALSE)){
+				posX += 4;
+				posX = posX  % 3;
+			}
+			output = FALSE;
+        } else {
+			if (JoystickControls('u', output, TRUE)){
+				changeValue(1, LPC_values, posX, posY);
+			}
+			output = FALSE;
+			if (JoystickControls('d', output, TRUE)){
+				changeValue(-1, LPC_values, posX, posY);
+			}
+			output = FALSE;
+			if (JoystickControls('l', output, TRUE)){
+				changeValue(-5, LPC_values, posX, posY);
+			}
+			output = FALSE;
+			if (JoystickControls('r', output, TRUE)){
+				changeValue(5, LPC_values, posX, posY);
+			}
+			output = FALSE;
         }
-        output = FALSE;
-        if (JoystickControls('d', output)){
-        	posY += 1;
-        	posY = posY % 2;
-		}
-        output = FALSE;
-        if (JoystickControls('l', output)){
-        	posX += 2;
-        	posX = posX % 3;
-		}
-        output = FALSE;
-        if (JoystickControls('r', output)){
-        	posX += 4;
-        	posX = posX  % 3;
-        }
-        output = FALSE;
+
+
 
         chooseTime(map, LPC_values, posX, posY);
 
@@ -808,19 +757,11 @@ int main (void) {
     	{
     		PWM_Stop_Mov();
     	}
-
-//    	Timer0_Wait(1600);
-//        PWM_Stop_Mov();
-//    	//PWM_ChangeDirection();
-//        Timer0_Wait(1600);
-//        PWM_Right();
-//        Timer0_Wait(1600);
-//        PWM_Left();
-
     }
-
-
 }
+
+
+
 
 void check_failed(uint8_t *file, uint32_t line)
 {

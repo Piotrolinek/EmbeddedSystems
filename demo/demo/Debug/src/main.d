@@ -11,6 +11,7 @@ src/main.o src/main.d: ../src/main.c \
  C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\inc/lpc17xx_timer.h \
  C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\inc/lpc17xx_systick.h \
  C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\inc/temp.h \
+ C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\inc/lpc17xx_dac.h \
  C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\inc/joystick.h \
  C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\inc/pca9532.h \
  C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\inc/acc.h \
@@ -43,6 +44,8 @@ C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\inc/lpc17xx_timer.h:
 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\inc/lpc17xx_systick.h:
 
 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\inc/temp.h:
+
+C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\inc/lpc17xx_dac.h:
 
 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\inc/joystick.h:
 
