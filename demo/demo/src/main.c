@@ -557,8 +557,13 @@ void showPresentTime(void){
 //		value = value / 10;
 //	}
 //}
+struct pos {
+	uint8_t x;
+	uint8_t y;
+	uint8_t length;
+};
 
-char* valToString(uint32_t value, char* str, int len) {
+char* valToString(uint32_t value, char* str, uint8_t len) {
 	int i = len;
 	uint16_t tmp = value;
 	str[i] = '\0';
@@ -568,11 +573,6 @@ char* valToString(uint32_t value, char* str, int len) {
 	}
 }
 
-struct pos {
-	uint8_t x;
-	uint8_t y;
-	uint8_t length;
-};
 //void chooseTime(struct pos (*map)[2][3], int32_t *LPC_values){
 //	//char* str[4];
 //	char* str = "2024";
@@ -583,10 +583,11 @@ struct pos {
 //		//oled_putPixel(x, y, color);
 //	}
 //}
-void chooseTime(struct pos map[][3], int32_t LPC_values[], int8_t x, int8_t y){
+void chooseTime(struct pos map[2][3], int32_t LPC_values[], int8_t x, int8_t y){
 	char* str[5];
 	//char* str = "2024\0";
-	valToString(LPC_values[x+y*3], str, map[y][x].length);
+	uint8_t len = map[y][x].length;
+	valToString(LPC_values[x+y*3], str, len);
 	str[map[y][x].length] = '\0';
 	oled_putString(map[y][x].x, map[y][x].y, str, OLED_COLOR_BLACK, OLED_COLOR_WHITE);
 //	for(uint32_t i=0; i < map[0]->length; i++){
