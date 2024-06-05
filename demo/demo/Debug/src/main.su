@@ -26,8 +26,8 @@ main.c:449:6:showOurTemp	24	static
 main.c:455:6:showLuxometerReading	48	static
 main.c:462:6:showEditmode	24	static
 main.c:472:6:showPresentTime	56	static
-main.c:547:7:valToString	32	static
-main.c:576:6:chooseTime	56	static
-main.c:605:6:JoystickControls	24	static
-main.c:659:5:main	120	static
-main.c:854:6:check_failed	16	static
+main.c:561:7:valToString	40	static
+main.c:586:6:chooseTime	56	static
+main.c:614:6:JoystickControls	24	static
+main.c:668:5:main	128	static
+main.c:824:6:check_failed	16	static

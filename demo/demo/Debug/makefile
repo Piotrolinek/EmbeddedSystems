@@ -29,7 +29,7 @@ all: demo.axf
 demo.axf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: MCU Linker'
-	arm-none-eabi-gcc -nostdlib -L"C:\Users\247810\Desktop\demo\Lib_CMSISv1p30_LPC17xx\Debug" -L"C:\Users\247810\Desktop\demo\Lib_EaBaseBoard\Debug" -L"C:\Users\247810\Desktop\demo\Lib_MCU\Debug" -Xlinker --gc-sections -Xlinker -Map=demo.map -mcpu=cortex-m3 -mthumb -T "rdb1768cmsis_uart_Debug.ld" -o "demo.axf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-gcc -nostdlib -L"C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_CMSISv1p30_LPC17xx\Debug" -L"C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug" -L"C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug" -Xlinker --gc-sections -Xlinker -Map=demo.map -mcpu=cortex-m3 -mthumb -T "rdb1768cmsis_uart_Debug.ld" -o "demo.axf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 	$(MAKE) --no-print-directory post-build

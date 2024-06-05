@@ -544,13 +544,23 @@ void showPresentTime(void){
 
 }
 
-char* valToString(uint16_t value, char* str) {
-	int i = 0;
+//char* valToString(uint16_t value, char* str) {
+//	int i = 0;
+//	uint16_t tmp = value;
+//	while(tmp > 0){
+//		tmp = tmp / 10;
+//		i++;
+//	}
+//	str[i] = '\0';
+//	for(int j= i - 1; j >= 0; j--) {
+//		str[j] = (char)(value % 10 + '0');
+//		value = value / 10;
+//	}
+//}
+
+char* valToString(uint32_t value, char* str, int len) {
+	int i = len;
 	uint16_t tmp = value;
-	while(tmp > 0){
-		tmp = tmp / 10;
-		i++;
-	}
 	str[i] = '\0';
 	for(int j= i - 1; j >= 0; j--) {
 		str[j] = (char)(value % 10 + '0');
@@ -576,10 +586,9 @@ struct pos {
 void chooseTime(struct pos map[][3], int32_t LPC_values[], int8_t x, int8_t y){
 	char* str[5];
 	//char* str = "2024\0";
-	valToString(LPC_values[x*3+y], str);
-	str[map[x][y].length] = "\0";
-	uint8_t xdddd = 0;
-	oled_putString(map[x][y].x, map[x][y].y, str, OLED_COLOR_BLACK, OLED_COLOR_WHITE);
+	valToString(LPC_values[x+y*3], str, map[y][x].length);
+	str[map[y][x].length] = '\0';
+	oled_putString(map[y][x].x, map[y][x].y, str, OLED_COLOR_BLACK, OLED_COLOR_WHITE);
 //	for(uint32_t i=0; i < map[0]->length; i++){
 //		//oled_putChar(map[0]->x + i * 6, map[0]->y, &str[i], OLED_COLOR_BLACK, OLED_COLOR_WHITE);
 //
@@ -638,19 +647,19 @@ Bool JoystickControls(char key, Bool output){
 	switch(key){
 		case 'u':
 		case 'U':
-			prevStateJoyUp = prevStateJoy;
+			prevStateJoyUp = joyClick;
 			break;
 		case 'd':
 		case 'D':
-			prevStateJoyDown = prevStateJoy;
+			prevStateJoyDown = joyClick;
 			break;
 		case 'l':
 		case 'L':
-			prevStateJoyLeft = prevStateJoy;
+			prevStateJoyLeft = joyClick;
 			break;
 		case 'r':
 		case 'R':
-			prevStateJoyRight = prevStateJoy;
+			prevStateJoyRight = joyClick;
 			break;
 	}
 	return output;
@@ -658,15 +667,6 @@ Bool JoystickControls(char key, Bool output){
 
 int main (void) {
 
-
-    int32_t xoff = 0;
-    int32_t yoff = 0;
-    int32_t zoff = 0;
-
-    int8_t x = 0;
-
-    int8_t y = 0;
-    int8_t z = 0;
     uint8_t dir = 1;
     uint8_t wait = 0;
 
@@ -692,7 +692,6 @@ int main (void) {
 //    rgb_init();
     SYSTICK_InternalInit(1);
     SYSTICK_Cmd(ENABLE);
-    //SYSTICK_IntCmd(ENABLE);
 
 
 
@@ -712,38 +711,9 @@ int main (void) {
     light_setIrqInCycles(LIGHT_CYCLE_1);
 
 
-
-
-    /*
-     * Assume base board in zero-g position when reading first value.
-     */
-//    acc_read(&x, &y, &z);
-//    xoff = 0-x;
-//    yoff = 0-y;
-//    zoff = 64-z;
-
-    /* ---- Speaker ------> */
-
-//    GPIO_SetDir(2, 1<<0, 1);
-//    GPIO_SetDir(2, 1<<1, 1);
-//
-//    GPIO_SetDir(0, 1<<27, 1);
-//    GPIO_SetDir(0, 1<<28, 1);
-//    GPIO_SetDir(2, 1<<13, 1);
-//    GPIO_SetDir(0, 1<<26, 1);
-//
-//    GPIO_ClearValue(0, 1<<27); //LM4811-clk
-//    GPIO_ClearValue(0, 1<<28); //LM4811-up/dn
-//    GPIO_ClearValue(2, 1<<13); //LM4811-shutdn
-//
-//    btn1 = ((GPIO_ReadValue(0) >> 4) & 0x01);
-
-    /* <---- Speaker ------ */
-
-    //Timer0_Wait(10009);
     RTC_Init(LPC_RTC);
     LPC_RTC->YEAR = 2024;
-    LPC_RTC->MONTH = 6;
+    LPC_RTC->MONTH = 7;
     LPC_RTC->DOM = 06;
 
     LPC_RTC->HOUR = 5;
@@ -752,7 +722,7 @@ int main (void) {
     LPC_RTC->CCR = 1;
 
     int32_t LPC_values[] = {LPC_RTC->YEAR, LPC_RTC->MONTH, LPC_RTC->DOM, LPC_RTC->HOUR, LPC_RTC->MIN, LPC_RTC->SEC};
-    struct pos map[2][3] ={{{1,12, 4}, {37,12, 2}, {55,12, 2}},{{1,24, 2}, {25,24, 2}, {43,24, 2}}};
+    struct pos map[2][3] ={{{1,12, 4}, {31,12, 2}, {49,12, 2}},{{1,24, 2}, {19,24, 2}, {37,24, 2}}};
 
     PWM_ChangeDirection();
     GPIO_SetDir(0,1<<4,0);
@@ -775,7 +745,7 @@ int main (void) {
     while (1) {
     	uint32_t joyClick = ((GPIO_ReadValue(0) & (1<<17))>>17);
 
-
+    	int32_t LPC_values[] = {LPC_RTC->YEAR, LPC_RTC->MONTH, LPC_RTC->DOM, LPC_RTC->HOUR, LPC_RTC->MIN, LPC_RTC->SEC};
 		Bool joyClickDiff = joyClick - prevStateJoyClick;
 
 		if((joyClickDiff)&&(!editing)&&(!joyClick)){
@@ -827,12 +797,12 @@ int main (void) {
     	}
     	uint32_t but1 = ((GPIO_ReadValue(0) >> 4) & 0x01);
     	uint32_t but2 = ((GPIO_ReadValue(1) >> 31) & 0x01);
-    	PWM_Stop_Mov();
+    	//PWM_Stop_Mov();
     	if(but1==0){
-    		//PWM_Left();
+    		PWM_Left();
     	}
     	else if(but2==0){
-            //PWM_Right();
+            PWM_Right();
     	}else
     	{
     		PWM_Stop_Mov();
