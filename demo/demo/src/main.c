@@ -41,8 +41,13 @@ Bool prevStateJoyUp = TRUE;
 Bool prevStateJoyDown = TRUE;
 uint32_t sample_index = 0;
 uint32_t samples[NUM_SAMPLES];
+Bool directionOfNextAlarm;
 //////////////////////////////////////////////
-
+struct alarm_struct{
+	Bool MODE; //Down->0, Up->1
+	uint8_t HOUR;
+	uint8_t MIN;
+};
 
 
 
@@ -258,7 +263,7 @@ void showLuxometerReading(void){
 	uint32_t light_val = light_read();
 	char* xdd[6];
 	uint32_t_to_str(light_val, xdd); //co
-	oled_putString(1, 36, &xdd, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
+	oled_putString(43, 1, &xdd, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
 }
 
 void showEditmode(Bool editmode) {
@@ -271,7 +276,7 @@ void showEditmode(Bool editmode) {
 	}
 }
 
-void showPresentTime(void){
+void showPresentTime(struct alarm_struct alarm[], int8_t y){
     char date_str[10];
     uint16_t year = LPC_RTC->YEAR;
 
@@ -340,25 +345,46 @@ void showPresentTime(void){
 					}
 					sec = sec / 10;
 			}
+	char alarm_str[8];
+	alarm_str[7] = '\0';
+	uint8_t min;
+	if(y == 3) {
+		//alarm_str[0] = (char)(alarm[1].MODE + '0');
+		alarm_str[0] = 'U';
+		alarm_str[1] = ' ';
+		hour = alarm[1].HOUR;
+		min = alarm[1].MIN;
+	}
+	else {
+		//alarm_str[0] = (char)(alarm[0].MODE + '0');
+		alarm_str[0] = 'D';
+		alarm_str[1] = ' ';
+		hour = alarm[0].HOUR;
+		min = alarm[0].MIN;
+	}
+
+	for(uint8_t i = 3; i >= 2; i--) {
+		alarm_str[i] = (char)(hour % 10 + '0');
+		if(hour < 0) {
+			break;
+		}
+		hour = hour / 10;
+	}
+	alarm_str[4] = ':';
+
+	for(uint8_t i = 6; i >= 5; i--) {
+		alarm_str[i] = (char)(min % 10 + '0');
+		if(min < 0) {
+			break;
+		}
+		min = min / 10;
+	}
 	time_str[8] = '\0';
 	oled_putString(1, 12, &date_str, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
 	oled_putString(1, 24, &time_str, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
-
+	oled_putString(37, 36, &alarm_str, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
 }
 
-//char* valToString(uint16_t value, char* str) {
-//	int i = 0;
-//	uint16_t tmp = value;
-//	while(tmp > 0){
-//		tmp = tmp / 10;
-//		i++;
-//	}
-//	str[i] = '\0';
-//	for(int j= i - 1; j >= 0; j--) {
-//		str[j] = (char)(value % 10 + '0');
-//		value = value / 10;
-//	}
-//}
 struct pos {
 	uint8_t x;
 	uint8_t y;
@@ -375,28 +401,19 @@ void valToString(uint32_t value, char* str, uint8_t len) {
 	}
 }
 
-//void chooseTime(struct pos (*map)[2][3], int32_t *LPC_values){
-//	//char* str[4];
-//	char* str = "2024";
-//	//valToString(LPC_values[0], str);
-//
-//	for(uint32_t i=0; i < map[0][0]->length; i++){
-//		oled_putChar(map[0][0]->x, map[0][0]->y, &str, OLED_COLOR_BLACK, OLED_COLOR_WHITE);
-//		//oled_putPixel(x, y, color);
-//	}
-//}
-void chooseTime(struct pos map[2][3], int32_t LPC_values[], int8_t x, int8_t y){
+void chooseTime(struct pos map[4][3], int32_t LPC_values[], struct alarm_struct alarm[], int8_t x, int8_t y){
 	char str[5];
-	//char* str = "2024\0";
 	uint8_t len = map[y][x].length;
-	valToString(LPC_values[x+y*3], str, len);
+	if (x+y*3 < 6){
+		valToString(LPC_values[x+y*3], str, len);
+	} else {
+		if(x==0) return;
+		else if(x==1) valToString(alarm[y-2].HOUR, str, len);
+		else if(x==2) valToString(alarm[y-2].MIN, str, len);
+		setNextAlarm(alarm);
+	}
 	str[map[y][x].length] = '\0';
 	oled_putString(map[y][x].x, map[y][x].y, str, OLED_COLOR_BLACK, OLED_COLOR_WHITE);
-//	for(uint32_t i=0; i < map[0]->length; i++){
-//		//oled_putChar(map[0]->x + i * 6, map[0]->y, &str[i], OLED_COLOR_BLACK, OLED_COLOR_WHITE);
-//
-//		//oled_putPixel(x, y, color);
-//	}
 }
 
 //void JoystickControls(char key){
@@ -507,9 +524,23 @@ void generate_samples(void) {
 		samples[i] = (sin(2*3.14159*i/ NUM_SAMPLES)+ 1) * 512;
 	}
 }
-void changeValue(int16_t value, int32_t LPC_values[], uint8_t x, uint8_t y) {
+void changeValue(int16_t value, int32_t LPC_values[], struct alarm_struct alarm[2], uint8_t x, uint8_t y) {
 	uint8_t pos_on_map = y*3+x;
-	int32_t tmp = LPC_values[pos_on_map] + value;
+	int32_t tmp;
+	uint8_t i;
+	if(pos_on_map < 6) {
+		tmp = LPC_values[pos_on_map] + value;
+	}
+	else if(pos_on_map < 12){
+		if(pos_on_map < 9) i = 0;
+		else i = 1;
+		if(pos_on_map == 6 ) tmp = alarm[0].MODE + value;
+		if(pos_on_map == 7 ) tmp = alarm[0].HOUR + value;
+		if(pos_on_map == 8 ) tmp = alarm[0].MIN + value;
+		if(pos_on_map == 9) tmp = alarm[1].MODE + value;
+		if(pos_on_map == 10) tmp = alarm[1].HOUR + value;
+		if(pos_on_map == 11) tmp = alarm[1].MIN + value;
+	}
 	switch (pos_on_map){
 	case 0:
 		if(tmp > 2100) tmp = 2000;
@@ -552,6 +583,54 @@ void changeValue(int16_t value, int32_t LPC_values[], uint8_t x, uint8_t y) {
 		else if(tmp < 0) tmp = 59;
 		LPC_RTC->SEC= tmp;
 		break;
+	case 6:
+	case 9:
+//		if(tmp > 1) tmp = 0;
+//		else if(tmp < 0) tmp = 1;
+//		alarm[i].MODE = tmp;
+		break;
+	case 7:
+	case 10:
+		if(tmp > 23) tmp = 0;
+		else if(tmp < 0) tmp = 23;
+		alarm[i].HOUR = tmp;
+		break;
+	case 8:
+	case 11:
+		if(tmp > 59) tmp = 0;
+		else if(tmp < 0) tmp = 59;
+		alarm[i].MIN = tmp;
+		break;
+	}
+}
+
+void setNextAlarm( struct alarm_struct alarm[]){
+	int32_t hour0Diff = alarm[0].HOUR - LPC_RTC->HOUR + 24;
+	hour0Diff = hour0Diff % 24;
+	int32_t minute0Diff = alarm[0].MIN - LPC_RTC->MIN +60;
+	minute0Diff = minute0Diff % 60;
+
+	int32_t hour1Diff = alarm[1].HOUR - LPC_RTC->HOUR + 24;
+	hour1Diff = hour1Diff % 24;
+	int32_t minute1Diff = alarm[1].MIN - LPC_RTC->MIN +60;
+	minute1Diff = minute1Diff % 60;
+
+	if(hour0Diff<hour1Diff){
+		LPC_RTC->ALHOUR = alarm[0].HOUR;
+		LPC_RTC->ALMIN = alarm[0].MIN;
+		directionOfNextAlarm = alarm[0].MODE;
+	}else if(hour0Diff>hour1Diff){
+		LPC_RTC->ALHOUR = alarm[1].HOUR;
+		LPC_RTC->ALMIN = alarm[1].MIN;
+		directionOfNextAlarm = alarm[1].MODE;
+	}else if(minute0Diff<minute1Diff){
+		LPC_RTC->ALHOUR = alarm[0].HOUR;
+		LPC_RTC->ALMIN = alarm[0].MIN;
+		directionOfNextAlarm = alarm[0].MODE;
+	} else if(minute0Diff>minute1Diff){
+	LPC_RTC->ALHOUR = alarm[1].HOUR;
+	LPC_RTC->ALMIN = alarm[1].MIN;
+	directionOfNextAlarm = alarm[1].MODE;
 	}
 }
 
@@ -662,18 +741,30 @@ int main (void) {
 	PWM_Stop_Mov();
 	uint32_t ifCheckTheTemp;
 
+	char xdx[] = "ALARM:\0";
+	oled_putString(1, 36, xdx, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
+
+
+
 	Bool joystickOutput;
 	Bool output = FALSE;
 	uint8_t posX = 0;
 	uint8_t posY = 0;
 
+	struct alarm_struct alarm[2] = {{0, 15, 35},{1, 12, 15}};
+
 //	map[0][0].x = 1;
 //	map[0][0].y = 12;
 //	map[0][0].length = 4;
-    struct pos map[2][3] ={{{1,12, 4}, {31,12, 2}, {49,12, 2}},{{1,24, 2}, {19,24, 2}, {37,24, 2}}};
+    struct pos map[4][3] ={
+    		{{1,12, 4}, {31,12, 2}, {49,12, 2}},
+			{{1,24, 2}, {19,24, 2}, {37,24, 2}},
+			{{37,36,1}, {49,36, 2}, {67,36, 2}},
+			{{37,36,1}, {49,36, 2}, {67,36, 2}}};
+
+    setNextAlarm(alarm);
     while (1) {
     	uint32_t joyClick = ((GPIO_ReadValue(0) & (1<<17))>>17);
-
     	int32_t LPC_values[] = {LPC_RTC->YEAR, LPC_RTC->MONTH, LPC_RTC->DOM, LPC_RTC->HOUR, LPC_RTC->MIN, LPC_RTC->SEC};
 		Bool joyClickDiff = joyClick - prevStateJoyClick;
 
@@ -691,15 +782,16 @@ int main (void) {
 
         showEditmode(editing);
 
+
         if(!editing) {
 			if (JoystickControls('u', output, FALSE)){
 				posY += 3;
-				posY = posY % 2;
+				posY = posY % 4;
 			}
 			output = FALSE;
 			if (JoystickControls('d', output, FALSE)){
-				posY += 1;
-				posY = posY % 2;
+				posY += 5;
+				posY = posY % 4;
 			}
 			output = FALSE;
 			if (JoystickControls('l', output, FALSE)){
@@ -714,28 +806,28 @@ int main (void) {
 			output = FALSE;
         } else {
 			if (JoystickControls('u', output, TRUE)){
-				changeValue(1, LPC_values, posX, posY);
+				changeValue(1, LPC_values, alarm, posX, posY);
 			}
 			output = FALSE;
 			if (JoystickControls('d', output, TRUE)){
-				changeValue(-1, LPC_values, posX, posY);
+				changeValue(-1, LPC_values, alarm, posX, posY);
 			}
 			output = FALSE;
 			if (JoystickControls('l', output, TRUE)){
-				changeValue(-5, LPC_values, posX, posY);
+				changeValue(-5, LPC_values, alarm, posX, posY);
 			}
 			output = FALSE;
 			if (JoystickControls('r', output, TRUE)){
-				changeValue(5, LPC_values, posX, posY);
+				changeValue(5, LPC_values, alarm, posX, posY);
 			}
 			output = FALSE;
         }
 
 
 
-        chooseTime(map, LPC_values, posX, posY);
+        chooseTime(map, LPC_values, alarm, posX, posY);
 
-    	showPresentTime();
+    	showPresentTime(alarm, posY);
 		ifCheckTheTemp++;
 
     	if((ifCheckTheTemp%(1<<8))==0){
