@@ -26,8 +26,10 @@
 #include "oled.h"
 #include "rgb.h"
 #include "light.h"
+#include "eeprom.h"
 
 #define NUM_SAMPLES 1000
+#define EEPROM_OFFSET 256
 
 //////////////////////////////////////////////
 //Global vars
@@ -42,6 +44,7 @@ Bool prevStateJoyDown = TRUE;
 uint32_t sample_index = 0;
 uint32_t samples[NUM_SAMPLES];
 Bool directionOfNextAlarm;
+uint8_t eeprom_buffer[20];
 //////////////////////////////////////////////
 struct alarm_struct{
 	Bool MODE; //Down->0, Up->1
@@ -519,6 +522,8 @@ void TIMER1_IRQHandler1(void){
 	}
 }
 
+
+
 void generate_samples(void) {
 	for (uint32_t i = 0; i < NUM_SAMPLES; i++){
 		samples[i] = (sin(2*3.14159*i/ NUM_SAMPLES)+ 1) * 512;
@@ -543,8 +548,8 @@ void changeValue(int16_t value, int32_t LPC_values[], struct alarm_struct alarm[
 	}
 	switch (pos_on_map){
 	case 0:
-		if(tmp > 2100) tmp = 2000;
-		else if(tmp < 2000) tmp = 2100;
+		if(tmp > 2099) tmp = 2000;
+		else if(tmp < 2000) tmp = 2099;
 		LPC_RTC->YEAR = tmp;
 		break;
 	case 1:
@@ -614,7 +619,7 @@ void setNextAlarm( struct alarm_struct alarm[]){
 	hour1Diff = hour1Diff % 24;
 	int32_t minute1Diff = alarm[1].MIN - LPC_RTC->MIN +60;
 	minute1Diff = minute1Diff % 60;
-
+																		LPC_RTC->ALSEC = 0;
 	if(hour0Diff<hour1Diff){
 		LPC_RTC->ALHOUR = alarm[0].HOUR;
 		LPC_RTC->ALMIN = alarm[0].MIN;
@@ -633,13 +638,81 @@ void setNextAlarm( struct alarm_struct alarm[]){
 	directionOfNextAlarm = alarm[1].MODE;
 	}
 }
+int8_t read_time_from_eeprom(struct alarm_struct alarm[]){
+	uint8_t temporary_buffer[4];
+    int16_t eeprom_read_len = eeprom_read(temporary_buffer, EEPROM_OFFSET + 16, 4);
+	if(eeprom_read_len != 4){
+		return -5;
+	}
+    eeprom_read_len = eeprom_read(eeprom_buffer, EEPROM_OFFSET, 5);
+    if(eeprom_read_len != 5){
+    	return -5;
+    }
+    char header[] = "TIME";
+    for (uint8_t i=0; i<4; i++){
+    	if((char)eeprom_buffer[i] != header[i]){
+    		return -i-1;
+    	}
+    	if((char)temporary_buffer[i] != header[i]){
+			return -i-16;
+		}
+    }
+    uint16_t len = eeprom_buffer[4];
+    eeprom_read_len = eeprom_read(eeprom_buffer, EEPROM_OFFSET, len);
+    if(eeprom_read_len != 20){
+    	return -6;
+    }
+    LPC_RTC->YEAR = eeprom_buffer[5]*100 + eeprom_buffer[6];
+    LPC_RTC->MONTH = eeprom_buffer[7];
+    LPC_RTC->DOM = eeprom_buffer[8];
+    LPC_RTC->HOUR = eeprom_buffer[9];
+    LPC_RTC->MIN = eeprom_buffer[10];
+    LPC_RTC->SEC = eeprom_buffer[11];
+    alarm[0].HOUR = eeprom_buffer[12];
+	alarm[0].MIN = eeprom_buffer[13];
+	alarm[1].HOUR = eeprom_buffer[14];
+	alarm[1].MIN = eeprom_buffer[15];
+	setNextAlarm(alarm);
+	return 0;
+}
+
+int8_t write_time_to_eeprom(struct alarm_struct alarm[]){
+	char header[] = "TIME";
+	for(uint8_t i = 0; i < 4; i++){
+		eeprom_buffer[i] = (uint8_t)(header[i]);
+		eeprom_buffer[i+16] = (uint8_t)(header[i]);
+	}
+	eeprom_buffer[4] = 20;
+	eeprom_buffer[5] = LPC_RTC->YEAR / 100;
+	eeprom_buffer[6] = LPC_RTC->YEAR % 100;
+	eeprom_buffer[7] = LPC_RTC->MONTH;
+	eeprom_buffer[8] = LPC_RTC->DOM;
+	eeprom_buffer[9] = LPC_RTC->HOUR;
+	eeprom_buffer[10] = LPC_RTC->MIN;
+	eeprom_buffer[11] = LPC_RTC->SEC;
+	eeprom_buffer[12] = alarm[0].HOUR;
+	eeprom_buffer[13] = alarm[0].MIN;
+	eeprom_buffer[14] = alarm[1].HOUR;
+	eeprom_buffer[15] = alarm[1].MIN;
+	int16_t eeprom_write_len = eeprom_write(eeprom_buffer, EEPROM_OFFSET, 20);
+	if (eeprom_write_len != 20){
+		return -1;
+	}
+	return 0;
+}
+void RTC_IRQHandler(void){
+	if (LPC_RTC->ILR&2){
+		LPC_RTC->ILR = 2;
+		PWM_Right();
+		//Tu nalezy wywolac interrupt do DAC
+	}
+}
 
 int main (void) {
-
     uint8_t dir = 1;
     uint8_t wait = 0;
 
-    uint8_t state    = 0;
+    uint8_t state                 = 0;
 
     uint32_t trim = 0;
 
@@ -649,6 +722,8 @@ int main (void) {
     init_i2c();
     init_ssp();
     init_adc();
+    eeprom_init();
+
 
     uint8_t positionInGUI = 0;
 //    rotary_init();
@@ -672,6 +747,7 @@ int main (void) {
 
 
     PWM_vInit();
+
 
     uint32_t cnt = 0;
 	  uint32_t off = 0;
@@ -698,16 +774,21 @@ int main (void) {
     light_setIrqInCycles(LIGHT_CYCLE_1);
 
 
-    RTC_Init(LPC_RTC);
-    LPC_RTC->YEAR = 2024;
-    LPC_RTC->MONTH = 7;
-    LPC_RTC->DOM = 06;
 
-    LPC_RTC->HOUR = 23;
-    LPC_RTC->MIN = 59;
-    LPC_RTC->SEC = 50;
+
+    RTC_Init(LPC_RTC);
+    LPC_RTC->YEAR = 2022;
+    LPC_RTC->MONTH = 2;
+    LPC_RTC->DOM = 2;
+    LPC_RTC->HOUR = 2;
+    LPC_RTC->MIN = 2;
+    LPC_RTC->SEC = 2;
     LPC_RTC->CCR = 1;
 
+    LPC_RTC->AMR &= ~((1<<2)|(1<<1)|(1<<0));
+    LPC_RTC->ILR = 1;
+    LPC_RTC->CIIR = 0;
+    NVIC_EnableIRQ(RTC_IRQn);
 
     //Z przykladu ustawienie wyjcia z DAC
 
@@ -751,7 +832,7 @@ int main (void) {
 	uint8_t posX = 0;
 	uint8_t posY = 0;
 
-	struct alarm_struct alarm[2] = {{0, 15, 35},{1, 12, 15}};
+	struct alarm_struct alarm[2] = {{0, 2, 2},{1, 22, 22}};
 
 //	map[0][0].x = 1;
 //	map[0][0].y = 12;
@@ -761,8 +842,12 @@ int main (void) {
 			{{1,24, 2}, {19,24, 2}, {37,24, 2}},
 			{{37,36,1}, {49,36, 2}, {67,36, 2}},
 			{{37,36,1}, {49,36, 2}, {67,36, 2}}};
-
     setNextAlarm(alarm);
+
+    int8_t eeprom_read_ret_value = read_time_from_eeprom(alarm);
+    if(eeprom_read_ret_value != 0){
+    	//obsluga bledu
+    }
     while (1) {
     	uint32_t joyClick = ((GPIO_ReadValue(0) & (1<<17))>>17);
     	int32_t LPC_values[] = {LPC_RTC->YEAR, LPC_RTC->MONTH, LPC_RTC->DOM, LPC_RTC->HOUR, LPC_RTC->MIN, LPC_RTC->SEC};
@@ -828,8 +913,16 @@ int main (void) {
         chooseTime(map, LPC_values, alarm, posX, posY);
 
     	showPresentTime(alarm, posY);
-		ifCheckTheTemp++;
 
+
+
+		ifCheckTheTemp++;
+		if((ifCheckTheTemp%(1<<10))==0){
+			int8_t eeprom_write_ret_value = write_time_to_eeprom(alarm);
+			if(eeprom_write_ret_value != 0){
+				//obsluga bledu
+			}
+		}
     	if((ifCheckTheTemp%(1<<8))==0){
         	showOurTemp();
 			showLuxometerReading();
@@ -837,6 +930,7 @@ int main (void) {
     	if((ifCheckTheTemp%(1<<3))==0) {
     		//chooseTime(&line1, LPC_values);
     	}
+
     	uint32_t but1 = ((GPIO_ReadValue(0) >> 4) & 0x01);
     	uint32_t but2 = ((GPIO_ReadValue(1) >> 31) & 0x01);
     	//PWM_Stop_Mov();
