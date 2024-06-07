@@ -81,6 +81,13 @@ char* uint32_t_to_str(uint32_t val, char* str){
 	str[5] = '\0';
 }
 
+Bool isLeap(void){
+	if (LPC_RTC->YEAR % 400 == 0) return TRUE;
+	else if (LPC_RTC->YEAR % 100 == 0) return FALSE;
+	else if (LPC_RTC->YEAR % 4 == 0) return TRUE;
+	else return FALSE;
+}
+
 static void init_ssp(void)
 {
 	SSP_CFG_Type SSP_ConfigStruct;
@@ -594,9 +601,9 @@ void TIMER0_IRQHandler(void){
 			{
 				DAC_UpdateValue( LPC_DAC,(uint32_t)(sound_8k[cnt]));
 			}
-			else {
-				LPC_TIM0->TCR = 0x02;
-			}
+//			else {
+//				LPC_TIM0->TCR = 0x02;
+//			}
 		}
 	}
 }
@@ -604,17 +611,17 @@ void TIMER0_IRQHandler(void){
 
 void configPin(void) {
     //LPC_PINCON->PINSEL0 &= ~(3 << 8); // Clear bits for P0.04 (Pinsel 9:8 -> 11) -CAP2.0
-    LPC_PINCON->PINSEL0 |= (3 << 8);  // Set bits for CAP2.0 function
+    LPC_PINCON->PINSEL0 |= (3 << 10);  // Set bits for CAP2.0 function
 }
 
 void configTimer2(void) {
     LPC_SC->PCONP |= (1 << 22); // Power up Timer 2
-
-    LPC_TIM2->CTCR = (1<<0); // Counter mode
-    LPC_TIM2->TCR = 0x02; // Reset Timer
+    LPC_SC->PCLKSEL1 |= (2<<12);
+    LPC_TIM2->CTCR |= (1<<0) | (1<<1) | (1<<2); // Counter mode
     LPC_TIM2->PR = 0; // No prescale
+    //LPC_TIM2->TCR = 2; // Reset Timer
     //LPC_TIM2->CCR |= (1 << 0) | (1 << 2); // Capture on rising edge on CAP2.0 and interrupt on capture event
-    LPC_TIM2->TCR = 0x01; // Start Timer
+    LPC_TIM2->TCR = 1; // Start Timer
     //NVIC_EnableIRQ(TIMER2_IRQn); // Enable Timer 2 interrupt
 }
 
@@ -672,8 +679,13 @@ void changeValue(int16_t value, int32_t LPC_values[], struct alarm_struct alarm[
 			else if(tmp < 1) tmp = 30;
 		}
 		else if(LPC_values[1] == 2){
-			if(tmp > 28) tmp = 1;
-			else if(tmp < 1) tmp = 28;
+			if(isLeap()){
+				if(tmp > 29) tmp = 1;
+				else if(tmp < 1) tmp = 29;
+			} else {
+				if(tmp > 28) tmp = 1;
+				else if(tmp < 1) tmp = 28;
+			}
 		}
 		LPC_RTC->DOM= tmp;
 		break;
@@ -714,19 +726,17 @@ void changeValue(int16_t value, int32_t LPC_values[], struct alarm_struct alarm[
 }
 
 void correctDateValues(void){
-	Bool leapYear = FALSE;
-	if (LPC_RTC->YEAR % 400 == 0) leapYear = TRUE;
-	else if (LPC_RTC->YEAR % 100 == 0) leapYear = FALSE;
-	else if (LPC_RTC->YEAR % 4 == 0) leapYear = TRUE;
-	else leapYear = FALSE;
+	Bool leapYear = isLeap();
 	uint8_t lenghts[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-	if (LPC_RTC->DOM > lenghts[LPC_RTC->MONTH]){
+	if (LPC_RTC->DOM > lenghts[LPC_RTC->MONTH-1]){
 		if(leapYear && LPC_RTC->MONTH == 2){
 			if (LPC_RTC->DOM > 29){
 				LPC_RTC->DOM = 29;
 			}
 		}
-		LPC_RTC->DOM = lenghts[LPC_RTC->MONTH];
+		else{
+			LPC_RTC->DOM = lenghts[LPC_RTC->MONTH-1];
+		}
 	}
 }
 
@@ -834,7 +844,7 @@ int main (void) {
     uint8_t dir = 1;
     uint8_t wait = 0;
 
-    uint8_t state                                                = 0;
+    uint8_t state                                                  = 0;
 
     uint32_t trim = 0;
 
