@@ -30,5 +30,7 @@ Funkcjonalności:
 - [x] Checkpoint:
 Podłączenie silnika i sterowanie nim
 
--- info --
+**info**
 LPC1769 I ma VIN ~1.7V tj. za mało na silnik
+P2_9 -> IN1
+P2_10 -> IN2
