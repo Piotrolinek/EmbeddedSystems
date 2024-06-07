@@ -50,14 +50,14 @@ extern int sound_sz;
 Bool disableSound = FALSE;
 uint32_t cnt = 0;
 uint32_t sound_offset = 0;
+uint8_t activationMode = 0;
+uint32_t lumenActivation = 200;
 //////////////////////////////////////////////
 struct alarm_struct{
 	Bool MODE; //Down->0, Up->1
 	uint8_t HOUR;
 	uint8_t MIN;
 };
-
-
 
 
 uint32_t len(uint32_t val){
@@ -457,9 +457,32 @@ void showPresentTime(struct alarm_struct alarm[], int8_t y){
 		min = min / 10;
 	}
 	time_str[8] = '\0';
+	char activation[8];
+	if(activationMode == 0){
+		activation[0] = 'N';
+	} else if(activationMode == 1){
+		activation[0] = 'A';
+	} else if(activationMode == 2){
+		activation[0] = 'L';
+	} else{
+		activation[0] = 'B';
+	}
+	activation[1] = ' ';
+	uint16_t lumens_to_display = lumenActivation;
+	for(uint8_t i = 6; i >= 2; i--) {
+		activation[i] = (char)(lumens_to_display % 10 + '0');
+		if(lumens_to_display < 0) {
+			break;
+		} else if(lumens_to_display == 0 && i != 6) {
+			activation[i] = ' ';
+		}
+		lumens_to_display = lumens_to_display / 10;
+	}
+	activation[7]='\0';
 	oled_putString(1, 12, &date_str, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
 	oled_putString(1, 24, &time_str, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
 	oled_putString(37, 36, &alarm_str, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
+	oled_putString(31, 48, &activation, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
 }
 
 struct pos {
@@ -480,17 +503,45 @@ void valToString(uint32_t value, char* str, uint8_t len) {
 
 void chooseTime(struct pos map[4][3], int32_t LPC_values[], struct alarm_struct alarm[], int8_t x, int8_t y){
 	char str[5];
-	uint8_t len = map[y][x].length;
+	uint8_t leng = map[y][x].length;
+	uint8_t toAdd = 0;
 	if (x+y*3 < 6){
-		valToString(LPC_values[x+y*3], str, len);
-	} else {
+		valToString(LPC_values[x+y*3], str, leng);
+	} else if (x+y*3 < 12){
 		if(x==0) return;
-		else if(x==1) valToString(alarm[y-2].HOUR, str, len);
-		else if(x==2) valToString(alarm[y-2].MIN, str, len);
+		else if(x==1) valToString(alarm[y-2].HOUR, str, leng);
+		else if(x==2) valToString(alarm[y-2].MIN, str, leng);
 		setNextAlarm(alarm);
+	} else {
+		if(x==0){
+			if(activationMode == 0){
+				str[0] = 'N';
+			} else if(activationMode == 1){
+				str[0] = 'A';
+			} else if(activationMode == 2){
+				str[0] = 'L';
+			} else{
+				str[0] = 'B';
+			}
+		} else if(x==1){
+			if(lumenActivation >= 10000) {
+				toAdd = 0;
+			}
+			else if(lumenActivation >= 1000) {
+				toAdd = 6;
+			}
+			else if(lumenActivation >= 100) {
+				toAdd = 12;
+			}
+			else if(lumenActivation >= 10) {
+				toAdd = 18;
+			}
+			valToString(lumenActivation, str, len(lumenActivation));
+		}
+
 	}
 	str[map[y][x].length] = '\0';
-	oled_putString(map[y][x].x, map[y][x].y, str, OLED_COLOR_BLACK, OLED_COLOR_WHITE);
+	oled_putString(map[y][x].x + toAdd, map[y][x].y, str, OLED_COLOR_BLACK, OLED_COLOR_WHITE);
 }
 
 //void JoystickControls(char key){
@@ -609,19 +660,15 @@ void TIMER0_IRQHandler(void){
 }
 
 
-void configPin(void) {
-    //LPC_PINCON->PINSEL0 &= ~(3 << 8); // Clear bits for P0.04 (Pinsel 9:8 -> 11) -CAP2.0
-    LPC_PINCON->PINSEL0 |= (3 << 10);  // Set bits for CAP2.0 function
-}
-
 void configTimer2(void) {
     LPC_SC->PCONP |= (1 << 22); // Power up Timer 2
-    LPC_SC->PCLKSEL1 |= (2<<12);
-    LPC_TIM2->CTCR |= (1<<0) | (1<<1) | (1<<2); // Counter mode
+    LPC_SC->PCLKSEL1 |= (1<<12); //Byla 2
+    LPC_PINCON->PINSEL0 |= (3 << 10);
+    LPC_TIM2->CTCR |= (1<<0) | (1<<2); // Counter mode
     LPC_TIM2->PR = 0; // No prescale
-    //LPC_TIM2->TCR = 2; // Reset Timer
-    //LPC_TIM2->CCR |= (1 << 0) | (1 << 2); // Capture on rising edge on CAP2.0 and interrupt on capture event
-    LPC_TIM2->TCR = 1; // Start Timer
+    LPC_TIM2->CCR = 0; // Capture on rising edge on CAP2.0 and interrupt on capture event
+    LPC_TIM2->TCR = 2; // Start Timer // Bylo 1
+    LPC_TIM2->TCR = 1;
     //NVIC_EnableIRQ(TIMER2_IRQn); // Enable Timer 2 interrupt
 }
 
@@ -656,6 +703,10 @@ void changeValue(int16_t value, int32_t LPC_values[], struct alarm_struct alarm[
 		if(pos_on_map == 9) tmp = alarm[1].MODE + value;
 		if(pos_on_map == 10) tmp = alarm[1].HOUR + value;
 		if(pos_on_map == 11) tmp = alarm[1].MIN + value;
+	}
+	else if(pos_on_map < 15){
+		if(pos_on_map == 12) tmp = activationMode + value;
+		if(pos_on_map == 13) tmp = lumenActivation + value * 50;
 	}
 	switch (pos_on_map){
 	case 0:
@@ -706,9 +757,6 @@ void changeValue(int16_t value, int32_t LPC_values[], struct alarm_struct alarm[
 		break;
 	case 6:
 	case 9:
-//		if(tmp > 1) tmp = 0;
-//		else if(tmp < 0) tmp = 1;
-//		alarm[i].MODE = tmp;
 		break;
 	case 7:
 	case 10:
@@ -721,6 +769,16 @@ void changeValue(int16_t value, int32_t LPC_values[], struct alarm_struct alarm[
 		if(tmp > 59) tmp = 0;
 		else if(tmp < 0) tmp = 59;
 		alarm[i].MIN = tmp;
+		break;
+	case 12:
+		if(tmp > 3) tmp = 0;
+		else if(tmp < 0) tmp = 3;
+		activationMode = tmp;
+		break;
+	case 13:
+		if(tmp < 0) tmp = 64000;
+		else if(tmp > 64000) tmp = 0;
+		lumenActivation = tmp;
 		break;
 	}
 }
@@ -841,10 +899,11 @@ void RTC_IRQHandler(void){
 }
 
 int main (void) {
+	//GPIO_SetDir(0, 5, 0);
     uint8_t dir = 1;
     uint8_t wait = 0;
 
-    uint8_t state                                                  = 0;
+    uint8_t state                                                           = 0;
 
     uint32_t trim = 0;
 
@@ -956,7 +1015,8 @@ int main (void) {
 
 	char xdx[] = "ALARM:\0";
 	oled_putString(1, 36, xdx, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
-
+	char dxd[] = "MODE:\0";
+	oled_putString(1, 48, dxd, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
 
 	sampleRate = get_sample_rate();
 	if(sampleRate < 0){
@@ -974,20 +1034,21 @@ int main (void) {
 //	map[0][0].x = 1;
 //	map[0][0].y = 12;
 //	map[0][0].length = 4;
-    struct pos map[4][3] ={
+    struct pos map[5][3] ={
     		{{1,12, 4}, {31,12, 2}, {49,12, 2}},
 			{{1,24, 2}, {19,24, 2}, {37,24, 2}},
 			{{37,36,1}, {49,36, 2}, {67,36, 2}},
-			{{37,36,1}, {49,36, 2}, {67,36, 2}}};
+			{{37,36,1}, {49,36, 2}, {67,36, 2}},
+			{{31,48,1}, {43,48, 5}, {73,48, 0}}};
     setNextAlarm(alarm);
 
     int8_t eeprom_read_ret_value = read_time_from_eeprom(alarm);
     if(eeprom_read_ret_value != 0){
     	//obsluga bledu
     }
-    configPin();
     configTimer2();
     while (1) {
+
     	uint32_t joyClick = ((GPIO_ReadValue(0) & (1<<17))>>17);
     	int32_t LPC_values[] = {LPC_RTC->YEAR, LPC_RTC->MONTH, LPC_RTC->DOM, LPC_RTC->HOUR, LPC_RTC->MIN, LPC_RTC->SEC};
 		Bool joyClickDiff = joyClick - prevStateJoyClick;
@@ -1009,13 +1070,13 @@ int main (void) {
 
         if(!editing) {
 			if (JoystickControls('u', output, FALSE)){
-				posY += 3;
-				posY = posY % 4;
+				posY += 4;
+				posY = posY % 5;
 			}
 			output = FALSE;
 			if (JoystickControls('d', output, FALSE)){
-				posY += 5;
-				posY = posY % 4;
+				posY += 6;
+				posY = posY % 5;
 			}
 			output = FALSE;
 			if (JoystickControls('l', output, FALSE)){

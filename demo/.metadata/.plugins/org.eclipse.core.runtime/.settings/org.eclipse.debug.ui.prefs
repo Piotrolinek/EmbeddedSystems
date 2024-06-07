@@ -1,6 +1,6 @@
 Variables.detail.orientation=Variables.detail.orientation.hidden
 eclipse.preferences.version=1
-org.eclipse.debug.ui.MemoryView.RenderingViewPane.1=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<persistedMemoryRenderings>\r\n<memoryRendering memoryBlock\="1915593144" renderingId\="com.nxp.mcuxpresso.debug.peripheral.render.id"/>\r\n</persistedMemoryRenderings>\r\n
+org.eclipse.debug.ui.MemoryView.RenderingViewPane.1=
 org.eclipse.debug.ui.MemoryView.orientation=0
 org.eclipse.debug.ui.PREF_LAUNCH_PERSPECTIVES=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<launchPerspectives/>\r\n
 pref_state_memento.=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<FaultsViewMemento org.eclipse.debug.ui.SASH_DETAILS_PART\="250" org.eclipse.debug.ui.SASH_REGISTERS_PART\="375" org.eclipse.debug.ui.SASH_STACKED_PART\="375"/>
