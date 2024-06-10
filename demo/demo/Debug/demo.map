@@ -809,7 +809,7 @@ END GROUP
                 0x20084000                __top_RamAHB32 = 0x20084000
                 0x20084000                __top_RAM2 = 0x20084000
 
-.text           0x00000000     0xee10
+.text           0x00000000    0x10320
  FILL mask 0xff
                 0x00000000                __vectors_start__ = ABSOLUTE (.)
  *(.isr_vector)
@@ -818,10 +818,10 @@ END GROUP
                 0x000000cc                . = ALIGN (0x4)
                 0x000000cc                __section_table_start = .
                 0x000000cc                __data_section_table = .
-                0x000000cc        0x4 LONG 0xee10 LOADADDR (.data)
+                0x000000cc        0x4 LONG 0x10320 LOADADDR (.data)
                 0x000000d0        0x4 LONG 0x10000000 ADDR (.data)
                 0x000000d4        0x4 LONG 0x24 SIZEOF (.data)
-                0x000000d8        0x4 LONG 0xee10 LOADADDR (.data_RAM2)
+                0x000000d8        0x4 LONG 0x10320 LOADADDR (.data_RAM2)
                 0x000000dc        0x4 LONG 0x2007c000 ADDR (.data_RAM2)
                 0x000000e0        0x4 LONG 0x0 SIZEOF (.data_RAM2)
                 0x000000e4                __data_section_table_end = .
@@ -1311,67 +1311,67 @@ END GROUP
  *fill*         0x0000a9f9        0x3 ff
  .rodata        0x0000a9fc       0x45 ./src/main.o
  *fill*         0x0000aa41        0x3 ff
- .rodata        0x0000aa44     0x3e86 ./src/up.o
+ .rodata        0x0000aa44     0x5394 ./src/up.o
                 0x0000aa44                sound_up
- *fill*         0x0000e8ca        0x2 ff
- .rodata        0x0000e8cc        0x8 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(oled.o)
- .rodata        0x0000e8d4      0x300 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(font5x7.o)
-                0x0000e8d4                font5x7
+ .rodata        0x0000fdd8        0x8 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(oled.o)
+ .rodata        0x0000fde0      0x300 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(font5x7.o)
+                0x0000fde0                font5x7
  .rodata.str1.4
-                0x0000ebd4        0xf C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_adc.o)
- *fill*         0x0000ebe3        0x1 ff
+                0x000100e0        0xf C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_adc.o)
+ *fill*         0x000100ef        0x1 ff
  .rodata.str1.4
-                0x0000ebe4        0xf C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_dac.o)
- *fill*         0x0000ebf3        0x1 ff
+                0x000100f0        0xf C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_dac.o)
+ *fill*         0x000100ff        0x1 ff
  .rodata.str1.4
-                0x0000ebf4        0xf C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_i2c.o)
- *fill*         0x0000ec03        0x1 ff
+                0x00010100        0xf C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_i2c.o)
+ *fill*         0x0001010f        0x1 ff
  .rodata.str1.4
-                0x0000ec04        0xf C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_rtc.o)
- *fill*         0x0000ec13        0x1 ff
+                0x00010110        0xf C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_rtc.o)
+ *fill*         0x0001011f        0x1 ff
  .rodata.str1.4
-                0x0000ec14        0xf C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
- *fill*         0x0000ec23        0x1 ff
+                0x00010120        0xf C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ *fill*         0x0001012f        0x1 ff
  .rodata.str1.4
-                0x0000ec24       0x13 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_systick.o)
- *fill*         0x0000ec37        0x1 ff
+                0x00010130       0x13 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_systick.o)
+ *fill*         0x00010143        0x1 ff
  .rodata.npio2_hw
-                0x0000ec38       0x80 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libm.a(lib_a-e_rem_pio2.o)
+                0x00010144       0x80 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libm.a(lib_a-e_rem_pio2.o)
  .rodata.two_over_pi
-                0x0000ecb8      0x108 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libm.a(lib_a-e_rem_pio2.o)
- .rodata.PIo2   0x0000edc0       0x40 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libm.a(lib_a-k_rem_pio2.o)
+                0x000101c4      0x108 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libm.a(lib_a-e_rem_pio2.o)
+ *fill*         0x000102cc        0x4 ff
+ .rodata.PIo2   0x000102d0       0x40 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libm.a(lib_a-k_rem_pio2.o)
  .rodata.init_jk
-                0x0000ee00       0x10 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libm.a(lib_a-k_rem_pio2.o)
-                0x0000ee10                . = ALIGN (0x4)
+                0x00010310       0x10 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libm.a(lib_a-k_rem_pio2.o)
+                0x00010320                . = ALIGN (0x4)
 
-.glue_7         0x0000ee10        0x0
- .glue_7        0x0000ee10        0x0 linker stubs
+.glue_7         0x00010320        0x0
+ .glue_7        0x00010320        0x0 linker stubs
 
-.glue_7t        0x0000ee10        0x0
- .glue_7t       0x0000ee10        0x0 linker stubs
+.glue_7t        0x00010320        0x0
+ .glue_7t       0x00010320        0x0 linker stubs
 
-.vfp11_veneer   0x0000ee10        0x0
- .vfp11_veneer  0x0000ee10        0x0 linker stubs
+.vfp11_veneer   0x00010320        0x0
+ .vfp11_veneer  0x00010320        0x0 linker stubs
 
-.v4_bx          0x0000ee10        0x0
- .v4_bx         0x0000ee10        0x0 linker stubs
+.v4_bx          0x00010320        0x0
+ .v4_bx         0x00010320        0x0 linker stubs
 
-.iplt           0x0000ee10        0x0
- .iplt          0x0000ee10        0x0 ./src/cr_startup_lpc17.o
+.iplt           0x00010320        0x0
+ .iplt          0x00010320        0x0 ./src/cr_startup_lpc17.o
 
-.rel.dyn        0x0000ee10        0x0
- .rel.iplt      0x0000ee10        0x0 ./src/cr_startup_lpc17.o
+.rel.dyn        0x00010320        0x0
+ .rel.iplt      0x00010320        0x0 ./src/cr_startup_lpc17.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM.exidx      0x0000ee10        0x0
-                0x0000ee10                __exidx_start = .
+.ARM.exidx      0x00010320        0x0
+                0x00010320                __exidx_start = .
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x0000ee10                __exidx_end = .
-                0x0000ee10                _etext = .
+                0x00010320                __exidx_end = .
+                0x00010320                _etext = .
 
-.data_RAM2      0x2007c000        0x0 load address 0x0000ee10
+.data_RAM2      0x2007c000        0x0 load address 0x00010320
  FILL mask 0xff
                 [!provide]                PROVIDE (__start_data_RAM2 = .)
                 [!provide]                PROVIDE (__start_data_RamAHB32 = .)
@@ -1392,7 +1392,7 @@ END GROUP
                 0x10000000                . = ALIGN (0x4)
                 0x10000000                _end_uninit_RESERVED = .
 
-.data           0x10000000       0x24 load address 0x0000ee10
+.data           0x10000000       0x24 load address 0x00010320
  FILL mask 0xff
                 0x10000000                _data = .
                 [!provide]                PROVIDE (__start_data_RAM = .)
@@ -1424,7 +1424,7 @@ END GROUP
                 [!provide]                PROVIDE (__end_data_RAM = .)
                 [!provide]                PROVIDE (__end_data_RamLoc32 = .)
 
-.igot.plt       0x10000024        0x0 load address 0x0000ee34
+.igot.plt       0x10000024        0x0 load address 0x00010344
  .igot.plt      0x10000024        0x0 ./src/cr_startup_lpc17.o
 
 .bss_RAM2       0x2007c000        0x0
@@ -1491,8 +1491,8 @@ END GROUP
                 0x10008000                PROVIDE (_vStackTop = DEFINED (__user_stack_top)?__user_stack_top:(__top_RamLoc32 - 0x0))
                 [!provide]                PROVIDE (__valid_user_code_checksum = (0x0 - ((((((_vStackTop + (ResetISR + 0x1)) + (NMI_Handler + 0x1)) + (HardFault_Handler + 0x1)) + (DEFINED (MemManage_Handler)?MemManage_Handler:0x0 + 0x1)) + (DEFINED (BusFault_Handler)?BusFault_Handler:0x0 + 0x1)) + (DEFINED (UsageFault_Handler)?UsageFault_Handler:0x0 + 0x1))))
                 0x00000000                _image_start = LOADADDR (.text)
-                0x0000ee34                _image_end = (LOADADDR (.data) + SIZEOF (.data))
-                0x0000ee34                _image_size = (_image_end - _image_start)
+                0x00010344                _image_end = (LOADADDR (.data) + SIZEOF (.data))
+                0x00010344                _image_size = (_image_end - _image_start)
 OUTPUT(demo.axf elf32-littlearm)
 LOAD linker stubs
 
