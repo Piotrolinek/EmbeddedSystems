@@ -2,6 +2,38 @@
 <project>
 	<configuration id="com.crt.advproject.config.lib.debug.476180645" name="Debug">
 		<extension point="org.eclipse.cdt.core.LanguageSettingsProvider">
+			<provider id="com.crt.advproject.GCCBuildCommandParser">
+				<language id="org.eclipse.cdt.core.gcc">
+					<resource project-relative-path="src/ff.c">
+						<entry kind="includePath" name="/Lib_CMSISv1p30_LPC17xx/inc">
+							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
+						</entry>
+						<entry kind="includePath" name="/${ProjName}/inc">
+							<flag value="VALUE_WORKSPACE_PATH"/>
+						</entry>
+						<entry kind="includePath" name="/Lib_MCU/inc">
+							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
+						</entry>
+						<entry kind="macro" name="DEBUG" value="1"/>
+						<entry kind="macro" name="__CODE_RED" value="1"/>
+						<entry kind="macro" name="__REDLIB__" value="1"/>
+					</resource>
+					<resource project-relative-path="src/mmc.c">
+						<entry kind="includePath" name="/Lib_CMSISv1p30_LPC17xx/inc">
+							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
+						</entry>
+						<entry kind="includePath" name="/${ProjName}/inc">
+							<flag value="VALUE_WORKSPACE_PATH"/>
+						</entry>
+						<entry kind="includePath" name="/Lib_MCU/inc">
+							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
+						</entry>
+						<entry kind="macro" name="DEBUG" value="1"/>
+						<entry kind="macro" name="__CODE_RED" value="1"/>
+						<entry kind="macro" name="__REDLIB__" value="1"/>
+					</resource>
+				</language>
+			</provider>
 			<provider id="com.crt.advproject.GCCBuildSpecCompilerParser">
 				<language id="org.eclipse.cdt.core.gcc">
 					<entry kind="includePath" name="C:/nxp/MCUXpressoIDE_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/redlib/include">

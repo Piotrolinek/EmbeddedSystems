@@ -43,15 +43,20 @@ Bool prevStateJoyUp = TRUE;
 Bool prevStateJoyDown = TRUE;
 uint32_t sample_index = 0;
 uint32_t samples[NUM_SAMPLES];
-Bool directionOfNextAlarm;
+Bool directionOfNextAlarm;  //True - up, False - down
 uint8_t eeprom_buffer[20];
-extern const unsigned char sound_8k[];
-extern int sound_sz;
+extern const unsigned char sound_up[];
+extern const unsigned char sound_down[];
+extern int sound_sz_up;
+extern int sound_sz_down;
 Bool disableSound = FALSE;
 uint32_t cnt = 0;
 uint32_t sound_offset = 0;
-uint8_t activationMode = 0;
+uint8_t activationMode = 3;
 uint32_t lumenActivation = 200;
+int32_t prevCount = -1;
+Bool sound_to_play; //True - up, False - down
+int8_t roleteState = 0; //Zmienna odpowiedzialn za stan rolety -1 - dol, 0 - nieokreślony, 1 - gora
 //////////////////////////////////////////////
 struct alarm_struct{
 	Bool MODE; //Down->0, Up->1
@@ -219,6 +224,15 @@ void PWM_ChangeDirection(void)
 
 }
 
+Bool checkDifference(void) {
+	if(prevCount != LPC_TIM2->TC) {
+		prevCount = LPC_TIM2->TC;
+		return TRUE;
+	}
+	return FALSE;
+}
+
+
 void PWM_Right(){
 	if(!(GPIO_ReadValue(2) & 1<<11))
 	{
@@ -239,7 +253,14 @@ void PWM_Stop_Mov(){
 	GPIO_ClearValue(2, 3<<10);
 }
 
-int32_t get_sample_rate(void){
+int32_t get_sample_rate(Bool to_validate){
+	cnt = 0;
+	unsigned char* sound_8k;
+	if(to_validate){
+		sound_8k = sound_up;
+	} else {
+		sound_8k = sound_down;
+	}
 	/* ChunkID */
 	if (sound_8k[cnt] != 'R' && sound_8k[cnt+1] != 'I' &&
 		sound_8k[cnt+2] != 'F' && sound_8k[cnt+3] != 'F')
@@ -648,13 +669,12 @@ void TIMER0_IRQHandler(void){
 	if(LPC_TIM0->IR & (1<<0)) {
 		LPC_TIM0->IR = (1<<0);
 		if(!disableSound){
-			if(cnt++ < sound_sz)
-			{
-				DAC_UpdateValue( LPC_DAC,(uint32_t)(sound_8k[cnt]));
+			if(sound_to_play) {
+				if(cnt++ < sound_sz_up) DAC_UpdateValue( LPC_DAC,(uint32_t)(sound_up[cnt]));
 			}
-//			else {
-//				LPC_TIM0->TCR = 0x02;
-//			}
+			else {
+				if(cnt++ < sound_sz_down) DAC_UpdateValue( LPC_DAC,(uint32_t)(sound_down[cnt]));
+			}
 		}
 	}
 }
@@ -667,8 +687,8 @@ void configTimer2(void) {
     LPC_TIM2->CTCR |= (1<<0) | (1<<2); // Counter mode
     LPC_TIM2->PR = 0; // No prescale
     LPC_TIM2->CCR = 0; // Capture on rising edge on CAP2.0 and interrupt on capture event
-    LPC_TIM2->TCR = 2; // Start Timer // Bylo 1
-    LPC_TIM2->TCR = 1;
+    LPC_TIM2->TCR = 2;//Reset  // Bylo 1
+    LPC_TIM2->TCR = 1;// Start Timer
     //NVIC_EnableIRQ(TIMER2_IRQn); // Enable Timer 2 interrupt
 }
 
@@ -774,6 +794,11 @@ void changeValue(int16_t value, int32_t LPC_values[], struct alarm_struct alarm[
 		if(tmp > 3) tmp = 0;
 		else if(tmp < 0) tmp = 3;
 		activationMode = tmp;
+		if(activationMode == 1 || activationMode == 3){
+			LPC_RTC->AMR &= ~((1<<2)|(1<<1)|(1<<0));
+		} else {
+			LPC_RTC->AMR |= ((1<<2)|(1<<1)|(1<<0));
+		}
 		break;
 	case 13:
 		if(tmp < 0) tmp = 64000;
@@ -803,12 +828,18 @@ void setNextAlarm( struct alarm_struct alarm[]){
 	hour0Diff = hour0Diff % 24;
 	int32_t minute0Diff = alarm[0].MIN - LPC_RTC->MIN +60;
 	minute0Diff = minute0Diff % 60;
+	int32_t second0Diff = 0 - LPC_RTC->SEC +60;
+	second0Diff = second0Diff % 60;
 
 	int32_t hour1Diff = alarm[1].HOUR - LPC_RTC->HOUR + 24;
 	hour1Diff = hour1Diff % 24;
 	int32_t minute1Diff = alarm[1].MIN - LPC_RTC->MIN +60;
 	minute1Diff = minute1Diff % 60;
-																		LPC_RTC->ALSEC = 0;
+	int32_t second1Diff = 0 - LPC_RTC->SEC +60;
+	second1Diff = second1Diff % 60;
+
+	LPC_RTC->ALSEC = 0;
+
 	if(hour0Diff<hour1Diff){
 		LPC_RTC->ALHOUR = alarm[0].HOUR;
 		LPC_RTC->ALMIN = alarm[0].MIN;
@@ -822,9 +853,17 @@ void setNextAlarm( struct alarm_struct alarm[]){
 		LPC_RTC->ALMIN = alarm[0].MIN;
 		directionOfNextAlarm = alarm[0].MODE;
 	} else if(minute0Diff>minute1Diff){
-	LPC_RTC->ALHOUR = alarm[1].HOUR;
-	LPC_RTC->ALMIN = alarm[1].MIN;
-	directionOfNextAlarm = alarm[1].MODE;
+		LPC_RTC->ALHOUR = alarm[1].HOUR;
+		LPC_RTC->ALMIN = alarm[1].MIN;
+		directionOfNextAlarm = alarm[1].MODE;
+	} else if(second0Diff<second1Diff){
+		LPC_RTC->ALHOUR = alarm[0].HOUR;
+		LPC_RTC->ALMIN = alarm[0].MIN;
+		directionOfNextAlarm = alarm[0].MODE;
+	} else {
+		LPC_RTC->ALHOUR = alarm[1].HOUR;
+		LPC_RTC->ALMIN = alarm[1].MIN;
+		directionOfNextAlarm = alarm[1].MODE;
 	}
 }
 int8_t read_time_from_eeprom(struct alarm_struct alarm[]){
@@ -893,9 +932,65 @@ void RTC_IRQHandler(void){
 	if (LPC_RTC->ILR&2){
 		LPC_RTC->ILR = 2;
 		cnt = sound_offset;
+		sound_to_play = directionOfNextAlarm;
 		initTimer0();
 		//Tu nalezy wywolac interrupt do DAC
+		prevCount = -1;
+		if(directionOfNextAlarm){
+			PWM_Right();
+		} else {
+			PWM_Left();
+		}
 	}
+}
+
+void activateMotor(struct alarm_struct alarm[]) {
+	uint32_t but1 = ((GPIO_ReadValue(0) >> 4) & 0x01);
+	uint32_t but2 = ((GPIO_ReadValue(1) >> 31) & 0x01);
+	Bool moveUp = lumenActivation < light_read();
+	Bool moveDown = lumenActivation > light_read();
+	//chuj wie obojetnie gdzie
+	Bool isButtonClicked = (moveUp || moveDown);
+
+	//baseline -> buttons always active (NONE)
+	if(activationMode == 2 || activationMode == 3) { //LUXOMETER ONLY
+		//moveUp = moveUp || lumenActivation < light_read();
+		//moveDown = moveDown || lumenActivation > light_read();
+		if(moveUp && (roleteState!=1)){
+			PWM_Left();
+		}
+		else if(moveDown && (roleteState!=-1)){
+			PWM_Right();
+		}
+	}
+	moveUp = but1==0;
+	moveDown = but2==0;
+		if(moveUp && (roleteState!=1)){
+			PWM_Left();
+		}
+		else if(moveDown && (roleteState!=-1)){
+			PWM_Right();
+		}
+
+//	else
+//	{
+//		if(moveUp){
+//			roleteState = 1;
+//		}else if(moveDown) {
+//			roleteState = -1;
+//		}
+//		if(isButtonClicked){
+//			roleteState = 0;
+//		}else if(moveUp){
+//			roleteState = 1;
+//		}else {
+//			roleteState = -1;
+//		}
+//		setNextAlarm(alarm);
+//		PWM_Stop_Mov();
+//		LPC_TIM2->TCR = 2;
+//		LPC_TIM2->TCR = 1;
+//	}
 }
 
 int main (void) {
@@ -903,7 +998,7 @@ int main (void) {
     uint8_t dir = 1;
     uint8_t wait = 0;
 
-    uint8_t state                                                           = 0;
+    uint8_t state= 0;
 
     uint32_t trim = 0;
 
@@ -1018,7 +1113,12 @@ int main (void) {
 	char dxd[] = "MODE:\0";
 	oled_putString(1, 48, dxd, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
 
-	sampleRate = get_sample_rate();
+	sampleRate = get_sample_rate(1);
+	if(sampleRate < 0){
+		//err handle
+		disableSound = TRUE;
+	}
+	sampleRate = get_sample_rate(0);
 	if(sampleRate < 0){
 		//err handle
 		disableSound = TRUE;
@@ -1076,7 +1176,7 @@ int main (void) {
 			output = FALSE;
 			if (JoystickControls('d', output, FALSE)){
 				posY += 6;
-				posY = posY % 5;
+				posY = posY % 5;//do poprawy!!!!!!!!!!!!!!
 			}
 			output = FALSE;
 			if (JoystickControls('l', output, FALSE)){
@@ -1123,9 +1223,9 @@ int main (void) {
 				//obsluga bledu
 			}
 		}
+		showLuxometerReading();
     	if((ifCheckTheTemp%(1<<8))==0){
-        	showOurTemp();
-			showLuxometerReading();
+    		showOurTemp();
 		}
     	if((ifCheckTheTemp%(1<<3))==0) {
     		//chooseTime(&line1, LPC_values);
@@ -1134,15 +1234,25 @@ int main (void) {
     	uint32_t but1 = ((GPIO_ReadValue(0) >> 4) & 0x01);
     	uint32_t but2 = ((GPIO_ReadValue(1) >> 31) & 0x01);
     	//PWM_Stop_Mov();
-    	if(but1==0){
-    		PWM_Left();
+    	if(but1 == 0 || but2 == 0) {
+    		prevCount = -1;
     	}
-    	else if(but2==0){
-            PWM_Right();
-    	}else
-    	{
+
+
+    	int32_t jeden =  ((GPIO_ReadValue(2) & (1<<10))>>10);
+    	int32_t dwa = ((GPIO_ReadValue(2) & (1<<11))>>11);
+
+    	if((!checkDifference()) && (( jeden == 1) || (dwa == 1))){
+    		if((GPIO_ReadValue(2) & (1<<10))>>10 == 1){
+    			roleteState = 1;
+    		} else {
+    			roleteState = -1;
+    		}
+
     		PWM_Stop_Mov();
+
     	}
+    	activateMotor(alarm);
     }
 }
 

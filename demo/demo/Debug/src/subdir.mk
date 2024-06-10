@@ -5,18 +5,24 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../src/cr_startup_lpc17.c \
+../src/down.c \
 ../src/main.c \
-../src/sound_8k.c 
+../src/sound_8k.c \
+../src/up.c 
 
 OBJS += \
 ./src/cr_startup_lpc17.o \
+./src/down.o \
 ./src/main.o \
-./src/sound_8k.o 
+./src/sound_8k.o \
+./src/up.o 
 
 C_DEPS += \
 ./src/cr_startup_lpc17.d \
+./src/down.d \
 ./src/main.d \
-./src/sound_8k.d 
+./src/sound_8k.d \
+./src/up.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

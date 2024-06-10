@@ -7,7 +7,7 @@
 <booleanAttribute key="com.crt.ctrlcenter.crtInit" value="true"/>
 <stringAttribute key="com.crt.ctrlcenter.currentWireType" value="SWD"/>
 <booleanAttribute key="com.crt.ctrlcenter.mainBreakIsHardware" value="true"/>
-<stringAttribute key="com.crt.ctrlcenter.serialNumber" value="LinkServerNXP - LPC-LinkLPC-Link Probe v1.3WIN64HS12"/>
+<stringAttribute key="com.crt.ctrlcenter.serialNumber" value="LinkServerNXPNXP CMSIS-DAPUNKNOWN_SERIAL"/>
 <mapAttribute key="com.crt.ctrlcenter.symbolsGroupSettings"/>
 <intAttribute key="com.crt.ctrlcenter.version" value="6"/>
 <stringAttribute key="com.nxp.mcuxpresso.flash.base.address" value="0x0"/>
@@ -17,8 +17,8 @@
 <stringAttribute key="com.nxp.mcuxpresso.flash.executable" value="axf"/>
 <stringAttribute key="com.nxp.mcuxpresso.flash.program.action" value="Program"/>
 <booleanAttribute key="com.nxp.mcuxpresso.flash.reset.target" value="true"/>
-<stringAttribute key="com.nxp.mcuxpresso.ide.probe.manufacturer" value="NXP - LPC-Link"/>
-<stringAttribute key="com.nxp.mcuxpresso.ide.probe.name" value="LPC-Link Probe v1.3"/>
+<stringAttribute key="com.nxp.mcuxpresso.ide.probe.manufacturer" value="NXP"/>
+<stringAttribute key="com.nxp.mcuxpresso.ide.probe.name" value="NXP CMSIS-DAP"/>
 <stringAttribute key="com.nxp.mcuxpresso.ide.probe.type" value="LinkServer"/>
 <stringAttribute key="debug.level" value="2"/>
 <stringAttribute key="emu.speed" value=""/>
