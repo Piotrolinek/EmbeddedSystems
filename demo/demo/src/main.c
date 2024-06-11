@@ -10,12 +10,11 @@
 #include "lpc17xx_pinsel.h"
 #include "lpc17xx_gpio.h"
 #include "lpc17xx_i2c.h"
-#include "lpc17xx_ssp.h"
-#include "lpc17xx_adc.h"
 #include "lpc17xx_timer.h"
 #include "lpc17xx_systick.h"
 #include "temp.h"
 #include "lpc17xx_dac.h"
+#include "lpc17xx_ssp.h"
 
 
 #include "joystick.h"
@@ -33,6 +32,7 @@
 
 //////////////////////////////////////////////
 //Global vars
+Bool changeCountOnMotor = TRUE;
 static uint8_t barPos = 2;
 uint32_t msTicks = 0;
 Bool editing = FALSE;
@@ -93,6 +93,25 @@ Bool isLeap(void){
 	else return FALSE;
 }
 
+static void init_i2c(void)
+{
+	PINSEL_CFG_Type PinCfg;
+
+	/* Initialize I2C2 pin connect */
+	PinCfg.Funcnum = 2;
+	PinCfg.Pinnum = 10;
+	PinCfg.Portnum = 0;
+	PINSEL_ConfigPin(&PinCfg);
+	PinCfg.Pinnum = 11;
+	PINSEL_ConfigPin(&PinCfg);
+
+	// Initialize I2C peripheral
+	I2C_Init(LPC_I2C2, 100000);
+
+	/* Enable I2C1 operation */
+	I2C_Cmd(LPC_I2C2, ENABLE);
+}
+
 static void init_ssp(void)
 {
 	SSP_CFG_Type SSP_ConfigStruct;
@@ -130,49 +149,7 @@ static void init_ssp(void)
 
 }
 
-static void init_i2c(void)
-{
-	PINSEL_CFG_Type PinCfg;
 
-	/* Initialize I2C2 pin connect */
-	PinCfg.Funcnum = 2;
-	PinCfg.Pinnum = 10;
-	PinCfg.Portnum = 0;
-	PINSEL_ConfigPin(&PinCfg);
-	PinCfg.Pinnum = 11;
-	PINSEL_ConfigPin(&PinCfg);
-
-	// Initialize I2C peripheral
-	I2C_Init(LPC_I2C2, 100000);
-
-	/* Enable I2C1 operation */
-	I2C_Cmd(LPC_I2C2, ENABLE);
-}
-
-static void init_adc(void)
-{
-	PINSEL_CFG_Type PinCfg;
-
-	/*
-	 * Init ADC pin connect
-	 * AD0.0 on P0.23
-	 */
-	PinCfg.Funcnum = 1;
-	PinCfg.OpenDrain = 0;
-	PinCfg.Pinmode = 0;
-	PinCfg.Pinnum = 23;
-	PinCfg.Portnum = 0;
-	PINSEL_ConfigPin(&PinCfg);
-
-	/* Configuration for ADC :
-	 * 	Frequency at 0.2Mhz
-	 *  ADC channel 0, no Interrupt
-	 */
-	ADC_Init(LPC_ADC, 200000);
-	ADC_IntConfig(LPC_ADC,ADC_CHANNEL_0,DISABLE);
-	ADC_ChannelCmd(LPC_ADC,ADC_CHANNEL_0,ENABLE);
-
-}
 // Note: CPU is running @100MHz
 void PWM_vInit(void)
 {
@@ -183,7 +160,7 @@ void PWM_vInit(void)
   LPC_PINCON->PINSEL4 &=~(15<<0);    // reset
   LPC_PINCON->PINSEL4 |= (1<<0);    // set PWM1.1 at P2.0
   LPC_PWM1->TCR = (1<<1);           // counter reset
-  LPC_PWM1->PR  = (100000000UL-1)>>13;     // clock /100000000 / prescaler (= PR +1) = 1 s
+  LPC_PWM1->PR  = (100000000UL-1)>>10;     // clock /100000000 / prescaler (= PR +1) = 1 s
   LPC_PWM1->MCR = (1<<1);           // reset on MR0
   LPC_PWM1->MR0 = 4;                // set PWM cycle 0,25Hz (according to manual)
   LPC_PWM1->MR1 = 2;                // set duty to 50%
@@ -197,32 +174,6 @@ void PWM_vInit(void)
   GPIO_SetDir(2, 1<<11, 1); // To jest kontrolka do prawo
 }
 
-void PWM_ChangeDirection(void)
-{
-	uint32_t a = GPIO_ReadValue(2);
-	uint32_t b =  1<<2;
-	uint32_t c = a&b;
-	if(GPIO_ReadValue(2) & 1<<2)
-	{
-		GPIO_ClearValue(2,1<<2);
-		GPIO_SetValue(2,1<<1);
-
-	}else
-	{
-		GPIO_ClearValue(2,1<<1);
-		GPIO_SetValue(2,1<<2);
-	}
-
-//	if(LPC_PINCON->PINSEL4 & (1<<0)){
-//		  LPC_PINCON->PINSEL4 &=~(15<<0);    // reset
-//		  LPC_PINCON->PINSEL4 |= (1<<2);    // set PWM1.2 at P2.1
-//	}
-//	else{
-//		  LPC_PINCON->PINSEL4 &=~(15<<0);    // reset
-//		  LPC_PINCON->PINSEL4 |= (1<<0);    // set PWM1.1 at P2.0
-//	}
-
-}
 
 Bool checkDifference(void) {
 	if(prevCount != LPC_TIM2->TC) {
@@ -380,7 +331,7 @@ void showPresentTime(struct alarm_struct alarm[], int8_t y){
 
 	for(int8_t i = 3; i >= 0; i--) {
 			date_str[i] = (char)(year % 10 + '0');
-			if(year <= 0) {
+			if(year == 0) {
 				break;
 			}
 			year = year / 10;
@@ -390,7 +341,7 @@ void showPresentTime(struct alarm_struct alarm[], int8_t y){
 	uint8_t month = LPC_RTC->MONTH;
 	for(uint8_t i = 6; i >= 5; i--) {
 			date_str[i] = (char)(month % 10 + '0');
-			if(month <= 0) {
+			if(month == 0) {
 				break;
 			}
 			month = month / 10;
@@ -401,7 +352,7 @@ void showPresentTime(struct alarm_struct alarm[], int8_t y){
 	uint8_t day = LPC_RTC->DOM;
 	for(uint8_t i = 9; i >= 8; i--) {
 			date_str[i] = (char)(day % 10 + '0');
-			if(day <= 0) {
+			if(day == 0) {
 				break;
 			}
 			day = day / 10;
@@ -1007,7 +958,6 @@ int main (void) {
 
     init_i2c();
     init_ssp();
-    init_adc();
     eeprom_init();
 
 
@@ -1092,7 +1042,6 @@ int main (void) {
 
     int32_t LPC_values[] = {LPC_RTC->YEAR, LPC_RTC->MONTH, LPC_RTC->DOM, LPC_RTC->HOUR, LPC_RTC->MIN, LPC_RTC->SEC};
 
-    PWM_ChangeDirection();
     GPIO_SetDir(0,1<<4,0);
     GPIO_SetDir(1,1<<31,0);
     oled_clearScreen(OLED_COLOR_BLACK);
@@ -1241,17 +1190,19 @@ int main (void) {
 
     	int32_t jeden =  ((GPIO_ReadValue(2) & (1<<10))>>10);
     	int32_t dwa = ((GPIO_ReadValue(2) & (1<<11))>>11);
+    	//if(msTicks % (1<<3) == 0) {
 
-    	if((!checkDifference()) && (( jeden == 1) || (dwa == 1))){
-    		if((GPIO_ReadValue(2) & (1<<10))>>10 == 1){
-    			roleteState = 1;
-    		} else {
-    			roleteState = -1;
-    		}
+		if((!checkDifference()) && (( jeden == 1) || (dwa == 1))){
+			if((GPIO_ReadValue(2) & (1<<10))>>10 == 1){
+				roleteState = 1;
+			} else {
+				roleteState = -1;
+			}
 
-    		PWM_Stop_Mov();
+			PWM_Stop_Mov();
 
-    	}
+		}
+    	//}
     	activateMotor(alarm);
     }
 }
