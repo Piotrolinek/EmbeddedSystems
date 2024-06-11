@@ -551,18 +551,17 @@ void showPresentTime(struct alarm_struct alarm[], int8_t y) {
     for (uint8_t i = 6; i >= 2; i--) {
         activation[i] = (char) (lumens_to_display % 10 + '0');
 
-
-    } else if (lumens_to_display == 0 && i != 6) {
-        activation[i] = ' ';
+        if (lumens_to_display == 0 && i != 6) {
+            activation[i] = ' ';
+        }
+        lumens_to_display = lumens_to_display / 10;
     }
-    lumens_to_display = lumens_to_display / 10;
-}
 
-activation[7] = '\0';
-oled_putString(1, 12, &date_str, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
-oled_putString(1, 24, &time_str, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
-oled_putString(37, 36, &alarm_str, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
-oled_putString(31, 48, &activation, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
+    activation[7] = '\0';
+    oled_putString(1, 12, &date_str, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
+    oled_putString(1, 24, &time_str, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
+    oled_putString(37, 36, &alarm_str, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
+    oled_putString(31, 48, &activation, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
 }
 
 struct pos {
