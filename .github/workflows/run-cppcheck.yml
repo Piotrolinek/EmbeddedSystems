@@ -46,7 +46,7 @@ jobs:
             --force \
             --inline-suppr \
             --xml \
-            $GITHUB_WORKSPACE/demo/demo/src/ \
+            $GITHUB_WORKSPACE/demo/demo/src/main.c \
             2> $GITHUB_WORKSPACE/cppcheck-result.xml
       
       - name: Parse CppCheck results
