@@ -62,41 +62,75 @@ struct pos {
     uint8_t y;
     uint8_t length;
 };
+
 //////////////////////////////////////////////
 //HEADER SRECTION
 uint32_t len(uint32_t val);
+
 char *uint32_t_to_str(uint32_t val, char *str);
+
 Bool isLeap(void);
+
 static void init_ssp(void);
+
 static void init_i2c(void);
+
 void PWM_vInit(void);
+
 void PWM_ChangeDirection(void);
+
 Bool checkDifference(void);
+
 void PWM_Right();
+
 void PWM_Left();
+
 void PWM_Stop_Mov();
+
 int32_t get_sample_rate(Bool to_validate);
+
 void write_temp_on_screen(char *temp_str);
+
 void SysTick_Handler(void);
+
 uint32_t getMsTicks(void);
+
 void showOurTemp(void);
+
 void showLuxometerReading(void);
+
 void showEditmode(Bool editmode);
+
 void showPresentTime(struct alarm_struct alarm[], int8_t y);
+
 void valToString(uint32_t value, char *str, uint8_t len);
+
 void chooseTime(struct pos map[4][3], int32_t LPC_values[], struct alarm_struct alarm[], int8_t x, int8_t y);
+
 Bool JoystickControls(char key, Bool output, Bool edit);
+
 void initTimer0(void);
+
 void TIMER0_IRQHandler(void);
+
 void configTimer2(void);
+
 void TIMER2_IRQHandler(void);
+
 void changeValue(int16_t value, int32_t LPC_values[], struct alarm_struct alarm[2], uint8_t x, uint8_t y);
+
 void correctDateValues(void);
+
 void setNextAlarm(struct alarm_struct alarm[]);
+
 int8_t read_time_from_eeprom(struct alarm_struct alarm[]);
+
 int8_t write_time_to_eeprom(struct alarm_struct alarm[]);
+
 void RTC_IRQHandler(void);
+
 void activateMotor(void);
+
 void check_failed(void);
 ///////////////////////////////////////////////////////
 
@@ -617,7 +651,6 @@ void chooseTime(struct pos map[4][3], int32_t LPC_values[], struct alarm_struct 
 }
 
 
-
 Bool JoystickControls(char key, Bool output, Bool edit) {
     Bool prevStateJoyRight = TRUE;
     Bool prevStateJoyLeft = TRUE;
@@ -973,7 +1006,6 @@ void activateMotor(void) {
     uint32_t but2 = ((GPIO_ReadValue(1) >> 31U) & 0x01);
     Bool moveUp = lumenActivation < light_read();
     Bool moveDown = lumenActivation > light_read();
-    Bool isButtonClicked = (moveUp || moveDown);
 
     if (activationMode == 2U || activationMode == 3U) { //LUXOMETER ONLY
         if (moveUp && (roleteState != 1)) {
@@ -1026,7 +1058,6 @@ int main(void) {
     Bool prevStateJoyClick = TRUE;
 
 
-    uint32_t off = 0;
     int32_t sampleRate = 0;
 
     //TODO delete
@@ -1112,7 +1143,6 @@ int main(void) {
         disableSound = TRUE;
     }
 
-    Bool joystickOutput;
     Bool output = FALSE;
     uint8_t posX = 0;
     uint8_t posY = 0;
