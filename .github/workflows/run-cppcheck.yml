@@ -1,0 +1,56 @@
+name: CppCheck with MISRA
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  cppcheck:
+    name: CppCheck
+    runs-on: ['ubuntu-latest']
+    timeout-minutes: 2
+    permissions:
+        # only required for workflows in private repositories
+        actions: read
+        contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install CppCheck
+        shell: bash
+        run: |
+          sudo apt-get install cppcheck
+          cppcheck --version
+      
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install lxml
+      
+      - name: Run CppCheck
+        shell: bash
+        run: |
+          cppcheck \
+            --enable=all \
+            --addon=$GITHUB_WORKSPACE/.github/scripts/misra.json \
+            --force \
+            --inline-suppr \
+            --xml \
+            -i$GITHUB_WORKSPACE/file/or/dir/you/want/to/exclude/from/cppcheck \
+            $GITHUB_WORKSPACE/file/or/dir/you/want/to/include/in/cppcheck \
+            2> $GITHUB_WORKSPACE/cppcheck-result.xml
+      
+      - name: Parse CppCheck results
+        shell: bash
+        run: |
+          python $GITHUB_WORKSPACE/.github/scripts/cppcheck_parser.py $GITHUB_WORKSPACE/cppcheck-result.xml
