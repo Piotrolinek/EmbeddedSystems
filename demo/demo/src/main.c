@@ -63,6 +63,11 @@ struct alarm_struct {
     uint8_t HOUR;
     uint8_t MIN;
 };
+struct pos {
+    uint8_t x;
+    uint8_t y;
+    uint8_t length;
+};
 //////////////////////////////////////////////
 //HEADER SRECTION
 uint32_t len(uint32_t val);
@@ -240,29 +245,6 @@ void PWM_vInit(void) {
 }
 
 
-//void PWM_ChangeDirection(void) {
-//    uint32_t a = GPIO_ReadValue(2);
-//    uint32_t b = 1 << 2;
-//    uint32_t c = a & b;
-//    if (GPIO_ReadValue(2) & 1 << 2) {
-//        GPIO_ClearValue(2, 1 << 2);
-//        GPIO_SetValue(2, 1 << 1);
-//
-//    } else {
-//        GPIO_ClearValue(2, 1 << 1);
-//        GPIO_SetValue(2, 1 << 2);
-//    }
-
-//	if(LPC_PINCON->PINSEL4 & (1<<0)){
-//		  LPC_PINCON->PINSEL4 &=~(15<<0);    // reset
-//		  LPC_PINCON->PINSEL4 |= (1<<2);    // set PWM1.2 at P2.1
-//	}
-//	else{
-//		  LPC_PINCON->PINSEL4 &=~(15<<0);    // reset
-//		  LPC_PINCON->PINSEL4 |= (1<<0);    // set PWM1.1 at P2.0
-//	}
-
-}
 
 
 /*!
@@ -587,11 +569,7 @@ void showPresentTime(struct alarm_struct alarm[], int8_t y) {
     oled_putString(31, 48, &activation, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
 }
 
-struct pos {
-    uint8_t x;
-    uint8_t y;
-    uint8_t length;
-};
+
 
 void valToString(uint32_t value, char *str, uint8_t len) {
     int i = len;
