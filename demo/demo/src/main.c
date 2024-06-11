@@ -477,9 +477,8 @@ void showPresentTime(struct alarm_struct alarm[], int8_t y) {
 
     for (int8_t i = 1; i >= 0; i--) {
         time_str[i] = (char) (hour % 10 + '0');
-        if (hour < 0) {
-            break;
-        }
+
+
         hour = hour / 10;
     }
 
@@ -490,9 +489,8 @@ void showPresentTime(struct alarm_struct alarm[], int8_t y) {
 
     for (uint8_t i = 4; i >= 3; i--) {
         time_str[i] = (char) (minute % 10 + '0');
-        if (minute < 0) {
-            break;
-        }
+
+
         minute = minute / 10;
     }
 
@@ -502,9 +500,8 @@ void showPresentTime(struct alarm_struct alarm[], int8_t y) {
     uint8_t sec = LPC_RTC->SEC;
     for (uint8_t i = 7; i >= 6; i--) {
         time_str[i] = (char) (sec % 10 + '0');
-        if (sec < 0) {
-            break;
-        }
+
+
         sec = sec / 10;
     }
     char alarm_str[8];
@@ -526,18 +523,16 @@ void showPresentTime(struct alarm_struct alarm[], int8_t y) {
 
     for (uint8_t i = 3; i >= 2; i--) {
         alarm_str[i] = (char) (hour % 10 + '0');
-        if (hour < 0) {
-            break;
-        }
+
+
         hour = hour / 10;
     }
     alarm_str[4] = ':';
 
     for (uint8_t i = 6; i >= 5; i--) {
         alarm_str[i] = (char) (min % 10 + '0');
-        if (min < 0) {
-            break;
-        }
+
+
         min = min / 10;
     }
     time_str[8] = '\0';
@@ -555,18 +550,19 @@ void showPresentTime(struct alarm_struct alarm[], int8_t y) {
     uint16_t lumens_to_display = lumenActivation;
     for (uint8_t i = 6; i >= 2; i--) {
         activation[i] = (char) (lumens_to_display % 10 + '0');
-        if (lumens_to_display < 0) {
-            break;
-        } else if (lumens_to_display == 0 && i != 6) {
-            activation[i] = ' ';
-        }
-        lumens_to_display = lumens_to_display / 10;
+
+
+    } else if (lumens_to_display == 0 && i != 6) {
+        activation[i] = ' ';
     }
-    activation[7] = '\0';
-    oled_putString(1, 12, &date_str, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
-    oled_putString(1, 24, &time_str, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
-    oled_putString(37, 36, &alarm_str, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
-    oled_putString(31, 48, &activation, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
+    lumens_to_display = lumens_to_display / 10;
+}
+
+activation[7] = '\0';
+oled_putString(1, 12, &date_str, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
+oled_putString(1, 24, &time_str, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
+oled_putString(37, 36, &alarm_str, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
+oled_putString(31, 48, &activation, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
 }
 
 struct pos {
@@ -660,6 +656,8 @@ Bool JoystickControls(char key, Bool output, Bool edit) {
         portNum = 2;
         pin = 4;
         prevStateJoy = prevStateJoyLeft;
+    } else {
+        prevStateJoy = TRUE;
     }
     uint32_t joyClick = ((GPIO_ReadValue(portNum) & (1 << pin)) >> pin);
     Bool joyClickDiff = joyClick - prevStateJoy;
@@ -866,7 +864,7 @@ void changeValue(int16_t value, int32_t LPC_values[], struct alarm_struct alarm[
 
 void correctDateValues(void) {
     Bool leapYear = isLeap();
-    uint8_t lenghts[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    const uint8_t lenghts[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     if (LPC_RTC->DOM > lenghts[LPC_RTC->MONTH - 1]) {
         if (leapYear && LPC_RTC->MONTH == 2) {
             if (LPC_RTC->DOM > 29) {
@@ -932,7 +930,7 @@ int8_t read_time_from_eeprom(struct alarm_struct alarm[]) {
     if (eeprom_read_len != 5) {
         return -5;
     }
-    char header[] = "TIME";
+    const char header[] = "TIME";
     for (uint8_t i = 0; i < 4; i++) {
         if ((char) eeprom_buffer[i] != header[i]) {
             return -i - 1;
@@ -941,8 +939,8 @@ int8_t read_time_from_eeprom(struct alarm_struct alarm[]) {
             return -i - 16;
         }
     }
-    uint16_t len = eeprom_buffer[4];
-    eeprom_read_len = eeprom_read(eeprom_buffer, EEPROM_OFFSET, len);
+    uint16_t lenFromEeprom = eeprom_buffer[4];
+    eeprom_read_len = eeprom_read(eeprom_buffer, EEPROM_OFFSET, lenFromEeprom);
     if (eeprom_read_len != 20) {
         return -6;
     }
@@ -1089,7 +1087,6 @@ int main(void) {
     PWM_vInit();
 
 
-    uint32_t cnt = 0;
     uint32_t off = 0;
     int32_t sampleRate = 0;
     uint32_t delay = 0;
@@ -1144,10 +1141,10 @@ int main(void) {
     DAC_Init(LPC_DAC);
 
 
-    int32_t LPC_values[] = {LPC_RTC->YEAR, LPC_RTC->MONTH, LPC_RTC->DOM, LPC_RTC->HOUR, LPC_RTC->MIN, LPC_RTC->SEC};
+    //int32_t LPC_values[] = {LPC_RTC->YEAR, LPC_RTC->MONTH, LPC_RTC->DOM, LPC_RTC->HOUR, LPC_RTC->MIN, LPC_RTC->SEC};
 
     GPIO_SetDir(0, 1 << 4, 0);
-    GPIO_SetDir(1, 1 << 31, 0);
+    GPIO_SetDir(1, (uint32_t) 1 << 31, 0);
     oled_clearScreen(OLED_COLOR_BLACK);
 
 
@@ -1158,7 +1155,7 @@ int main(void) {
 
 
     PWM_Stop_Mov();
-    uint32_t ifCheckTheTemp;
+    uint32_t ifCheckTheTemp = 0;
 
     char xdx[] = "ALARM:\0";
     oled_putString(1, 36, xdx, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
