@@ -32,31 +32,31 @@
 
 //////////////////////////////////////////////
 //Global vars
-Bool changeCountOnMotor = TRUE;
+static Bool changeCountOnMotor = TRUE;
 static uint8_t barPos = 2;
-uint32_t msTicks = 0;
-Bool editing = FALSE;
-Bool prevStateJoyClick = TRUE;
-Bool prevStateJoyRight = TRUE;
-Bool prevStateJoyLeft = TRUE;
-Bool prevStateJoyUp = TRUE;
-Bool prevStateJoyDown = TRUE;
-uint32_t sample_index = 0;
-uint32_t samples[NUM_SAMPLES];
-Bool directionOfNextAlarm;  //True - up, False - down
-uint8_t eeprom_buffer[20];
+static uint32_t msTicks = 0;
+static Bool editing = FALSE;
+static Bool prevStateJoyClick = TRUE;
+static Bool prevStateJoyRight = TRUE;
+static Bool prevStateJoyLeft = TRUE;
+static Bool prevStateJoyUp = TRUE;
+static Bool prevStateJoyDown = TRUE;
+static uint32_t sample_index = 0;
+static uint32_t samples[NUM_SAMPLES];
+static Bool directionOfNextAlarm;  //True - up, False - down
+static uint8_t eeprom_buffer[20];
 extern const unsigned char sound_up[];
 extern const unsigned char sound_down[];
 extern int sound_sz_up;
 extern int sound_sz_down;
-Bool disableSound = FALSE;
-uint32_t cnt = 0;
-uint32_t sound_offset = 0;
-uint8_t activationMode = 3;
-uint32_t lumenActivation = 200;
-int32_t prevCount = -1;
-Bool sound_to_play; //True - up, False - down
-int8_t roleteState = 0; //Zmienna odpowiedzialn za stan rolety -1 - dol, 0 - nieokreślony, 1 - gora
+static Bool disableSound = FALSE;
+static uint32_t cnt = 0;
+static uint32_t sound_offset = 0;
+static uint8_t activationMode = 3;
+static uint32_t lumenActivation = 200;
+static int32_t prevCount = -1;
+static Bool sound_to_play; //True - up, False - down
+static int8_t roleteState = 0; //Zmienna odpowiedzialn za stan rolety -1 - dol, 0 - nieokreślony, 1 - gora
 //////////////////////////////////////////////
 struct alarm_struct {
     Bool MODE; //Down->0, Up->1
