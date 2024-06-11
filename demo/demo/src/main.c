@@ -64,7 +64,13 @@ struct alarm_struct{
 	uint8_t MIN;
 };
 
-
+/*!
+ *  @brief    		Returns lenght of uint32_t number.
+ *  @param val  	uint32_t,
+ *             		value to check the length of.
+ *  @returns  		Lenght of param 'val'.
+ *  @side effects:  None.
+ */
 uint32_t len(uint32_t val){
 	uint32_t i = 0;
 	while(val > 0) {
@@ -74,6 +80,15 @@ uint32_t len(uint32_t val){
 	return i;
 }
 
+/*!
+ *  @brief    		Converts uint32_t number into char array. Adds null character at the end.
+ *  @param val  	uint32_t, 
+ *             		value to convert to char array.
+ *  @param str 		char*,
+ *             		char array to write to, of length value + 1 (for null char at the end).
+ *  @returns  		void. //todo
+ *  @side effects:	For this function to be safe, char* str parameter has to be carefully initialised with proper size.
+ */
 char* uint32_t_to_str(uint32_t val, char* str){
 	uint32_t val_len = len(val);
 	for(int32_t i = val_len - 1; i >= 0; i--){
@@ -86,12 +101,19 @@ char* uint32_t_to_str(uint32_t val, char* str){
 	str[5] = '\0';
 }
 
+/*!
+ *  @brief    		Returns bool value whether or not Real Time Clock: Year is a leap year or not,
+					Example: 2000 is leap, 2001 is not leap, 1900 is not leap, 1600 is leap.
+ *  @returns  		TRUE - if is leap, FALSE - otherwise.
+ *  @side effects:	LPC_RTC has to be initialised prior to running this function.
+ */
 Bool isLeap(void){
 	if (LPC_RTC->YEAR % 400 == 0) return TRUE;
 	else if (LPC_RTC->YEAR % 100 == 0) return FALSE;
 	else if (LPC_RTC->YEAR % 4 == 0) return TRUE;
 	else return FALSE;
 }
+
 
 static void init_ssp(void)
 {
@@ -129,7 +151,11 @@ static void init_ssp(void)
 	SSP_Cmd(LPC_SSP1, ENABLE);
 
 }
-
+/*!
+ *  @brief    		Initializes I2C interface.
+ *  @returns  		void.
+ *  @side effects:	None.
+ */
 static void init_i2c(void)
 {
 	PINSEL_CFG_Type PinCfg;
@@ -148,54 +174,34 @@ static void init_i2c(void)
 	/* Enable I2C1 operation */
 	I2C_Cmd(LPC_I2C2, ENABLE);
 }
-
-static void init_adc(void)
-{
-	PINSEL_CFG_Type PinCfg;
-
-	/*
-	 * Init ADC pin connect
-	 * AD0.0 on P0.23
-	 */
-	PinCfg.Funcnum = 1;
-	PinCfg.OpenDrain = 0;
-	PinCfg.Pinmode = 0;
-	PinCfg.Pinnum = 23;
-	PinCfg.Portnum = 0;
-	PINSEL_ConfigPin(&PinCfg);
-
-	/* Configuration for ADC :
-	 * 	Frequency at 0.2Mhz
-	 *  ADC channel 0, no Interrupt
-	 */
-	ADC_Init(LPC_ADC, 200000);
-	ADC_IntConfig(LPC_ADC,ADC_CHANNEL_0,DISABLE);
-	ADC_ChannelCmd(LPC_ADC,ADC_CHANNEL_0,ENABLE);
-
-}
-// Note: CPU is running @100MHz
+/*!
+ *  @brief    		Initializes PWM. //todo
+ *  @returns  		void.
+ *  @side effects:	None.
+ *  @Note: 			CPU is running @100MHz
+ */
 void PWM_vInit(void)
 {
   //init PWM
-  LPC_SC->PCLKSEL0 &=~(3<<12);      // reset
-  LPC_SC->PCLKSEL0 |= (1<<12);      // set PCLK to full CPU speed (100MHz)
-  LPC_SC->PCONP |= (1 << 6);        // PWM on
-  LPC_PINCON->PINSEL4 &=~(15<<0);    // reset
-  LPC_PINCON->PINSEL4 |= (1<<0);    // set PWM1.1 at P2.0
-  LPC_PWM1->TCR = (1<<1);           // counter reset
-  LPC_PWM1->PR  = (100000000UL-1)>>13;     // clock /100000000 / prescaler (= PR +1) = 1 s
-  LPC_PWM1->MCR = (1<<1);           // reset on MR0
-  LPC_PWM1->MR0 = 4;                // set PWM cycle 0,25Hz (according to manual)
-  LPC_PWM1->MR1 = 2;                // set duty to 50%
-  LPC_PWM1->LER = (1<<0);    // latch MR0 & MR1
-  LPC_PWM1->PCR |= (3<<9);           // PWM1 output enable
-  LPC_PWM1->TCR = (1<<1)|(1<<0)|(1<<3);// counter enable, PWM enable
-  LPC_PWM1->TCR = (1<<0)|(1<<3);    // counter enable, PWM enable
-
+  LPC_SC->PCLKSEL0 &=~(3<<12);      	// reset
+  LPC_SC->PCLKSEL0 |= (1<<12);      	// set PCLK to full CPU speed (100MHz)
+  LPC_SC->PCONP |= (1 << 6);        	// PWM on
+  LPC_PINCON->PINSEL4 &=~(15<<0);    	// reset
+  LPC_PINCON->PINSEL4 |= (1<<0);    	// set PWM1.1 at P2.0
+  LPC_PWM1->TCR = (1<<1);           	// counter reset
+  LPC_PWM1->PR  = (100000000UL-1)>>13;  // clock /100000000 / prescaler (= PR +1) = 1 s
+  LPC_PWM1->MCR = (1<<1);           	// reset on MR0
+  LPC_PWM1->MR0 = 4;                	// set PWM cycle 0,25Hz (according to manual)
+  LPC_PWM1->MR1 = 2;                	// set duty to 50%
+  LPC_PWM1->LER = (1<<0);    			// latch MR0 & MR1
+  LPC_PWM1->PCR |= (3<<9);           	// PWM1 output enable
+  LPC_PWM1->TCR = (1<<1)|(1<<0)|(1<<3); // counter enable, PWM enable
+  LPC_PWM1->TCR = (1<<0)|(1<<3);    	// counter enable, PWM enable ????????
 
   GPIO_SetDir(2, 1<<10, 1); // To jest kontrolka do lewo
   GPIO_SetDir(2, 1<<11, 1); // To jest kontrolka do prawo
 }
+
 
 void PWM_ChangeDirection(void)
 {
@@ -224,6 +230,12 @@ void PWM_ChangeDirection(void)
 
 }
 
+
+/*!
+ *  @brief    		Uses TIMER2 to determine whether or not the motor is currently running, by comparing previous TC value, to current TC value
+ *  @returns  		TRUE - if is different (impiles that the motor is running), FALSE - otherwise
+ *  @side effects:	LPC_TIM2 has to be initialised prior to running this function.
+ */
 Bool checkDifference(void) {
 	if(prevCount != LPC_TIM2->TC) {
 		prevCount = LPC_TIM2->TC;
@@ -233,6 +245,11 @@ Bool checkDifference(void) {
 }
 
 
+/*!
+ *  @brief			Changes motor spin direction to right, by modifying proper GPIO pins
+ *  @returns  		void.
+ *  @side effects:  None.
+ */
 void PWM_Right(){
 	if(!(GPIO_ReadValue(2) & 1<<11))
 	{
@@ -240,7 +257,11 @@ void PWM_Right(){
 		GPIO_SetValue(2,1<<11);
 	}
 }
-
+/*!
+ *  @brief			Changes motor spin direction to left, by modifying proper GPIO pins
+ *  @returns  		void.
+ *  @side effects:  None.
+ */
 void PWM_Left(){
 	if(!(GPIO_ReadValue(2) & 1<<10))
 	{
@@ -248,11 +269,41 @@ void PWM_Left(){
 		GPIO_SetValue(2,1<<10);
 	}
 }
-
+/*!
+ *  @brief			Stops motor rotation, by clearing proper GPIO pins
+ *  @returns  		void.
+ *  @side effects:  None.
+ */
 void PWM_Stop_Mov(){
 	GPIO_ClearValue(2, 3<<10);
 }
-
+/*!
+ *  @brief    		Validates external sound files (const unsigned char[]), specifically
+					([a - b] where a - 1  is starting index in const unsigned char[], b - 1 is ending index of specified section):
+					[1 - 4] - “RIFF” Marks the file as a riff file. Characters are each 1 byte long.
+					[5 - 8] - File size (integer) Size of the overall file - 8 bytes, in bytes (32-bit integer). Typically, you’d fill this in after creation.
+					[9 -12] - “WAVE” File Type Header. For our purposes, it always equals “WAVE”.
+					[13-16] - “fmt " Format chunk marker. Includes trailing null
+					[17-20] - 16 Length of format data as listed above
+					[21-22] - 1 Type of format (1 is PCM) - 2 byte integer
+					[23-24] - 2 Number of Channels - 2 byte integer
+					[25-28] - 44100 Sample Rate - 32 byte integer. Common values are 44100 (CD), 48000 (DAT). Sample Rate = Number of Samples per second, or Hertz.
+					[29-32] - 176400 (Sample Rate * BitsPerSample * Channels) / 8.
+					[33-34] - 4 (BitsPerSample * Channels) / 8.1 - 8 bit mono2 - 8 bit stereo/16 bit mono4 - 16 bit stereo
+					[35-36] - 16 Bits per sample
+					[37-40] - “data” “data” chunk header. Marks the beginning of the data section.
+					[41-44] - File size (data) Size of the data section.
+ *  @param to_validate Bool, 
+ *            		Selector which sound to validate, TRUE - validate extern const unsinged char sound_up[], FALSE - validate extern const unsigned char sound_down[]
+ *  @returns  		int32_t sampleRate equal to sample rate from wav file IF validation passes,
+ * 					IF validation fails, returns error code:
+ * 					-1 - missing or wrong format (RIFF expected)
+ * 					-2 - missing or wrong format (WAVE expected)
+ * 					-3 - missing "fmt"
+ * 					-4 - missing or unsupported sample rate (8000 expected)
+ * 					-5 - missing "data"
+ *  @side effects:  If validation fails, sounds are disabled globally
+ */
 int32_t get_sample_rate(Bool to_validate){
 	cnt = 0;
 	unsigned char* sound_8k;
@@ -321,7 +372,13 @@ int32_t get_sample_rate(Bool to_validate){
 	sound_offset = cnt;
 	return sampleRate;
 }
-
+/*!
+ *  @brief    		Reads temperature value and prepares a char array to be displayed on OLED screen.
+ *  @param temp_str	char*,
+ *             		char array to write to, of length value + 4 ("xx.x C", where xxx is a value returned by temp_read()).
+ *  @returns  		void.
+ *  @side effects:	For this function to be safe, char* temp_str parameter has to be carefully initialised with proper size, reaching negative value causes loop to break preemptively.
+ */
 void write_temp_on_screen(char *temp_str){
 	int32_t temp = temp_read();
 	for(int32_t i = 3; i >= 0; i--) {
