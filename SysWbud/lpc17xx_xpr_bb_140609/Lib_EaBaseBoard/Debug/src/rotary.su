@@ -1,2 +1,0 @@
-rotary.c:60:6:rotary_init	8	static
-rotary.c:76:9:rotary_read	16	static

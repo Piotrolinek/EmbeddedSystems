@@ -1,0 +1,7 @@
+{
+    "script": "misra.py",
+    "args": [
+      "--rule-texts=/home/runner/work/Embedded_Systems/Embedded_Systems/.github/scripts/misra_c_2023.txt"
+    ],
+    "//": "--suppress-rules 17.3,21.12"
+}

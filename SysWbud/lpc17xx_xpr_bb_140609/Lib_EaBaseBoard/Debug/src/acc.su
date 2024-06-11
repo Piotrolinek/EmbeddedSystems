@@ -1,9 +1,0 @@
-acc.c:76:12:I2CRead	72	static
-acc.c:94:12:I2CWrite	72	static
-acc.c:113:16:getStatus	16	static
-acc.c:124:16:getModeControl	16	static
-acc.c:135:13:setModeControl	24	static
-acc.c:158:6:acc_init	8	static
-acc.c:179:6:acc_read	32	static
-acc.c:218:6:acc_setRange	24	static
-acc.c:239:6:acc_setMode	24	static

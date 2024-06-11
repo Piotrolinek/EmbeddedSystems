@@ -1,2 +1,0 @@
-core_cm3.h:1468:22:NVIC_SetPriorityGrouping	24	static
-memory.c:37:5:main	16	static

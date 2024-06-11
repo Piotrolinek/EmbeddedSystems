@@ -1,4 +1,0 @@
-usbhost_main.c:40:5:main	56	static
-usbhost_main.c:92:7:Main_Read	16	static
-usbhost_main.c:126:7:Main_Write	24	static
-usbhost_main.c:171:7:Main_Copy	24	static

@@ -1,9 +1,0 @@
-core_cm3.h:1211:22:__WFI	4	static
-lpc17xx_clkpwr.c:80:6:CLKPWR_SetPCLKDiv	24	static
-lpc17xx_clkpwr.c:141:10:CLKPWR_GetPCLKSEL	24	static
-lpc17xx_clkpwr.c:196:10:CLKPWR_GetPCLK	24	static
-lpc17xx_clkpwr.c:266:6:CLKPWR_ConfigPPWR	16	static
-lpc17xx_clkpwr.c:284:6:CLKPWR_Sleep	8	static
-lpc17xx_clkpwr.c:297:6:CLKPWR_DeepSleep	8	static
-lpc17xx_clkpwr.c:312:6:CLKPWR_PowerDown	8	static
-lpc17xx_clkpwr.c:327:6:CLKPWR_DeepPowerDown	8	static
