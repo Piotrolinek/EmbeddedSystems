@@ -63,6 +63,44 @@ struct alarm_struct {
     uint8_t HOUR;
     uint8_t MIN;
 };
+//////////////////////////////////////////////
+//HEADER SRECTION
+uint32_t len(uint32_t val);
+char *uint32_t_to_str(uint32_t val, char *str);
+Bool isLeap(void);
+static void init_ssp(void);
+static void init_i2c(void);
+void PWM_vInit(void);
+void PWM_ChangeDirection(void);
+Bool checkDifference(void);
+void PWM_Right();
+void PWM_Left();
+void PWM_Stop_Mov();
+int32_t get_sample_rate(Bool to_validate);
+void write_temp_on_screen(char *temp_str);
+void SysTick_Handler(void);
+uint32_t getMsTicks(void);
+void showOurTemp(void);
+void showLuxometerReading(void);
+void showEditmode(Bool editmode);
+void showPresentTime(struct alarm_struct alarm[], int8_t y);
+void valToString(uint32_t value, char *str, uint8_t len);
+void chooseTime(struct pos map[4][3], int32_t LPC_values[], struct alarm_struct alarm[], int8_t x, int8_t y);
+Bool JoystickControls(char key, Bool output, Bool edit);
+void initTimer0(void);
+void TIMER0_IRQHandler(void);
+void configTimer2(void);
+void TIMER2_IRQHandler(void);
+void generate_samples(void);
+void changeValue(int16_t value, int32_t LPC_values[], struct alarm_struct alarm[2], uint8_t x, uint8_t y);
+void correctDateValues(void);
+void setNextAlarm(struct alarm_struct alarm[]);
+int8_t read_time_from_eeprom(struct alarm_struct alarm[]);
+int8_t write_time_to_eeprom(struct alarm_struct alarm[]);
+void RTC_IRQHandler(void);
+void activateMotor(void);
+void check_failed(void);
+///////////////////////////////////////////////////////
 
 /*!
  *  @brief    		Returns lenght of uint32_t number.
@@ -86,7 +124,7 @@ uint32_t len(uint32_t val) {
  *             		value to convert to char array.
  *  @param str 		char*,
  *             		char array to write to, of length value + 1 (for null char at the end).
- *  @returns  		void. //todo
+ *  @returns  		void. TODO
  *  @side effects:	For this function to be safe, char* str parameter has to be carefully initialised with proper size.
  */
 char *uint32_t_to_str(uint32_t val, char *str) {
@@ -175,7 +213,7 @@ static void init_i2c(void) {
 }
 
 /*!
- *  @brief    		Initializes PWM. //todo
+ *  @brief    		Initializes PWM. TODO
  *  @returns  		void.
  *  @side effects:	None.
  *  @Note: 			CPU is running @100MHz
@@ -620,20 +658,7 @@ void chooseTime(struct pos map[4][3], int32_t LPC_values[], struct alarm_struct 
     oled_putString(map[y][x].x + toAdd, map[y][x].y, str, OLED_COLOR_BLACK, OLED_COLOR_WHITE);
 }
 
-//void JoystickControls(char key){
-//	uint32_t joyClick = ((GPIO_ReadValue(0) & (1<<17))>>17);
-//	Bool joyClickDiff = joyClick - prevStateJoy;
-//	if((joyClickDiff)&&(!editing)&&(!joyClick)){
-//		editing = TRUE;
-//		prevStateJoy = 0;
-//		joyClickDiff = FALSE;
-//	}
-//	if((joyClickDiff)&&(editing)&&(!joyClick)){
-//		editing = FALSE;
-//		prevStateJoyClick = 0;
-//		prevStateJoyClick = joyClick;
-//	}
-//}
+
 
 Bool JoystickControls(char key, Bool output, Bool edit) {
     uint8_t pin = 0;
@@ -880,14 +905,14 @@ void setNextAlarm(struct alarm_struct alarm[]) {
     hour0Diff = hour0Diff % 24;
     int32_t minute0Diff = alarm[0].MIN - LPC_RTC->MIN + 60;
     minute0Diff = minute0Diff % 60;
-    int32_t second0Diff = 0 - LPC_RTC->SEC + 60;
+    int32_t second0Diff = 60 - LPC_RTC->SEC;
     second0Diff = second0Diff % 60;
 
     int32_t hour1Diff = alarm[1].HOUR - LPC_RTC->HOUR + 24;
     hour1Diff = hour1Diff % 24;
     int32_t minute1Diff = alarm[1].MIN - LPC_RTC->MIN + 60;
     minute1Diff = minute1Diff % 60;
-    int32_t second1Diff = 0 - LPC_RTC->SEC + 60;
+    int32_t second1Diff = 60 - LPC_RTC->SEC;
     second1Diff = second1Diff % 60;
 
     LPC_RTC->ALSEC = 0;
@@ -958,7 +983,7 @@ int8_t read_time_from_eeprom(struct alarm_struct alarm[]) {
 }
 
 int8_t write_time_to_eeprom(struct alarm_struct alarm[]) {
-    char header[] = "TIME";
+    const char header[] = "TIME";
     for (uint8_t i = 0; i < 4; i++) {
         eeprom_buffer[i] = (uint8_t)(header[i]);
         eeprom_buffer[i + 16] = (uint8_t)(header[i]);
@@ -998,18 +1023,14 @@ void RTC_IRQHandler(void) {
     }
 }
 
-void activateMotor(struct alarm_struct alarm[]) {
+void activateMotor(void) {
     uint32_t but1 = ((GPIO_ReadValue(0) >> 4) & 0x01);
     uint32_t but2 = ((GPIO_ReadValue(1) >> 31) & 0x01);
     Bool moveUp = lumenActivation < light_read();
     Bool moveDown = lumenActivation > light_read();
-    //chuj wie obojetnie gdzie
     Bool isButtonClicked = (moveUp || moveDown);
 
-    //baseline -> buttons always active (NONE)
     if (activationMode == 2 || activationMode == 3) { //LUXOMETER ONLY
-        //moveUp = moveUp || lumenActivation < light_read();
-        //moveDown = moveDown || lumenActivation > light_read();
         if (moveUp && (roleteState != 1)) {
             PWM_Left();
         } else if (moveDown && (roleteState != -1)) {
@@ -1023,26 +1044,6 @@ void activateMotor(struct alarm_struct alarm[]) {
     } else if (moveDown && (roleteState != -1)) {
         PWM_Right();
     }
-
-//	else
-//	{
-//		if(moveUp){
-//			roleteState = 1;
-//		}else if(moveDown) {
-//			roleteState = -1;
-//		}
-//		if(isButtonClicked){
-//			roleteState = 0;
-//		}else if(moveUp){
-//			roleteState = 1;
-//		}else {
-//			roleteState = -1;
-//		}
-//		setNextAlarm(alarm);
-//		PWM_Stop_Mov();
-//		LPC_TIM2->TCR = 2;
-//		LPC_TIM2->TCR = 1;
-//	}
 }
 
 int main(void) {
@@ -1156,9 +1157,9 @@ int main(void) {
     PWM_Stop_Mov();
     uint32_t ifCheckTheTemp = 0;
 
-    char xdx[] = "ALARM:\0";
+    const char xdx[] = "ALARM:\0";
     oled_putString(1, 36, xdx, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
-    char dxd[] = "MODE:\0";
+    const char dxd[] = "MODE:\0";
     oled_putString(1, 48, dxd, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
 
     sampleRate = get_sample_rate(1);
@@ -1288,7 +1289,6 @@ int main(void) {
 
         int32_t jeden = ((GPIO_ReadValue(2) & (1 << 10)) >> 10);
         int32_t dwa = ((GPIO_ReadValue(2) & (1 << 11)) >> 11);
-        //if(msTicks % (1<<3) == 0) {
 
         if ((!checkDifference()) && ((jeden == 1) || (dwa == 1))) {
             if ((GPIO_ReadValue(2) & (1 << 10)) >> 10 == 1) {
@@ -1300,13 +1300,12 @@ int main(void) {
             PWM_Stop_Mov();
 
         }
-        //}
-        activateMotor(alarm);
+        activateMotor();
     }
 }
 
 
-void check_failed(uint8_t *file, uint32_t line) {
+void check_failed(void) {
     /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
