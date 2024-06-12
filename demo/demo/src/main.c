@@ -32,18 +32,15 @@
 
 //////////////////////////////////////////////
 //Global vars
-static Bool changeCountOnMotor = TRUE;
 static Bool leapYear = FALSE;
-static uint8_t barPos = 2;
 static uint32_t msTicks = 0;
 static Bool editing = FALSE;
-static uint32_t sample_index = 0;
 static Bool directionOfNextAlarm;  //True - up, False - down
 static uint8_t eeprom_buffer[20];
 extern int sound_sz_up;
 extern int sound_sz_down;
-extern const unsigned char sound_up[21396];
-extern const unsigned char sound_down[16006];
+extern unsigned char sound_up[21396];
+extern unsigned char sound_down[16006];
 static Bool disableSound = FALSE;
 static uint32_t cnt = 0;
 static uint32_t sound_offset = 0;
@@ -70,7 +67,7 @@ struct pos {
 
 uint32_t len(uint32_t val);
 
-void uint32_t_to_str(uint32_t val, char *str);
+void uint32_t_to_str(uint32_t val,unsigned char *str);
 
 static void isLeap(void);
 
@@ -90,7 +87,7 @@ static void PWM_Stop_Mov(void);
 
 static int32_t get_sample_rate(Bool to_validate);
 
-static void write_temp_on_screen(char *temp_str);
+static void write_temp_on_screen(unsigned char *temp_str);
 
 void SysTick_Handler(void);
 
@@ -104,7 +101,7 @@ static void showEditmode(Bool editmode);
 
 static void showPresentTime(struct alarm_struct alarm[], int8_t y);
 
-static void valToString(uint32_t value, char *str, uint8_t len);
+static void valToString(uint32_t value,unsigned char *str, uint8_t len);
 
 static void chooseTime(struct pos map[4][3], int32_t LPC_values[], struct alarm_struct alarm[], int8_t x, int8_t y);
 
@@ -132,12 +129,13 @@ void RTC_IRQHandler(void);
 
 static void activateMotor(void);
 
-static void check_failed(void);
 ///////////////////////////////////////////////////////
 ///LIB FUNCTION HEADERS TO SATISFY MISRA
 uint32_t GPIO_ReadValue(uint8_t);
 
 uint32_t SysTick_Config(uint32_t);
+
+void RTC_Init (LPC_RTC_TypeDef *RTCx);
 ///////////////////////////////////////////////////////
 
 /*!
@@ -166,7 +164,7 @@ uint32_t len(uint32_t val) {
  *  @returns  		
  *  @side effects:	For this function to be safe, char* str parameter has to be carefully initialised with proper size.
  */
-void uint32_t_to_str(uint32_t val, char *str) {
+void uint32_t_to_str(uint32_t val,unsigned char *str) {
     uint32_t val_len = len(val);
     uint32_t param_val = val;
     for (int32_t i = (int32_t)val_len - 1; i >= 0; i--) {
@@ -445,7 +443,7 @@ int32_t get_sample_rate(Bool to_validate) {
  *  @returns
  *  @side effects:	For this function to be safe, char* temp_str parameter has to be carefully initialised with proper size, reaching negative value causes loop to break preemptively.
  */
-void write_temp_on_screen(char *temp_str) {
+void write_temp_on_screen(unsigned char *temp_str) {
     int32_t temp = temp_read();
     for (int32_t i = 3; i >= 0; i--) {
         temp_str[i] = (char) ((temp % 10) + '0');
@@ -491,9 +489,9 @@ uint32_t getMsTicks(void) {
  *            Program gets slowly when funtion is procceding
  */
 void showOurTemp(void) {
-    char naszString[7];
-    write_temp_on_screen(&naszString);
-    oled_putString(1, 0, &naszString, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
+    unsigned char naszString[7];
+    write_temp_on_screen(naszString);
+    oled_putString(1, 0, naszString, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
 }
 
 /*!
@@ -504,9 +502,9 @@ void showOurTemp(void) {
  */
 void showLuxometerReading(void) {
     uint32_t light_val = light_read();
-    char *xdd[6];
+    unsigned char xdd[6];
     uint32_t_to_str(light_val, xdd); //co
-    oled_putString(43, 1, &xdd, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
+    oled_putString(43, 1, xdd, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
 }
 
 /*!
@@ -539,11 +537,11 @@ void showEditmode(Bool editmode) {
  *            Not handling OLED errors
  */
 void showPresentTime(struct alarm_struct alarm[], int8_t y) {
-    char date_str[10];
+    unsigned char date_str[10];
     uint16_t year = LPC_RTC->YEAR;
 
     for (int8_t i = 3; i >= 0; i--) {
-        date_str[i] = (char)((uint8_t)(year % 10U) + '0');
+        date_str[i] = (unsigned char)((uint8_t)(year % 10U) + '0');
         if (year == 0U) {
             break;
         }
@@ -553,7 +551,7 @@ void showPresentTime(struct alarm_struct alarm[], int8_t y) {
 
     uint8_t month = LPC_RTC->MONTH;
     for (uint8_t i = 6U; i >= 5U; i--) {
-        date_str[i] = (char)((uint8_t)(month % 10U) + '0');
+        date_str[i] = (unsigned char)((uint8_t)(month % 10U) + '0');
         if (month == 0U) {
             break;
         }
@@ -564,19 +562,19 @@ void showPresentTime(struct alarm_struct alarm[], int8_t y) {
 
     uint8_t day = LPC_RTC->DOM;
     for (uint8_t i = 9U; i >= 8U; i--) {
-        date_str[i] = (char)((uint8_t)(day % 10U) + '0');
+        date_str[i] = (unsigned char)((uint8_t)(day % 10U) + '0');
         if (day == 0U) {
             break;
         }
         day = day / 10U;
     }
 
-    char time_str[9];
+    unsigned char time_str[9];
 
     uint8_t hour = LPC_RTC->HOUR;
 
     for (int8_t i = 1; i >= 0; i--) {
-        time_str[i] = (char)((uint8_t)(hour % 10U) + '0');
+        time_str[i] = (unsigned char)((uint8_t)(hour % 10U) + '0');
 
 
         hour = hour / 10U;
@@ -588,7 +586,7 @@ void showPresentTime(struct alarm_struct alarm[], int8_t y) {
     uint8_t minute = LPC_RTC->MIN;
 
     for (uint8_t i = 4U; i >= 3U; i--) {
-        time_str[i] = (char)((uint8_t)(minute % 10U) + '0');
+        time_str[i] = (unsigned char)((uint8_t)(minute % 10U) + '0');
 
 
         minute = minute / 10U;
@@ -599,12 +597,12 @@ void showPresentTime(struct alarm_struct alarm[], int8_t y) {
 
     uint8_t sec = LPC_RTC->SEC;
     for (uint8_t i = 7U; i >= 6U; i--) {
-        time_str[i] = (char)((uint8_t)(sec % 10U) + '0');
+        time_str[i] = (unsigned char)((uint8_t)(sec % 10U) + '0');
 
 
         sec = sec / 10U;
     }
-    char alarm_str[8];
+    unsigned char alarm_str[8];
     alarm_str[7] = '\0';
     uint8_t min;
     if (y == 3) {
@@ -622,7 +620,7 @@ void showPresentTime(struct alarm_struct alarm[], int8_t y) {
     }
 
     for (uint8_t i = 3U; i >= 2U; i--) {
-        alarm_str[i] = (char)((uint8_t)(hour % 10U) + '0');
+        alarm_str[i] = (unsigned char)((uint8_t)(hour % 10U) + '0');
 
 
         hour = hour / 10U;
@@ -630,13 +628,13 @@ void showPresentTime(struct alarm_struct alarm[], int8_t y) {
     alarm_str[4] = ':';
 
     for (uint8_t i = 6U; i >= 5U; i--) {
-        alarm_str[i] = (char)((uint8_t)(min % 10U) + '0');
+        alarm_str[i] = (unsigned char)((uint8_t)(min % 10U) + '0');
 
 
         min = min / 10U;
     }
     time_str[8] = '\0';
-    char activation[8];
+    unsigned char activation[8];
     if (activationMode == 0U) {
         activation[0] = 'N';
     } else if (activationMode == 1U) {
@@ -649,7 +647,7 @@ void showPresentTime(struct alarm_struct alarm[], int8_t y) {
     activation[1] = ' ';
     uint32_t lumens_to_display = lumenActivation;
     for (uint8_t i = 6U; i >= 2U; i--) {
-        activation[i] = (char)((uint8_t)(lumens_to_display % 10U) + '0');
+        activation[i] = (unsigned char)((uint8_t)(lumens_to_display % 10U) + '0');
 
         if ((lumens_to_display == 0U) && (i != 6U)) {
             activation[i] = ' ';
@@ -658,10 +656,10 @@ void showPresentTime(struct alarm_struct alarm[], int8_t y) {
     }
 
     activation[7] = '\0';
-    oled_putString(1, 12, &date_str, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
-    oled_putString(1, 24, &time_str, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
-    oled_putString(37, 36, &alarm_str, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
-    oled_putString(31, 48, &activation, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
+    oled_putString(1, 12, date_str, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
+    oled_putString(1, 24, time_str, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
+    oled_putString(37, 36, alarm_str, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
+    oled_putString(31, 48, activation, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
 }
 
 
@@ -677,7 +675,7 @@ void showPresentTime(struct alarm_struct alarm[], int8_t y) {
  *  @side effects:
  *            None.
  */
-void valToString(uint32_t value, char *str, uint8_t len) {
+void valToString(uint32_t value,unsigned char *str, uint8_t len) {
     int i = len;
     uint32_t param_val = value;
     str[i] = '\0';
@@ -708,7 +706,7 @@ void valToString(uint32_t value, char *str, uint8_t len) {
  *            None.
  */
 void chooseTime(struct pos map[4][3], int32_t LPC_values[], struct alarm_struct alarm[], int8_t x, int8_t y) {
-    char str[5];
+    unsigned char str[5];
     uint8_t leng = map[y][x].length;
     uint8_t toAdd = 0;
     if ((x + (y * 3)) < 6) {
@@ -1261,8 +1259,6 @@ int main(void) {
     eeprom_init();
     joystick_init();
     oled_init();
-    SYSTICK_InternalInit(1);
-    SYSTICK_Cmd(ENABLE);
 
     Bool prevStateJoyRight = TRUE;
     Bool prevStateJoyLeft = TRUE;
@@ -1283,9 +1279,6 @@ int main(void) {
 
     int32_t sampleRate = 0;
 
-    //TODO delete
-//    GPIO_SetDir(2, 1U << 0, 1);
-//    GPIO_SetDir(2, 1U << 1, 1);
 
     GPIO_SetDir(0, ((uint32_t)1U << 27U), 1);
     GPIO_SetDir(0, ((uint32_t)1U << 28U), 1);
@@ -1341,19 +1334,19 @@ int main(void) {
     oled_clearScreen(OLED_COLOR_BLACK);
 
 
-    char naszString[4];
-    write_temp_on_screen(&naszString);
-    oled_putString(1, 0, &naszString, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
+    unsigned char naszString[4];
+    write_temp_on_screen(naszString);
+    oled_putString(1, 0, naszString, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
     showLuxometerReading();
 
 
     PWM_Stop_Mov();
     uint32_t ifCheckTheTemp = 0;
 
-    const char xdx[] = "ALARM:\0";
-    oled_putString(1, 36, xdx, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
-    const char dxd[] = "MODE:\0";
-    oled_putString(1, 48, dxd, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
+    //const unsigned char xdx[] = "ALARM:\0";
+    oled_putString(1, 36,(uint8_t*) "ALARM:\0", OLED_COLOR_WHITE, OLED_COLOR_BLACK);
+    //const unsigned char dxd[] = "MODE:\0";
+    oled_putString(1, 48,(uint8_t*) "MODE:\0", OLED_COLOR_WHITE, OLED_COLOR_BLACK);
 
     sampleRate = get_sample_rate(1);
     if (sampleRate < 0) {
@@ -1485,18 +1478,4 @@ int main(void) {
         }
         activateMotor();
     }
-}
-
-/*!
- *  @brief    Hard Falult Handler
- *  @returns  
- *  @side effects:
- *            efekty uboczne
- */
-void check_failed(void) {
-    /* User can add his own implementation to report the file name and line number,
-     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-
-    /* Infinite loop */
-    while(1){};
 }
