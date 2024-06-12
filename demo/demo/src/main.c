@@ -253,18 +253,22 @@ static void init_i2c(void) {
  */
 void PWM_vInit(void) {
     //init PWM
-    LPC_SC->PCLKSEL0 &= ~((uint32_t)3U << 12U);      // reset
-    LPC_SC->PCLKSEL0 |= ((uint32_t)1U << 12U);      // set PCLK to full CPU speed (100MHz)
-    LPC_SC->PCONP |= (1U << 6U);        // PWM on
-    LPC_PINCON->PINSEL4 &= ~(15U << 0U);    // reset
-    LPC_PINCON->PINSEL4 |= (1U << 0U);    // set PWM1.1 at P2.0
-    LPC_PWM1->TCR = (1U << 1U);           // counter reset
-    LPC_PWM1->PR = (100000000UL - 1U) >> 10U;     // clock /100000000 / prescaler (= PR +1) = 1 s
+    LPC_SC->PCLKSEL0 &= ~((uint32_t)3U << 12U);     // Ustawienie 00 na bitach 13 i 12
+    LPC_SC->PCLKSEL0 |= ((uint32_t)1U << 12U);      // Ustawienie zegara PWM na pełną prędkość procesora
+    LPC_SC->PCONP |= (1U << 6U);                    // Włączenie zasilania dla modułu PWM
+
+    //TODO SPRAWDZIC JUTRO CZY NIE MOZNA TEGO USUNAC
+    LPC_PINCON->PINSEL4 &= ~(15U << 0U);            // reset
+
+
+    LPC_PINCON->PINSEL4 |= (1U << 0U);              // set PWM1.1 at P2.0
+    LPC_PWM1->TCR = (1U << 1U);                     // counter reset
+    LPC_PWM1->PR = (100000000UL - 1U) >> 10U;     // Prescaler ma wartość około 100 000 co daje nam zmiane TC na poziomie 1000Hz
     LPC_PWM1->MCR = (1U << 1U);           // reset on MR0
-    LPC_PWM1->MR0 = 4U;                // set PWM cycle 0,25Hz (according to manual)
-    LPC_PWM1->MR1 = 2U;                // set duty to 50%
-    LPC_PWM1->LER = (1U << 0U);    // latch MR0 & MR1
-    LPC_PWM1->PCR |= ((uint32_t)3U << 9U);           // PWM1 output enable
+    LPC_PWM1->MR0 = 4U;                // gdy TC bedzie tyle rowne to resetujemy
+    LPC_PWM1->MR1 = 2U;                // wypelnienie 50%
+    LPC_PWM1->LER = (3U << 0U);    // latch MR0 & MR1 //TODO sprawdzic ta zmiane
+    LPC_PWM1->PCR |= ((uint32_t)1U << 9U);           // PWM1 output enable
     //LPC_PWM1->TCR = (1U << 1U) | (1U << 0U) | (1U << 3U);// counter enable, PWM enable
     LPC_PWM1->TCR = (1U << 0U) | (1U << 3U);    // counter enable, PWM enable //sprawdzic co to w ogole robi
 
