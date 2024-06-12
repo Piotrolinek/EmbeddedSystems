@@ -19,66 +19,6 @@
 						<entry kind="macro" name="__NEWLIB__" value="1"/>
 						<entry kind="macro" name="__USE_CMSIS" value="CMSISv1p30_LPC17xx"/>
 					</resource>
-					<resource project-relative-path="src/up.c">
-						<entry kind="includePath" name="/Lib_CMSISv1p30_LPC17xx/inc">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
-						<entry kind="includePath" name="/Lib_EaBaseBoard/inc">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
-						<entry kind="includePath" name="/Lib_MCU/inc">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
-						<entry kind="macro" name="DEBUG" value="1"/>
-						<entry kind="macro" name="__CODE_RED" value="1"/>
-						<entry kind="macro" name="__NEWLIB__" value="1"/>
-						<entry kind="macro" name="__USE_CMSIS" value="CMSISv1p30_LPC17xx"/>
-					</resource>
-					<resource project-relative-path="src/sound_8k.c">
-						<entry kind="includePath" name="/Lib_CMSISv1p30_LPC17xx/inc">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
-						<entry kind="includePath" name="/Lib_EaBaseBoard/inc">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
-						<entry kind="includePath" name="/Lib_MCU/inc">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
-						<entry kind="macro" name="DEBUG" value="1"/>
-						<entry kind="macro" name="__CODE_RED" value="1"/>
-						<entry kind="macro" name="__NEWLIB__" value="1"/>
-						<entry kind="macro" name="__USE_CMSIS" value="CMSISv1p30_LPC17xx"/>
-					</resource>
-					<resource project-relative-path="src/cr_startup_lpc17.c">
-						<entry kind="includePath" name="/Lib_CMSISv1p30_LPC17xx/inc">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
-						<entry kind="includePath" name="/Lib_EaBaseBoard/inc">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
-						<entry kind="includePath" name="/Lib_MCU/inc">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
-						<entry kind="macro" name="DEBUG" value="1"/>
-						<entry kind="macro" name="__CODE_RED" value="1"/>
-						<entry kind="macro" name="__NEWLIB__" value="1"/>
-						<entry kind="macro" name="__USE_CMSIS" value="CMSISv1p30_LPC17xx"/>
-					</resource>
-					<resource project-relative-path="src/down.c">
-						<entry kind="includePath" name="/Lib_CMSISv1p30_LPC17xx/inc">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
-						<entry kind="includePath" name="/Lib_EaBaseBoard/inc">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
-						<entry kind="includePath" name="/Lib_MCU/inc">
-							<flag value="VALUE_WORKSPACE_PATH|RESOLVED"/>
-						</entry>
-						<entry kind="macro" name="DEBUG" value="1"/>
-						<entry kind="macro" name="__CODE_RED" value="1"/>
-						<entry kind="macro" name="__NEWLIB__" value="1"/>
-						<entry kind="macro" name="__USE_CMSIS" value="CMSISv1p30_LPC17xx"/>
-					</resource>
 				</language>
 			</provider>
 			<provider id="com.crt.advproject.GCCBuildSpecCompilerParser">

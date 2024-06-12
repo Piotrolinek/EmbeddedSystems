@@ -2,10 +2,11 @@ LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/name=Local
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=win32
 activeLaunchTarget=null\:---
-configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:speaker_wav LinkServer Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:i2c_eeprom LinkServer Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:demo LinkServer Debug
+configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:i2c_eeprom LinkServer Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:speaker_wav LinkServer Debug,org.eclipse.launchbar.core.descriptorType.default\:demo LinkServer Debug
 eclipse.preferences.version=1
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:demo\ LinkServer\ Debug/activeLaunchMode=debug
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:demo\ LinkServer\ Debug/activeLaunchTarget=null\:---
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:i2c_eeprom\ LinkServer\ Debug/activeLaunchMode=debug
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:i2c_eeprom\ LinkServer\ Debug/activeLaunchTarget=null\:---
 org.eclipse.launchbar.core.descriptorType.default\:demo\ LinkServer\ Debug/activeLaunchMode=debug
 org.eclipse.launchbar.core.descriptorType.default\:demo\ LinkServer\ Debug/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
