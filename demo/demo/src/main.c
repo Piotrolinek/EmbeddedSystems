@@ -33,6 +33,7 @@
 //////////////////////////////////////////////
 //Global vars
 static Bool changeCountOnMotor = TRUE;
+static Bool leapYear = FALSE;
 static uint8_t barPos = 2;
 static uint32_t msTicks = 0;
 static Bool editing = FALSE;
@@ -67,71 +68,69 @@ struct pos {
 //HEADER SRECTION
 uint32_t len(uint32_t val);
 
-char *uint32_t_to_str(uint32_t val, char *str);
+void uint32_t_to_str(uint32_t val, char *str);
 
-Bool isLeap(void);
+static void isLeap(void);
 
 static void init_ssp(void);
 
 static void init_i2c(void);
 
-void PWM_vInit(void);
+static void PWM_vInit(void);
 
-void PWM_ChangeDirection(void);
+static Bool checkDifference(void);
 
-Bool checkDifference(void);
+static void PWM_Right(void);
 
-void PWM_Right(void);
+static void PWM_Left(void);
 
-void PWM_Left(void);
+static void PWM_Stop_Mov(void);
 
-void PWM_Stop_Mov(void);
+static int32_t get_sample_rate(Bool to_validate);
 
-int32_t get_sample_rate(Bool to_validate);
-
-void write_temp_on_screen(char *temp_str);
+static void write_temp_on_screen(char *temp_str);
 
 void SysTick_Handler(void);
 
-uint32_t getMsTicks(void);
+static uint32_t getMsTicks(void);
 
-void showOurTemp(void);
+static void showOurTemp(void);
 
-void showLuxometerReading(void);
+static void showLuxometerReading(void);
 
-void showEditmode(Bool editmode);
+static void showEditmode(Bool editmode);
 
-void showPresentTime(struct alarm_struct alarm[], int8_t y);
+static void showPresentTime(struct alarm_struct alarm[], int8_t y);
 
-void valToString(uint32_t value, char *str, uint8_t len);
+static void valToString(uint32_t value, char *str, uint8_t len);
 
-void chooseTime(struct pos map[4][3], int32_t LPC_values[], struct alarm_struct alarm[], int8_t x, int8_t y);
+static void chooseTime(struct pos map[4][3], int32_t LPC_values[], struct alarm_struct alarm[], int8_t x, int8_t y);
 
-Bool JoystickControls(char key, Bool output, Bool edit);
+static Bool JoystickControls(char key, Bool edit);
 
-void initTimer0(void);
+static void initTimer0(void);
 
 void TIMER0_IRQHandler(void);
 
-void configTimer2(void);
+static void configTimer2(void);
 
 void TIMER2_IRQHandler(void);
 
-void changeValue(int16_t value, int32_t LPC_values[], struct alarm_struct alarm[2], uint8_t x, uint8_t y);
+static void changeValue(int16_t value, int32_t LPC_values[], struct alarm_struct alarm[2], uint8_t x, uint8_t y);
 
-void correctDateValues(void);
+static void correctDateValues(void);
 
-void setNextAlarm(struct alarm_struct alarm[]);
+static void setNextAlarm(struct alarm_struct alarm[]);
 
-int8_t read_time_from_eeprom(struct alarm_struct alarm[]);
+static int8_t read_time_from_eeprom(struct alarm_struct alarm[]);
 
-int8_t write_time_to_eeprom(struct alarm_struct alarm[]);
+static int8_t write_time_to_eeprom(struct alarm_struct alarm[]);
 
 void RTC_IRQHandler(void);
 
-void activateMotor(void);
+static void activateMotor(void);
 
-void check_failed(void);
+static void check_failed(void);
 ///////////////////////////////////////////////////////
 ///LIB FUNCTION HEADERS TO SATISFY MISRA
 uint32_t GPIO_ReadValue(uint8_t);
@@ -148,9 +147,10 @@ uint32_t SysTick_Config(uint32_t);
  */
 uint32_t len(uint32_t val) {
     uint32_t i = 0;
-    while (val > 0U) {
+    uint32_t param_val = val;
+    while (param_val > 0U) {
         i++;
-        val /= 10;
+        param_val /= 10;
     }
     return i;
 }
@@ -164,11 +164,12 @@ uint32_t len(uint32_t val) {
  *  @returns  		void. TODO
  *  @side effects:	For this function to be safe, char* str parameter has to be carefully initialised with proper size.
  */
-char *uint32_t_to_str(uint32_t val, char *str) {
+void uint32_t_to_str(uint32_t val, char *str) {
     uint32_t val_len = len(val);
+    uint32_t param_val = val;
     for (int32_t i = (int32_t)val_len - 1; i >= 0; i--) {
-        str[i] = (char)((val % 10U) + '0');
-        val /= 10;
+        str[i] = (char)((param_val % 10U) + '0');
+        param_val /= 10;
     }
     for (int32_t i = val_len; i < 6; i++) {
         str[i] = ' ';
@@ -182,13 +183,14 @@ char *uint32_t_to_str(uint32_t val, char *str) {
  *  @returns  		TRUE - if is leap, FALSE - otherwise.
  *  @side effects:	LPC_RTC has to be initialised prior to running this function.
  */
-Bool isLeap(void) {
+void isLeap(void) {
     Bool a = FALSE;
     if ((LPC_RTC->YEAR % 400) == 0) { a = TRUE; }
     else if ((LPC_RTC->YEAR % 100) == 0) { a = FALSE; }
     else if ((LPC_RTC->YEAR % 4) == 0) { a = TRUE; }
     else { a = FALSE; }
-    return a;
+    leapYear = a;
+    return;
 }
 
 
@@ -620,11 +622,11 @@ void showPresentTime(struct alarm_struct alarm[], int8_t y) {
 
 void valToString(uint32_t value, char *str, uint8_t len) {
     int i = len;
-
+    uint32_t param_val = value;
     str[i] = '\0';
     for (int j = i - 1; j >= 0; j--) {
-        str[j] = (char)((uint8_t)(value % 10U) + '0');
-        value = value / 10U;
+        str[j] = (char)((uint8_t)(param_val % 10U) + '0');
+        param_val = param_val / 10U;
     }
 }
 
@@ -675,11 +677,12 @@ void chooseTime(struct pos map[4][3], int32_t LPC_values[], struct alarm_struct 
 }
 
 
-Bool JoystickControls(char key, Bool output, Bool edit) {
+Bool JoystickControls(char key, Bool edit) {
     Bool prevStateJoyRight = TRUE;
     Bool prevStateJoyLeft = TRUE;
     Bool prevStateJoyUp = TRUE;
     Bool prevStateJoyDown = TRUE;
+    Bool output = FALSE;
     uint8_t pin = 0;
     uint8_t portNum = 0;
     Bool prevStateJoy;
@@ -847,7 +850,8 @@ void changeValue(int16_t value, int32_t LPC_values[], struct alarm_struct alarm[
                 else if (tmp < 1) { tmp = 30; }
                 else {}
             } else if (LPC_values[1] == 2) {
-                if (isLeap()) {
+                isLeap();
+                if (leapYear) {
                     if (tmp > 29) { tmp = 1; }
                     else if (tmp < 1) { tmp = 29; }
                     else {}
@@ -918,7 +922,7 @@ void changeValue(int16_t value, int32_t LPC_values[], struct alarm_struct alarm[
 }
 
 void correctDateValues(void) {
-    Bool leapYear = isLeap();
+    isLeap();
     const uint8_t lenghts[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     if (LPC_RTC->DOM > lenghts[LPC_RTC->MONTH - 1]) {
         if (leapYear && (LPC_RTC->MONTH == 2)) {
@@ -1105,7 +1109,7 @@ int main(void) {
     SYSTICK_Cmd(ENABLE);
 
 
-    if (SysTick_Config(SystemCoreClock / 1000)) {
+    if ((Bool)SysTick_Config(SystemCoreClock / 1000)) {
         while(1){}; // error
     }
 
@@ -1201,7 +1205,6 @@ int main(void) {
         disableSound = TRUE;
     }
 
-    Bool output = FALSE;
     uint8_t posX = 0;
     uint8_t posY = 0;
 
@@ -1246,43 +1249,35 @@ int main(void) {
 
 
         if (!editing) {
-            if (JoystickControls('u', output, FALSE)) {
+            if (JoystickControls('u', FALSE)) {
                 posY += 4U;
                 posY = posY % 5U;
             }
-            output = FALSE;
-            if (JoystickControls('d', output, FALSE)) {
+            if (JoystickControls('d', FALSE)) {
                 posY += 6U;
                 posY = posY % 5U;//do poprawy!!!!!!!!!!!!!!
             }
-            output = FALSE;
-            if (JoystickControls('l', output, FALSE)) {
+            if (JoystickControls('l', FALSE)) {
                 posX += 2U;
                 posX = posX % 3U;
             }
-            output = FALSE;
-            if (JoystickControls('r', output, FALSE)) {
+            if (JoystickControls('r', FALSE)) {
                 posX += 4U;
                 posX = posX % 3U;
             }
-            output = FALSE;
         } else {
-            if (JoystickControls('u', output, TRUE)) {
+            if (JoystickControls('u', TRUE)) {
                 changeValue(1, LPC_values, alarm, posX, posY);
             }
-            output = FALSE;
-            if (JoystickControls('d', output, TRUE)) {
+            if (JoystickControls('d', TRUE)) {
                 changeValue(-1, LPC_values, alarm, posX, posY);
             }
-            output = FALSE;
-            if (JoystickControls('l', output, TRUE)) {
+            if (JoystickControls('l', TRUE)) {
                 changeValue(-5, LPC_values, alarm, posX, posY);
             }
-            output = FALSE;
-            if (JoystickControls('r', output, TRUE)) {
+            if (JoystickControls('r', TRUE)) {
                 changeValue(5, LPC_values, alarm, posX, posY);
             }
-            output = FALSE;
         }
 
 
