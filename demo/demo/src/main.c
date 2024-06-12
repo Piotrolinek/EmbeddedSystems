@@ -106,7 +106,7 @@ static void valToString(uint32_t value, char *str, uint8_t len);
 
 static void chooseTime(struct pos map[4][3], int32_t LPC_values[], struct alarm_struct alarm[], int8_t x, int8_t y);
 
-static Bool JoystickControls(char key, Bool edit);
+static Bool JoystickControls(char key, Bool edit,Bool *prevStateJoyRight,Bool *prevStateJoyLeft,Bool *prevStateJoyUp,Bool *prevStateJoyDown);
 
 static void initTimer0(void);
 
@@ -677,11 +677,8 @@ void chooseTime(struct pos map[4][3], int32_t LPC_values[], struct alarm_struct 
 }
 
 
-Bool JoystickControls(char key, Bool edit) {
-    Bool prevStateJoyRight = TRUE;
-    Bool prevStateJoyLeft = TRUE;
-    Bool prevStateJoyUp = TRUE;
-    Bool prevStateJoyDown = TRUE;
+Bool JoystickControls(char key, Bool edit,Bool *prevStateJoyRight,Bool *prevStateJoyLeft,Bool *prevStateJoyUp,Bool *prevStateJoyDown) {
+
     Bool output = FALSE;
     uint8_t pin = 0;
     uint8_t portNum = 0;
@@ -689,19 +686,19 @@ Bool JoystickControls(char key, Bool edit) {
     if ((key == 'u') || (key == 'U')) {
         portNum = 2;
         pin = 3;
-        prevStateJoy = prevStateJoyUp;
+        prevStateJoy = *prevStateJoyUp;
     } else if ((key == 'd') || (key == 'D')) {
         portNum = 0;
         pin = 15;
-        prevStateJoy = prevStateJoyDown;
+        prevStateJoy = *prevStateJoyDown;
     } else if ((key == 'r') || (key == 'R')) {
         portNum = 0;
         pin = 16;
-        prevStateJoy = prevStateJoyRight;
+        prevStateJoy = *prevStateJoyRight;
     } else if ((key == 'l') || (key == 'L')) {
         portNum = 2;
         pin = 4;
-        prevStateJoy = prevStateJoyLeft;
+        prevStateJoy = *prevStateJoyLeft;
     } else {
         prevStateJoy = TRUE;
     }
@@ -734,19 +731,19 @@ Bool JoystickControls(char key, Bool edit) {
     switch (key) {
         case 'u':
         case 'U':
-            prevStateJoyUp = joyClick;
+            *prevStateJoyUp = joyClick;
             break;
         case 'd':
         case 'D':
-            prevStateJoyDown = joyClick;
+            *prevStateJoyDown = joyClick;
             break;
         case 'l':
         case 'L':
-            prevStateJoyLeft = joyClick;
+            *prevStateJoyLeft = joyClick;
             break;
         case 'r':
         case 'R':
-            prevStateJoyRight = joyClick;
+            *prevStateJoyRight = joyClick;
             break;
         default:
             break;
@@ -1094,6 +1091,11 @@ int main(void) {
     SYSTICK_InternalInit(1);
     SYSTICK_Cmd(ENABLE);
 
+    Bool prevStateJoyRight = TRUE;
+    Bool prevStateJoyLeft = TRUE;
+    Bool prevStateJoyUp = TRUE;
+    Bool prevStateJoyDown = TRUE;
+
 
     if ((Bool)SysTick_Config(SystemCoreClock / 1000)) {
         while(1){}; // error
@@ -1235,33 +1237,33 @@ int main(void) {
 
 
         if (!editing) {
-            if (JoystickControls('u', FALSE)) {
+            if (JoystickControls('u', FALSE,&prevStateJoyRight,&prevStateJoyLeft,&prevStateJoyUp,&prevStateJoyDown)) {
                 posY += 4U;
                 posY = posY % 5U;
             }
-            if (JoystickControls('d', FALSE)) {
+            if (JoystickControls('d', FALSE,&prevStateJoyRight,&prevStateJoyLeft,&prevStateJoyUp,&prevStateJoyDown)) {
                 posY += 6U;
                 posY = posY % 5U;//do poprawy!!!!!!!!!!!!!!
             }
-            if (JoystickControls('l', FALSE)) {
+            if (JoystickControls('l', FALSE,&prevStateJoyRight,&prevStateJoyLeft,&prevStateJoyUp,&prevStateJoyDown)) {
                 posX += 2U;
                 posX = posX % 3U;
             }
-            if (JoystickControls('r', FALSE)) {
+            if (JoystickControls('r', FALSE,&prevStateJoyRight,&prevStateJoyLeft,&prevStateJoyUp,&prevStateJoyDown)) {
                 posX += 4U;
                 posX = posX % 3U;
             }
         } else {
-            if (JoystickControls('u', TRUE)) {
+            if (JoystickControls('u', TRUE,&prevStateJoyRight,&prevStateJoyLeft,&prevStateJoyUp,&prevStateJoyDown)) {
                 changeValue(1, LPC_values, alarm, posX, posY);
             }
-            if (JoystickControls('d', TRUE)) {
+            if (JoystickControls('d', TRUE,&prevStateJoyRight,&prevStateJoyLeft,&prevStateJoyUp,&prevStateJoyDown)) {
                 changeValue(-1, LPC_values, alarm, posX, posY);
             }
-            if (JoystickControls('l', TRUE)) {
+            if (JoystickControls('l', TRUE,&prevStateJoyRight,&prevStateJoyLeft,&prevStateJoyUp,&prevStateJoyDown)) {
                 changeValue(-5, LPC_values, alarm, posX, posY);
             }
-            if (JoystickControls('r', TRUE)) {
+            if (JoystickControls('r', TRUE,&prevStateJoyRight,&prevStateJoyLeft,&prevStateJoyUp,&prevStateJoyDown)) {
                 changeValue(5, LPC_values, alarm, posX, posY);
             }
         }

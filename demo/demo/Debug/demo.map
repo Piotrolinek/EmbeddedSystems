@@ -704,7 +704,7 @@ END GROUP
                 0x20084000                __top_RamAHB32 = 0x20084000
                 0x20084000                __top_RAM2 = 0x20084000
 
-.text           0x00000000     0xe194
+.text           0x00000000     0xe274
  FILL mask 0xff
                 0x00000000                __vectors_start__ = ABSOLUTE (.)
  *(.isr_vector)
@@ -713,10 +713,10 @@ END GROUP
                 0x000000cc                . = ALIGN (0x4)
                 0x000000cc                __section_table_start = .
                 0x000000cc                __data_section_table = .
-                0x000000cc        0x4 LONG 0xe194 LOADADDR (.data)
+                0x000000cc        0x4 LONG 0xe274 LOADADDR (.data)
                 0x000000d0        0x4 LONG 0x10000000 ADDR (.data)
                 0x000000d4        0x4 LONG 0x20 SIZEOF (.data)
-                0x000000d8        0x4 LONG 0xe194 LOADADDR (.data_RAM2)
+                0x000000d8        0x4 LONG 0xe274 LOADADDR (.data_RAM2)
                 0x000000dc        0x4 LONG 0x2007c000 ADDR (.data_RAM2)
                 0x000000e0        0x4 LONG 0x0 SIZEOF (.data_RAM2)
                 0x000000e4                __data_section_table_end = .
@@ -843,313 +843,313 @@ END GROUP
  .text.chooseTime
                 0x00000e08      0x24c ./src/main.o
  .text.JoystickControls
-                0x00001054      0x244 ./src/main.o
+                0x00001054      0x250 ./src/main.o
  .text.initTimer0
-                0x00001298       0x64 ./src/main.o
+                0x000012a4       0x64 ./src/main.o
  .text.TIMER0_IRQHandler
-                0x000012fc       0x94 ./src/main.o
-                0x000012fc                TIMER0_IRQHandler
+                0x00001308       0x94 ./src/main.o
+                0x00001308                TIMER0_IRQHandler
  .text.configTimer2
-                0x00001390       0x68 ./src/main.o
+                0x0000139c       0x68 ./src/main.o
  .text.changeValue
-                0x000013f8      0x3ec ./src/main.o
+                0x00001404      0x3ec ./src/main.o
  .text.correctDateValues
-                0x000017e4       0x90 ./src/main.o
+                0x000017f0       0x90 ./src/main.o
  .text.setNextAlarm
-                0x00001874      0x22c ./src/main.o
+                0x00001880      0x22c ./src/main.o
  .text.read_time_from_eeprom
-                0x00001aa0      0x17c ./src/main.o
+                0x00001aac      0x17c ./src/main.o
  .text.write_time_to_eeprom
-                0x00001c1c      0x128 ./src/main.o
+                0x00001c28      0x128 ./src/main.o
  .text.RTC_IRQHandler
-                0x00001d44       0x64 ./src/main.o
-                0x00001d44                RTC_IRQHandler
+                0x00001d50       0x64 ./src/main.o
+                0x00001d50                RTC_IRQHandler
  .text.activateMotor
-                0x00001da8       0xec ./src/main.o
- .text.main     0x00001e94      0x5bc ./src/main.o
-                0x00001e94                main
+                0x00001db4       0xec ./src/main.o
+ .text.main     0x00001ea0      0x690 ./src/main.o
+                0x00001ea0                main
  .text.SystemInit
-                0x00002450      0x140 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
-                0x00002450                SystemInit
- .text.I2CRead  0x00002590       0x50 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(eeprom.o)
+                0x00002530      0x140 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
+                0x00002530                SystemInit
+ .text.I2CRead  0x00002670       0x50 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(eeprom.o)
  .text.I2CWrite
-                0x000025e0       0x50 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(eeprom.o)
+                0x000026c0       0x50 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(eeprom.o)
  .text.eepromDelay
-                0x00002630       0x2a C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(eeprom.o)
+                0x00002710       0x2a C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(eeprom.o)
  .text.eeprom_init
-                0x0000265a        0xc C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(eeprom.o)
-                0x0000265a                eeprom_init
+                0x0000273a        0xc C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(eeprom.o)
+                0x0000273a                eeprom_init
  .text.eeprom_read
-                0x00002666       0x84 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(eeprom.o)
-                0x00002666                eeprom_read
+                0x00002746       0x84 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(eeprom.o)
+                0x00002746                eeprom_read
  .text.eeprom_write
-                0x000026ea       0xf4 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(eeprom.o)
-                0x000026ea                eeprom_write
+                0x000027ca       0xf4 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(eeprom.o)
+                0x000027ca                eeprom_write
  .text.joystick_init
-                0x000027de       0x1e C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(joystick.o)
-                0x000027de                joystick_init
- .text.I2CRead  0x000027fc       0x50 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(light.o)
+                0x000028be       0x1e C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(joystick.o)
+                0x000028be                joystick_init
+ .text.I2CRead  0x000028dc       0x50 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(light.o)
  .text.I2CWrite
-                0x0000284c       0x50 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(light.o)
+                0x0000292c       0x50 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(light.o)
  .text.readCommandReg
-                0x0000289c       0x2c C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(light.o)
+                0x0000297c       0x2c C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(light.o)
  .text.readControlReg
-                0x000028c8       0x2c C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(light.o)
+                0x000029a8       0x2c C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(light.o)
  .text.light_enable
-                0x000028f4       0x3c C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(light.o)
-                0x000028f4                light_enable
+                0x000029d4       0x3c C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(light.o)
+                0x000029d4                light_enable
  .text.light_read
-                0x00002930       0x74 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(light.o)
-                0x00002930                light_read
+                0x00002a10       0x74 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(light.o)
+                0x00002a10                light_read
  .text.light_setMode
-                0x000029a4       0x48 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(light.o)
-                0x000029a4                light_setMode
+                0x00002a84       0x48 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(light.o)
+                0x00002a84                light_setMode
  .text.light_setWidth
-                0x000029ec       0x88 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(light.o)
-                0x000029ec                light_setWidth
+                0x00002acc       0x88 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(light.o)
+                0x00002acc                light_setWidth
  .text.light_setRange
-                0x00002a74       0x90 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(light.o)
-                0x00002a74                light_setRange
+                0x00002b54       0x90 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(light.o)
+                0x00002b54                light_setRange
  .text.light_setIrqInCycles
-                0x00002b04       0x40 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(light.o)
-                0x00002b04                light_setIrqInCycles
+                0x00002be4       0x40 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(light.o)
+                0x00002be4                light_setIrqInCycles
  .text.writeCommand
-                0x00002b44       0x48 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(oled.o)
+                0x00002c24       0x48 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(oled.o)
  .text.writeData
-                0x00002b8c       0x48 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(oled.o)
+                0x00002c6c       0x48 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(oled.o)
  .text.writeDataLen
-                0x00002bd4       0x78 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(oled.o)
+                0x00002cb4       0x78 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(oled.o)
  .text.runInitSequence
-                0x00002c4c       0xd4 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(oled.o)
- .text.hLine    0x00002d20       0x58 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(oled.o)
- .text.vLine    0x00002d78       0x56 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(oled.o)
- *fill*         0x00002dce        0x2 ff
+                0x00002d2c       0xd4 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(oled.o)
+ .text.hLine    0x00002e00       0x58 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(oled.o)
+ .text.vLine    0x00002e58       0x56 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(oled.o)
+ *fill*         0x00002eae        0x2 ff
  .text.oled_init
-                0x00002dd0       0x74 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(oled.o)
-                0x00002dd0                oled_init
+                0x00002eb0       0x74 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(oled.o)
+                0x00002eb0                oled_init
  .text.oled_putPixel
-                0x00002e44      0x150 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(oled.o)
-                0x00002e44                oled_putPixel
+                0x00002f24      0x150 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(oled.o)
+                0x00002f24                oled_putPixel
  .text.oled_line
-                0x00002f94      0x1b8 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(oled.o)
-                0x00002f94                oled_line
+                0x00003074      0x1b8 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(oled.o)
+                0x00003074                oled_line
  .text.oled_clearScreen
-                0x0000314c       0x64 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(oled.o)
-                0x0000314c                oled_clearScreen
+                0x0000322c       0x64 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(oled.o)
+                0x0000322c                oled_clearScreen
  .text.oled_putChar
-                0x000031b0       0xd8 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(oled.o)
-                0x000031b0                oled_putChar
+                0x00003290       0xd8 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(oled.o)
+                0x00003290                oled_putChar
  .text.oled_putString
-                0x00003288       0x52 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(oled.o)
-                0x00003288                oled_putString
- *fill*         0x000032da        0x2 ff
+                0x00003368       0x52 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(oled.o)
+                0x00003368                oled_putString
+ *fill*         0x000033ba        0x2 ff
  .text.temp_init
-                0x000032dc       0x24 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(temp.o)
-                0x000032dc                temp_init
+                0x000033bc       0x24 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(temp.o)
+                0x000033bc                temp_init
  .text.temp_read
-                0x00003300       0xf0 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(temp.o)
-                0x00003300                temp_read
+                0x000033e0       0xf0 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(temp.o)
+                0x000033e0                temp_read
  .text.DAC_Init
-                0x000033f0       0x30 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_dac.o)
-                0x000033f0                DAC_Init
+                0x000034d0       0x30 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_dac.o)
+                0x000034d0                DAC_Init
  .text.DAC_UpdateValue
-                0x00003420       0x48 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_dac.o)
-                0x00003420                DAC_UpdateValue
+                0x00003500       0x48 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_dac.o)
+                0x00003500                DAC_UpdateValue
  .text.DAC_SetBias
-                0x00003468       0x48 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_dac.o)
-                0x00003468                DAC_SetBias
+                0x00003548       0x48 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_dac.o)
+                0x00003548                DAC_SetBias
  .text.GPIO_GetPointer
-                0x000034b0       0x70 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+                0x00003590       0x70 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
  .text.GPIO_SetDir
-                0x00003520       0x4a C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
-                0x00003520                GPIO_SetDir
+                0x00003600       0x4a C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+                0x00003600                GPIO_SetDir
  .text.GPIO_SetValue
-                0x0000356a       0x2a C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
-                0x0000356a                GPIO_SetValue
+                0x0000364a       0x2a C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+                0x0000364a                GPIO_SetValue
  .text.GPIO_ClearValue
-                0x00003594       0x2a C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
-                0x00003594                GPIO_ClearValue
+                0x00003674       0x2a C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+                0x00003674                GPIO_ClearValue
  .text.GPIO_ReadValue
-                0x000035be       0x2a C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
-                0x000035be                GPIO_ReadValue
+                0x0000369e       0x2a C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+                0x0000369e                GPIO_ReadValue
  .text.NVIC_EnableIRQ
-                0x000035e8       0x30 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_i2c.o)
+                0x000036c8       0x30 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_i2c.o)
  .text.NVIC_DisableIRQ
-                0x00003618       0x34 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_i2c.o)
+                0x000036f8       0x34 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_i2c.o)
  .text.I2C_getNum
-                0x0000364c       0x48 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_i2c.o)
+                0x0000372c       0x48 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_i2c.o)
  .text.I2C_Start
-                0x00003694       0x3a C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_i2c.o)
+                0x00003774       0x3a C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_i2c.o)
  .text.I2C_Stop
-                0x000036ce       0x30 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_i2c.o)
+                0x000037ae       0x30 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_i2c.o)
  .text.I2C_SendByte
-                0x000036fe       0x4a C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_i2c.o)
+                0x000037de       0x4a C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_i2c.o)
  .text.I2C_GetByte
-                0x00003748       0x52 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_i2c.o)
- *fill*         0x0000379a        0x2 ff
+                0x00003828       0x52 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_i2c.o)
+ *fill*         0x0000387a        0x2 ff
  .text.I2C_SetClock
-                0x0000379c       0xa4 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_i2c.o)
+                0x0000387c       0xa4 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_i2c.o)
  .text.I2C_Init
-                0x00003840       0xa4 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_i2c.o)
-                0x00003840                I2C_Init
- .text.I2C_Cmd  0x000038e4       0x70 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_i2c.o)
-                0x000038e4                I2C_Cmd
+                0x00003920       0xa4 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_i2c.o)
+                0x00003920                I2C_Init
+ .text.I2C_Cmd  0x000039c4       0x70 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_i2c.o)
+                0x000039c4                I2C_Cmd
  .text.I2C_IntCmd
-                0x00003954       0x88 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_i2c.o)
-                0x00003954                I2C_IntCmd
+                0x00003a34       0x88 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_i2c.o)
+                0x00003a34                I2C_IntCmd
  .text.I2C_MasterTransferData
-                0x000039dc      0x2cc C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_i2c.o)
-                0x000039dc                I2C_MasterTransferData
+                0x00003abc      0x2cc C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_i2c.o)
+                0x00003abc                I2C_MasterTransferData
  .text.check_failed
-                0x00003ca8        0xc C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_libcfg_default.o)
-                0x00003ca8                check_failed
+                0x00003d88        0xc C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_libcfg_default.o)
+                0x00003d88                check_failed
  .text.set_PinFunc
-                0x00003cb4       0x80 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+                0x00003d94       0x80 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
  .text.set_ResistorMode
-                0x00003d34       0x80 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+                0x00003e14       0x80 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
  .text.set_OpenDrainMode
-                0x00003db4       0x68 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+                0x00003e94       0x68 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
  .text.PINSEL_ConfigPin
-                0x00003e1c       0x46 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
-                0x00003e1c                PINSEL_ConfigPin
- *fill*         0x00003e62        0x2 ff
+                0x00003efc       0x46 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+                0x00003efc                PINSEL_ConfigPin
+ *fill*         0x00003f42        0x2 ff
  .text.RTC_Init
-                0x00003e64       0x50 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_rtc.o)
-                0x00003e64                RTC_Init
+                0x00003f44       0x50 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_rtc.o)
+                0x00003f44                RTC_Init
  .text.setSSPclock
-                0x00003eb4       0xc4 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+                0x00003f94       0xc4 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
  .text.SSP_Init
-                0x00003f78       0x9c C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
-                0x00003f78                SSP_Init
+                0x00004058       0x9c C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+                0x00004058                SSP_Init
  .text.SSP_GetDataSize
-                0x00004014       0x40 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
-                0x00004014                SSP_GetDataSize
+                0x000040f4       0x40 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+                0x000040f4                SSP_GetDataSize
  .text.SSP_ConfigStructInit
-                0x00004054       0x3c C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
-                0x00004054                SSP_ConfigStructInit
- .text.SSP_Cmd  0x00004090       0x6c C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
-                0x00004090                SSP_Cmd
+                0x00004134       0x3c C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+                0x00004134                SSP_ConfigStructInit
+ .text.SSP_Cmd  0x00004170       0x6c C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+                0x00004170                SSP_Cmd
  .text.SSP_SendData
-                0x000040fc       0x40 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
-                0x000040fc                SSP_SendData
+                0x000041dc       0x40 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+                0x000041dc                SSP_SendData
  .text.SSP_ReceiveData
-                0x0000413c       0x3c C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
-                0x0000413c                SSP_ReceiveData
+                0x0000421c       0x3c C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+                0x0000421c                SSP_ReceiveData
  .text.SSP_ReadWrite
-                0x00004178      0x34e C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
-                0x00004178                SSP_ReadWrite
- *fill*         0x000044c6        0x2 ff
+                0x00004258      0x34e C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+                0x00004258                SSP_ReadWrite
+ *fill*         0x000045a6        0x2 ff
  .text.SYSTICK_InternalInit
-                0x000044c8       0x7c C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_systick.o)
-                0x000044c8                SYSTICK_InternalInit
+                0x000045a8       0x7c C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_systick.o)
+                0x000045a8                SYSTICK_InternalInit
  .text.SYSTICK_Cmd
-                0x00004544       0x50 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_systick.o)
-                0x00004544                SYSTICK_Cmd
+                0x00004624       0x50 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_systick.o)
+                0x00004624                SYSTICK_Cmd
  .text.CLKPWR_SetPCLKDiv
-                0x00004594       0x90 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
-                0x00004594                CLKPWR_SetPCLKDiv
+                0x00004674       0x90 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+                0x00004674                CLKPWR_SetPCLKDiv
  .text.CLKPWR_GetPCLKSEL
-                0x00004624       0x48 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
-                0x00004624                CLKPWR_GetPCLKSEL
+                0x00004704       0x48 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+                0x00004704                CLKPWR_GetPCLKSEL
  .text.CLKPWR_GetPCLK
-                0x0000466c       0x64 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
-                0x0000466c                CLKPWR_GetPCLK
+                0x0000474c       0x64 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+                0x0000474c                CLKPWR_GetPCLK
  .text.CLKPWR_ConfigPPWR
-                0x000046d0       0x58 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
-                0x000046d0                CLKPWR_ConfigPPWR
- .text          0x00004728      0x21c c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/thumb/v7-m/nofp\libgcc.a(_arm_addsubsf3.o)
-                0x00004728                __aeabi_frsub
-                0x00004730                __subsf3
-                0x00004730                __aeabi_fsub
-                0x00004734                __aeabi_fadd
-                0x00004734                __addsf3
-                0x00004894                __aeabi_ui2f
-                0x00004894                __floatunsisf
-                0x0000489c                __aeabi_i2f
-                0x0000489c                __floatsisf
-                0x000048b8                __aeabi_ul2f
-                0x000048b8                __floatundisf
-                0x000048c8                __aeabi_l2f
-                0x000048c8                __floatdisf
- .text          0x00004944       0xec c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/thumb/v7-m/nofp\libgcc.a(_arm_cmpsf2.o)
-                0x00004944                __gesf2
-                0x00004944                __gtsf2
-                0x0000494c                __lesf2
-                0x0000494c                __ltsf2
-                0x00004954                __nesf2
-                0x00004954                __eqsf2
-                0x00004954                __cmpsf2
-                0x000049b4                __aeabi_cfrcmple
-                0x000049bc                __aeabi_cfcmpeq
-                0x000049bc                __aeabi_cfcmple
-                0x000049cc                __aeabi_fcmpeq
-                0x000049e0                __aeabi_fcmplt
-                0x000049f4                __aeabi_fcmple
-                0x00004a08                __aeabi_fcmpge
-                0x00004a1c                __aeabi_fcmpgt
- .text          0x00004a30       0xec c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libc.a(lib_a-memcpy.o)
-                0x00004a30                memcpy
- .text.memset   0x00004b1c       0xa0 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libc.a(lib_a-memset.o)
-                0x00004b1c                memset
+                0x000047b0       0x58 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+                0x000047b0                CLKPWR_ConfigPPWR
+ .text          0x00004808      0x21c c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/thumb/v7-m/nofp\libgcc.a(_arm_addsubsf3.o)
+                0x00004808                __aeabi_frsub
+                0x00004810                __subsf3
+                0x00004810                __aeabi_fsub
+                0x00004814                __aeabi_fadd
+                0x00004814                __addsf3
+                0x00004974                __aeabi_ui2f
+                0x00004974                __floatunsisf
+                0x0000497c                __aeabi_i2f
+                0x0000497c                __floatsisf
+                0x00004998                __aeabi_ul2f
+                0x00004998                __floatundisf
+                0x000049a8                __aeabi_l2f
+                0x000049a8                __floatdisf
+ .text          0x00004a24       0xec c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/thumb/v7-m/nofp\libgcc.a(_arm_cmpsf2.o)
+                0x00004a24                __gesf2
+                0x00004a24                __gtsf2
+                0x00004a2c                __lesf2
+                0x00004a2c                __ltsf2
+                0x00004a34                __nesf2
+                0x00004a34                __eqsf2
+                0x00004a34                __cmpsf2
+                0x00004a94                __aeabi_cfrcmple
+                0x00004a9c                __aeabi_cfcmpeq
+                0x00004a9c                __aeabi_cfcmple
+                0x00004aac                __aeabi_fcmpeq
+                0x00004ac0                __aeabi_fcmplt
+                0x00004ad4                __aeabi_fcmple
+                0x00004ae8                __aeabi_fcmpge
+                0x00004afc                __aeabi_fcmpgt
+ .text          0x00004b10       0xec c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libc.a(lib_a-memcpy.o)
+                0x00004b10                memcpy
+ .text.memset   0x00004bfc       0xa0 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp\libc.a(lib_a-memset.o)
+                0x00004bfc                memset
  *(.rodata .rodata.* .constdata .constdata.*)
- .rodata        0x00004bbc     0x3e86 ./src/down.o
-                0x00004bbc                sound_down
- *fill*         0x00008a42        0x2 ff
+ .rodata        0x00004c9c     0x3e86 ./src/down.o
+                0x00004c9c                sound_down
+ *fill*         0x00008b22        0x2 ff
  .rodata.str1.4
-                0x00008a44       0x15 ./src/main.o
- *fill*         0x00008a59        0x3 ff
- .rodata        0x00008a5c       0x45 ./src/main.o
- *fill*         0x00008aa1        0x3 ff
- .rodata        0x00008aa4     0x5394 ./src/up.o
-                0x00008aa4                sound_up
- .rodata        0x0000de38        0x8 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(oled.o)
- .rodata        0x0000de40      0x300 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(font5x7.o)
-                0x0000de40                font5x7
+                0x00008b24       0x15 ./src/main.o
+ *fill*         0x00008b39        0x3 ff
+ .rodata        0x00008b3c       0x45 ./src/main.o
+ *fill*         0x00008b81        0x3 ff
+ .rodata        0x00008b84     0x5394 ./src/up.o
+                0x00008b84                sound_up
+ .rodata        0x0000df18        0x8 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(oled.o)
+ .rodata        0x0000df20      0x300 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(font5x7.o)
+                0x0000df20                font5x7
  .rodata.str1.4
-                0x0000e140        0xf C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_dac.o)
- *fill*         0x0000e14f        0x1 ff
+                0x0000e220        0xf C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_dac.o)
+ *fill*         0x0000e22f        0x1 ff
  .rodata.str1.4
-                0x0000e150        0xf C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_i2c.o)
- *fill*         0x0000e15f        0x1 ff
+                0x0000e230        0xf C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_i2c.o)
+ *fill*         0x0000e23f        0x1 ff
  .rodata.str1.4
-                0x0000e160        0xf C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_rtc.o)
- *fill*         0x0000e16f        0x1 ff
+                0x0000e240        0xf C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_rtc.o)
+ *fill*         0x0000e24f        0x1 ff
  .rodata.str1.4
-                0x0000e170        0xf C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
- *fill*         0x0000e17f        0x1 ff
+                0x0000e250        0xf C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ *fill*         0x0000e25f        0x1 ff
  .rodata.str1.4
-                0x0000e180       0x13 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_systick.o)
-                0x0000e194                . = ALIGN (0x4)
- *fill*         0x0000e193        0x1 ff
+                0x0000e260       0x13 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_systick.o)
+                0x0000e274                . = ALIGN (0x4)
+ *fill*         0x0000e273        0x1 ff
 
-.glue_7         0x0000e194        0x0
- .glue_7        0x0000e194        0x0 linker stubs
+.glue_7         0x0000e274        0x0
+ .glue_7        0x0000e274        0x0 linker stubs
 
-.glue_7t        0x0000e194        0x0
- .glue_7t       0x0000e194        0x0 linker stubs
+.glue_7t        0x0000e274        0x0
+ .glue_7t       0x0000e274        0x0 linker stubs
 
-.vfp11_veneer   0x0000e194        0x0
- .vfp11_veneer  0x0000e194        0x0 linker stubs
+.vfp11_veneer   0x0000e274        0x0
+ .vfp11_veneer  0x0000e274        0x0 linker stubs
 
-.v4_bx          0x0000e194        0x0
- .v4_bx         0x0000e194        0x0 linker stubs
+.v4_bx          0x0000e274        0x0
+ .v4_bx         0x0000e274        0x0 linker stubs
 
-.iplt           0x0000e194        0x0
- .iplt          0x0000e194        0x0 ./src/cr_startup_lpc17.o
+.iplt           0x0000e274        0x0
+ .iplt          0x0000e274        0x0 ./src/cr_startup_lpc17.o
 
-.rel.dyn        0x0000e194        0x0
- .rel.iplt      0x0000e194        0x0 ./src/cr_startup_lpc17.o
+.rel.dyn        0x0000e274        0x0
+ .rel.iplt      0x0000e274        0x0 ./src/cr_startup_lpc17.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM.exidx      0x0000e194        0x0
-                0x0000e194                __exidx_start = .
+.ARM.exidx      0x0000e274        0x0
+                0x0000e274                __exidx_start = .
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x0000e194                __exidx_end = .
-                0x0000e194                _etext = .
+                0x0000e274                __exidx_end = .
+                0x0000e274                _etext = .
 
-.data_RAM2      0x2007c000        0x0 load address 0x0000e194
+.data_RAM2      0x2007c000        0x0 load address 0x0000e274
  FILL mask 0xff
                 [!provide]                PROVIDE (__start_data_RAM2 = .)
                 [!provide]                PROVIDE (__start_data_RamAHB32 = .)
@@ -1170,7 +1170,7 @@ END GROUP
                 0x10000000                . = ALIGN (0x4)
                 0x10000000                _end_uninit_RESERVED = .
 
-.data           0x10000000       0x20 load address 0x0000e194
+.data           0x10000000       0x20 load address 0x0000e274
  FILL mask 0xff
                 0x10000000                _data = .
                 [!provide]                PROVIDE (__start_data_RAM = .)
@@ -1194,7 +1194,7 @@ END GROUP
                 [!provide]                PROVIDE (__end_data_RAM = .)
                 [!provide]                PROVIDE (__end_data_RamLoc32 = .)
 
-.igot.plt       0x10000020        0x0 load address 0x0000e1b4
+.igot.plt       0x10000020        0x0 load address 0x0000e294
  .igot.plt      0x10000020        0x0 ./src/cr_startup_lpc17.o
 
 .bss_RAM2       0x2007c000        0x0
@@ -1249,54 +1249,54 @@ END GROUP
                 0x10008000                PROVIDE (_vStackTop = DEFINED (__user_stack_top)?__user_stack_top:(__top_RamLoc32 - 0x0))
                 [!provide]                PROVIDE (__valid_user_code_checksum = (0x0 - ((((((_vStackTop + (ResetISR + 0x1)) + (NMI_Handler + 0x1)) + (HardFault_Handler + 0x1)) + (DEFINED (MemManage_Handler)?MemManage_Handler:0x0 + 0x1)) + (DEFINED (BusFault_Handler)?BusFault_Handler:0x0 + 0x1)) + (DEFINED (UsageFault_Handler)?UsageFault_Handler:0x0 + 0x1))))
                 0x00000000                _image_start = LOADADDR (.text)
-                0x0000e1b4                _image_end = (LOADADDR (.data) + SIZEOF (.data))
-                0x0000e1b4                _image_size = (_image_end - _image_start)
+                0x0000e294                _image_end = (LOADADDR (.data) + SIZEOF (.data))
+                0x0000e294                _image_size = (_image_end - _image_start)
 OUTPUT(demo.axf elf32-littlearm)
 LOAD linker stubs
 
-.debug_info     0x00000000     0x80c7
+.debug_info     0x00000000     0x8113
  .debug_info    0x00000000      0x1fe ./src/cr_startup_lpc17.o
  .debug_info    0x000001fe       0x77 ./src/down.o
- .debug_info    0x00000275     0x2154 ./src/main.o
- .debug_info    0x000023c9       0x77 ./src/up.o
- .debug_info    0x00002440      0x345 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
- .debug_info    0x00002785      0x5f7 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(eeprom.o)
- .debug_info    0x00002d7c      0x13f C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(joystick.o)
- .debug_info    0x00002ebb      0x795 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(light.o)
- .debug_info    0x00003650      0x9d1 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(oled.o)
- .debug_info    0x00004021      0x183 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(temp.o)
- .debug_info    0x000041a4       0x62 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(font5x7.o)
- .debug_info    0x00004206      0x2b3 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_dac.o)
- .debug_info    0x000044b9      0xe1b C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
- .debug_info    0x000052d4      0xdca C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_i2c.o)
- .debug_info    0x0000609e      0x102 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_libcfg_default.o)
- .debug_info    0x000061a0      0x4cd C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
- .debug_info    0x0000666d      0xa16 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_rtc.o)
- .debug_info    0x00007083      0x7b5 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
- .debug_info    0x00007838      0x265 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_systick.o)
- .debug_info    0x00007a9d      0x62a C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+ .debug_info    0x00000275     0x21a0 ./src/main.o
+ .debug_info    0x00002415       0x77 ./src/up.o
+ .debug_info    0x0000248c      0x345 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
+ .debug_info    0x000027d1      0x5f7 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(eeprom.o)
+ .debug_info    0x00002dc8      0x13f C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(joystick.o)
+ .debug_info    0x00002f07      0x795 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(light.o)
+ .debug_info    0x0000369c      0x9d1 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(oled.o)
+ .debug_info    0x0000406d      0x183 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(temp.o)
+ .debug_info    0x000041f0       0x62 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(font5x7.o)
+ .debug_info    0x00004252      0x2b3 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_dac.o)
+ .debug_info    0x00004505      0xe1b C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .debug_info    0x00005320      0xdca C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_i2c.o)
+ .debug_info    0x000060ea      0x102 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_libcfg_default.o)
+ .debug_info    0x000061ec      0x4cd C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .debug_info    0x000066b9      0xa16 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_rtc.o)
+ .debug_info    0x000070cf      0x7b5 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .debug_info    0x00007884      0x265 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_systick.o)
+ .debug_info    0x00007ae9      0x62a C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
 
-.debug_abbrev   0x00000000     0x1f36
+.debug_abbrev   0x00000000     0x1f31
  .debug_abbrev  0x00000000       0xc8 ./src/cr_startup_lpc17.o
  .debug_abbrev  0x000000c8       0x68 ./src/down.o
- .debug_abbrev  0x00000130      0x3ca ./src/main.o
- .debug_abbrev  0x000004fa       0x68 ./src/up.o
- .debug_abbrev  0x00000562      0x11c C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
- .debug_abbrev  0x0000067e      0x1e3 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(eeprom.o)
- .debug_abbrev  0x00000861       0xd0 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(joystick.o)
- .debug_abbrev  0x00000931      0x230 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(light.o)
- .debug_abbrev  0x00000b61      0x23c C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(oled.o)
- .debug_abbrev  0x00000d9d       0xfb C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(temp.o)
- .debug_abbrev  0x00000e98       0x4a C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(font5x7.o)
- .debug_abbrev  0x00000ee2      0x14a C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_dac.o)
- .debug_abbrev  0x0000102c      0x26b C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
- .debug_abbrev  0x00001297      0x2de C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_i2c.o)
- .debug_abbrev  0x00001575       0xad C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_libcfg_default.o)
- .debug_abbrev  0x00001622      0x196 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
- .debug_abbrev  0x000017b8      0x1ee C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_rtc.o)
- .debug_abbrev  0x000019a6      0x21b C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
- .debug_abbrev  0x00001bc1      0x178 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_systick.o)
- .debug_abbrev  0x00001d39      0x1fd C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+ .debug_abbrev  0x00000130      0x3c5 ./src/main.o
+ .debug_abbrev  0x000004f5       0x68 ./src/up.o
+ .debug_abbrev  0x0000055d      0x11c C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
+ .debug_abbrev  0x00000679      0x1e3 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(eeprom.o)
+ .debug_abbrev  0x0000085c       0xd0 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(joystick.o)
+ .debug_abbrev  0x0000092c      0x230 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(light.o)
+ .debug_abbrev  0x00000b5c      0x23c C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(oled.o)
+ .debug_abbrev  0x00000d98       0xfb C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(temp.o)
+ .debug_abbrev  0x00000e93       0x4a C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(font5x7.o)
+ .debug_abbrev  0x00000edd      0x14a C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_dac.o)
+ .debug_abbrev  0x00001027      0x26b C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .debug_abbrev  0x00001292      0x2de C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_i2c.o)
+ .debug_abbrev  0x00001570       0xad C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_libcfg_default.o)
+ .debug_abbrev  0x0000161d      0x196 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .debug_abbrev  0x000017b3      0x1ee C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_rtc.o)
+ .debug_abbrev  0x000019a1      0x21b C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .debug_abbrev  0x00001bbc      0x178 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_systick.o)
+ .debug_abbrev  0x00001d34      0x1fd C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
 
 .debug_aranges  0x00000000      0x850
  .debug_aranges
@@ -1425,27 +1425,27 @@ LOAD linker stubs
  .debug_macro   0x00005b7a       0x7a C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
  .debug_macro   0x00005bf4      0x2f4 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
 
-.debug_line     0x00000000     0x6fca
+.debug_line     0x00000000     0x6fcd
  .debug_line    0x00000000      0x443 ./src/cr_startup_lpc17.o
  .debug_line    0x00000443       0x2e ./src/down.o
- .debug_line    0x00000471     0x18b8 ./src/main.o
- .debug_line    0x00001d29       0x2c ./src/up.o
- .debug_line    0x00001d55      0x3f1 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
- .debug_line    0x00002146      0x412 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(eeprom.o)
- .debug_line    0x00002558      0x2ec C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(joystick.o)
- .debug_line    0x00002844      0x51f C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(light.o)
- .debug_line    0x00002d63      0x80b C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(oled.o)
- .debug_line    0x0000356e      0x328 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(temp.o)
- .debug_line    0x00003896       0x82 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(font5x7.o)
- .debug_line    0x00003918      0x33e C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_dac.o)
- .debug_line    0x00003c56      0x71f C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
- .debug_line    0x00004375      0xd13 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_i2c.o)
- .debug_line    0x00005088      0x1ec C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_libcfg_default.o)
- .debug_line    0x00005274      0x35f C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
- .debug_line    0x000055d3      0x9df C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_rtc.o)
- .debug_line    0x00005fb2      0x8b4 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
- .debug_line    0x00006866      0x383 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_systick.o)
- .debug_line    0x00006be9      0x3e1 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
+ .debug_line    0x00000471     0x18bb ./src/main.o
+ .debug_line    0x00001d2c       0x2c ./src/up.o
+ .debug_line    0x00001d58      0x3f1 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_CMSISv1p30_LPC17xx\Debug\libCMSISv1p30_LPC17xx.a(system_LPC17xx.o)
+ .debug_line    0x00002149      0x412 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(eeprom.o)
+ .debug_line    0x0000255b      0x2ec C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(joystick.o)
+ .debug_line    0x00002847      0x51f C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(light.o)
+ .debug_line    0x00002d66      0x80b C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(oled.o)
+ .debug_line    0x00003571      0x328 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(temp.o)
+ .debug_line    0x00003899       0x82 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_EaBaseBoard\Debug\libLib_EaBaseBoard.a(font5x7.o)
+ .debug_line    0x0000391b      0x33e C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_dac.o)
+ .debug_line    0x00003c59      0x71f C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_gpio.o)
+ .debug_line    0x00004378      0xd13 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_i2c.o)
+ .debug_line    0x0000508b      0x1ec C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_libcfg_default.o)
+ .debug_line    0x00005277      0x35f C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_pinsel.o)
+ .debug_line    0x000055d6      0x9df C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_rtc.o)
+ .debug_line    0x00005fb5      0x8b4 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_ssp.o)
+ .debug_line    0x00006869      0x383 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_systick.o)
+ .debug_line    0x00006bec      0x3e1 C:\Users\247810\Desktop\EmbeddedSystems\demo\Lib_MCU\Debug\libLib_MCU.a(lpc17xx_clkpwr.o)
 
 .debug_str      0x00000000    0x119b6
  .debug_str     0x00000000     0x3cbd ./src/cr_startup_lpc17.o
