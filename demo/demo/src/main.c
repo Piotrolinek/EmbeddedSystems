@@ -257,10 +257,6 @@ void PWM_vInit(void) {
     LPC_SC->PCLKSEL0 |= ((uint32_t)1U << 12U);      // Ustawienie zegara PWM na pełną prędkość procesora
     LPC_SC->PCONP |= (1U << 6U);                    // Włączenie zasilania dla modułu PWM
 
-    //TODO SPRAWDZIC JUTRO CZY NIE MOZNA TEGO USUNAC
-    LPC_PINCON->PINSEL4 &= ~(15U << 0U);            // reset
-
-
     LPC_PINCON->PINSEL4 |= (1U << 0U);              // set PWM1.1 at P2.0
     LPC_PWM1->TCR = (1U << 1U);                     // counter reset
     LPC_PWM1->PR = (100000000UL - 1U) >> 10U;     // Prescaler ma wartość około 100 000 co daje nam zmiane TC na poziomie 1000Hz
@@ -750,7 +746,7 @@ void initTimer0(void) {
 
 
     LPC_TIM0->PR = 0;
-    LPC_TIM0->MR0 = 12345; //xd
+    LPC_TIM0->MR0 = 12500; //xd
     LPC_TIM0->MCR |= (1U << 0U) | (1U << 1U);
     LPC_TIM0->TCR = 0x02; //reset
     LPC_TIM0->TCR = 0x01; //wlaczanie timera
@@ -778,7 +774,7 @@ void configTimer2(void) {
     LPC_PINCON->PINSEL0 |= ((uint32_t)3U << 10U);
     LPC_TIM2->CTCR |= (1U << 0U) | (1U << 2U); // Counter mode
     LPC_TIM2->PR = 0U; // No prescale
-    LPC_TIM2->CCR = 0U; // Capture on rising edge on CAP2.0 and interrupt on capture event
+    LPC_TIM2->CCR = 0U; // Capture on rising edge on CAP2.0
     LPC_TIM2->TCR = 2U;//Reset  // Bylo 1
     LPC_TIM2->TCR = 1U;// Start Timer
 }
