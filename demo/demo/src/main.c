@@ -65,7 +65,9 @@ struct pos {
 };
 
 //////////////////////////////////////////////
-//HEADER SRECTION
+//HEADER SECTION
+
+
 uint32_t len(uint32_t val);
 
 void uint32_t_to_str(uint32_t val, char *str);
@@ -139,7 +141,7 @@ uint32_t SysTick_Config(uint32_t);
 ///////////////////////////////////////////////////////
 
 /*!
- *  @brief    		Returns lenght of uint32_t number.
+ *  @brief    		Returns length of uint32_t number.
  *  @param val  	uint32_t,
  *             		value to check the length of.
  *  @returns  		Lenght of param 'val'.
@@ -161,7 +163,7 @@ uint32_t len(uint32_t val) {
  *             		value to convert to char array.
  *  @param str 		char*,
  *             		char array to write to, of length value + 1 (for null char at the end).
- *  @returns  		void. TODO
+ *  @returns  		
  *  @side effects:	For this function to be safe, char* str parameter has to be carefully initialised with proper size.
  */
 void uint32_t_to_str(uint32_t val, char *str) {
@@ -193,7 +195,12 @@ void isLeap(void) {
     return;
 }
 
-
+/*!
+ *  @brief    Initializes a SSP
+ *  @returns
+ *  @side effects:
+ *            No error detection
+ */
 static void init_ssp(void) {
     SSP_CFG_Type SSP_ConfigStruct;
     PINSEL_CFG_Type PinCfg;
@@ -215,10 +222,6 @@ static void init_ssp(void) {
     PINSEL_ConfigPin(&PinCfg);
     PinCfg.Pinnum = 9;
     PINSEL_ConfigPin(&PinCfg);
-//    PinCfg.Funcnum = 0;
-//    PinCfg.Portnum = 2;
-//    PinCfg.Pinnum = 2;
-//    PINSEL_ConfigPin(&PinCfg);
 
     SSP_ConfigStructInit(&SSP_ConfigStruct);
 
@@ -232,7 +235,7 @@ static void init_ssp(void) {
 
 /*!
  *  @brief    		Initializes I2C interface.
- *  @returns  		void.
+ *  @returns
  *  @side effects:	None.
  */
 static void init_i2c(void) {
@@ -255,7 +258,7 @@ static void init_i2c(void) {
 
 /*!
  *  @brief    		Initializes PWM. TODO
- *  @returns  		void.
+ *  @returns
  *  @side effects:	None.
  *  @Note: 			CPU is running @100MHz
  */
@@ -300,7 +303,7 @@ Bool checkDifference(void) {
 
 /*!
  *  @brief			Changes motor spin direction to right, by modifying proper GPIO pins
- *  @returns  		void.
+ *  @returns
  *  @side effects:  None.
  */
 void PWM_Right(void) {
@@ -312,7 +315,7 @@ void PWM_Right(void) {
 
 /*!
  *  @brief			Changes motor spin direction to left, by modifying proper GPIO pins
- *  @returns  		void.
+ *  @returns
  *  @side effects:  None.
  */
 void PWM_Left(void) {
@@ -324,7 +327,7 @@ void PWM_Left(void) {
 
 /*!
  *  @brief			Stops motor rotation, by clearing proper GPIO pins
- *  @returns  		void.
+ *  @returns
  *  @side effects:  None.
  */
 void PWM_Stop_Mov(void) {
@@ -439,7 +442,7 @@ int32_t get_sample_rate(Bool to_validate) {
  *  @brief    		Reads temperature value and prepares a char array to be displayed on OLED screen.
  *  @param temp_str	char*,
  *             		char array to write to, of length value + 4 ("xx.x C", where xxx is a value returned by temp_read()).
- *  @returns  		void.
+ *  @returns
  *  @side effects:	For this function to be safe, char* temp_str parameter has to be carefully initialised with proper size, reaching negative value causes loop to break preemptively.
  */
 void write_temp_on_screen(char *temp_str) {
@@ -460,21 +463,45 @@ void write_temp_on_screen(char *temp_str) {
     temp_str[6] = '\0';
 }
 
-
+/*!
+ *  @brief    Function that increment amount of msTicks
+ *  @returns
+ *  @side effects:
+ *            None.
+ */
 void SysTick_Handler(void) {
     msTicks++;
 }
 
+/*!
+ *  @brief    Get msTicks
+ *  @returns  msTicks amount (uint32_t)
+ *  @side effects:
+ *            None.
+ */
 uint32_t getMsTicks(void) {
     return msTicks;
 }
 
+/*!
+ *  @brief    Shows temp on screen
+ *  @returns
+ *  @side effects:
+ *            Can be used without further OLED initialization
+ *            Program gets slowly when funtion is procceding
+ */
 void showOurTemp(void) {
     char naszString[7];
     write_temp_on_screen(&naszString);
     oled_putString(1, 0, &naszString, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
 }
 
+/*!
+ *  @brief    Shows a value of light in lumens
+ *  @returns
+ *  @side effects:
+ *            Can be used without further Luxometer and I2C initialization
+ */
 void showLuxometerReading(void) {
     uint32_t light_val = light_read();
     char *xdd[6];
@@ -482,6 +509,15 @@ void showLuxometerReading(void) {
     oled_putString(43, 1, &xdd, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
 }
 
+/*!
+ *  @brief    Show on screen which mode is actual
+ *  @param Bool editmode
+ *             True - editing mode is on, moving mode is off
+ *             False - moving mode is on, editing mode is off
+ *  @returns
+ *  @side effects:
+ *            None.
+ */
 void showEditmode(Bool editmode) {
     oled_line(86, 0, 91, 0, OLED_COLOR_WHITE);
     oled_line(85, 0, 85, 8, OLED_COLOR_WHITE);
@@ -492,6 +528,16 @@ void showEditmode(Bool editmode) {
     }
 }
 
+/*!
+ *  @brief    Function shows present time and alarms on screen
+ *  @param struct alarm_struct  alarm[]
+ *             struct table which has alarms data
+ *  @param int8_t y
+ *             y parameter of OLED
+ *  @returns
+ *  @side effects:
+ *            Not handling OLED errors
+ */
 void showPresentTime(struct alarm_struct alarm[], int8_t y) {
     char date_str[10];
     uint16_t year = LPC_RTC->YEAR;
@@ -619,7 +665,18 @@ void showPresentTime(struct alarm_struct alarm[], int8_t y) {
 }
 
 
-
+/*!
+ *  @brief    Converts uint32_t value to an char arrow
+ *  @param uint32_t value
+ *            A value to convert
+ *  @param char* str
+ *            A char arrow catch a converted value
+ *  @param uint8_t len
+ *            length of arrow
+ *  @returns
+ *  @side effects:
+ *            None.
+ */
 void valToString(uint32_t value, char *str, uint8_t len) {
     int i = len;
     uint32_t param_val = value;
@@ -630,8 +687,27 @@ void valToString(uint32_t value, char *str, uint8_t len) {
     }
 }
 
+/*!
+ *  @brief    Function that allows us to change these fields:
+ *            Actual date and time,
+ *            Time of up and down alarms,
+ *            Sunshide manipulating mode,
+ *            Lumen activation level
+ *  @param struct pos map[4][3]
+ *            A map of positions
+ *  @param int32_t LPC_values[]
+ *            An arrow of LPC_RTC values
+ *  @param struct alarm_struct alarm[]
+ *            An arrow of alarm values
+ *  @param int8_t x
+ *            x OLED position
+ *  @param int8_t y
+ *             y OLED position
+ *  @returns
+ *  @side effects:
+ *            None.
+ */
 void chooseTime(struct pos map[4][3], int32_t LPC_values[], struct alarm_struct alarm[], int8_t x, int8_t y) {
-    ///TO SIE MOZE WYWALIC
     char str[5];
     uint8_t leng = map[y][x].length;
     uint8_t toAdd = 0;
@@ -676,7 +752,25 @@ void chooseTime(struct pos map[4][3], int32_t LPC_values[], struct alarm_struct 
     }
 }
 
-
+/*!
+ *  @brief    Controls moving of the joystick
+ *  @param char key
+ *            acronim of the move
+ *  @param Bool edit
+ *            True - editing mode
+ *            False - moving mode
+ *  @param Bool *prevStateJoyRight
+ *            State of the tilt to the right
+ *  @param Bool *prevStateJoyLeft
+ *            State of the tilt to the left
+ *  @param Bool *prevStateJoyUp
+ *            State of the tilt to the up
+ *  @param Bool *prevStateJoyDown
+ *            State of the tilt to the down
+ *  @returns  TRUE when output is true, FALSE otherwise
+ *  @side effects:
+ *            None
+ */
 Bool JoystickControls(char key, Bool edit,Bool *prevStateJoyRight,Bool *prevStateJoyLeft,Bool *prevStateJoyUp,Bool *prevStateJoyDown) {
 
     Bool output = FALSE;
@@ -751,6 +845,12 @@ Bool JoystickControls(char key, Bool edit,Bool *prevStateJoyRight,Bool *prevStat
     return output;
 }
 
+/*!
+ *  @brief    Initializes Timer0
+ *  @returns  
+ *  @side effects:
+ *            efekty uboczne
+ */
 void initTimer0(void) {
     LPC_SC->PCONP |= (1U << 0U); //Wlaczenie zasilania
 
@@ -768,6 +868,12 @@ void initTimer0(void) {
     NVIC_EnableIRQ(TIMER0_IRQn);
 }
 
+/*!
+ *  @brief    Executing when an Timer) interrupt is called
+ *  @returns  
+ *  @side effects:
+ *            Execute even if the sount is not correct loaded
+ */
 void TIMER0_IRQHandler(void) {
     if (LPC_TIM0->IR & (1U << 0U)) {
         LPC_TIM0->IR = (1U << 0U);
@@ -781,7 +887,12 @@ void TIMER0_IRQHandler(void) {
     }
 }
 
-
+/*!
+ *  @brief    Configures Timer2
+ *  @returns  
+ *  @side effects:
+ *            None
+ */
 void configTimer2(void) {
     LPC_SC->PCONP |= ((uint32_t)1U << 22U); // Power up Timer 2
     LPC_SC->PCLKSEL1 |= ((uint32_t)1U << 12U); //Byla 2
@@ -793,7 +904,22 @@ void configTimer2(void) {
     LPC_TIM2->TCR = 1U;// Start Timer
 }
 
-void changeValue(int16_t value, int32_t LPC_values[], struct alarm_struct alarm[2], uint8_t x, uint8_t y) {
+/*!
+ *  @brief    Changes a value x,y in pos
+ *  @param int16_t value
+ *            Value to add
+ *  @param int32_t LPC_values[]
+ *            Arrow of LPC Values
+ *  @param struct alarm_struct alarm[2]
+ *            Arrow of alarm values
+ *  @param uint8_t x
+ *            x logic position
+ *  @param uint8_t y
+ *            y logic position
+ *  @returns  
+ *  @side effects:
+ *            None
+ */void changeValue(int16_t value, int32_t LPC_values[], struct alarm_struct alarm[2], uint8_t x, uint8_t y) {
     uint8_t pos_on_map = (y * 3U) + x;
     int32_t tmp;
     uint8_t i = 0U;
@@ -918,6 +1044,12 @@ void changeValue(int16_t value, int32_t LPC_values[], struct alarm_struct alarm[
     }
 }
 
+/*!
+ *  @brief    Correct days of month when it's incorrect
+ *  @returns  
+ *  @side effects:
+ *            None
+ */
 void correctDateValues(void) {
     isLeap();
     const uint8_t lenghts[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
@@ -932,6 +1064,14 @@ void correctDateValues(void) {
     }
 }
 
+/*!
+ *  @brief    Sets nearest alarm in the future
+ *  @param struct alarm_struct alarm[]
+ *            Arrow of alarms
+ *  @returns  
+ *  @side effects:
+ *            When the alarm was in the same minute, and next alarm will be in the next minute, programm sets again an alarm that was a moment ago
+ */
 void setNextAlarm(struct alarm_struct alarm[]) {
     int32_t hour0Diff = alarm[0].HOUR - LPC_RTC->HOUR + 24;
     hour0Diff = hour0Diff % 24;
@@ -976,6 +1116,17 @@ void setNextAlarm(struct alarm_struct alarm[]) {
     }
 }
 
+/*!
+ *  @brief    Reads data from EEPROM
+ *  @param struct alarm_struct alarm[]
+ *            An alarm arrow to insert alarm data from EEPROM 
+ *  @returns  error code:
+ *            0 - funtion ended correct
+ *            -5, -6 - length error
+ *            -1..-5, -16..-20 -tag error
+ *  @side effects:
+ *            Reading wrong data
+ */
 int8_t read_time_from_eeprom(struct alarm_struct alarm[]) {
     uint8_t temporary_buffer[4];
     int16_t eeprom_read_len = eeprom_read(temporary_buffer, EEPROM_OFFSET + 16, 4);
@@ -1017,6 +1168,16 @@ int8_t read_time_from_eeprom(struct alarm_struct alarm[]) {
     return errorCode;
 }
 
+/*!
+ *  @brief    Writes data to the EEPROM
+ *  @param struct alarm_struct alarm[]
+ *            An alarm arrow with data to write to the EEPROM
+ *  @returns  error code:
+ *            0 - funtion ended correct
+ *            -1 - length error
+ *  @side effects:
+ *            Try to write even when I2C is not working
+ */
 int8_t write_time_to_eeprom(struct alarm_struct alarm[]) {
     const char header[] = "TIME";
     int8_t errorCode = 0;
@@ -1043,6 +1204,12 @@ int8_t write_time_to_eeprom(struct alarm_struct alarm[]) {
     return errorCode;
 }
 
+/*!
+ *  @brief    RTC Interrupts Handler
+ *  @returns  
+ *  @side effects:
+ *            None
+ */
 void RTC_IRQHandler(void) {
     if (LPC_RTC->ILR & 2) {
         LPC_RTC->ILR = 2;
@@ -1059,6 +1226,12 @@ void RTC_IRQHandler(void) {
     }
 }
 
+/*!
+ *  @brief    Activates motor, when condition is met
+ *  @returns  
+ *  @side effects:
+ *            Possible initializing a move of non existing motor
+ */
 void activateMotor(void) {
     uint32_t but1 = ((GPIO_ReadValue(0) >> 4U) & (uint32_t)0x01);
     uint32_t but2 = ((GPIO_ReadValue(1) >> 31U) & (uint32_t)0x01);
@@ -1314,7 +1487,12 @@ int main(void) {
     }
 }
 
-
+/*!
+ *  @brief    Hard Falult Handler
+ *  @returns  
+ *  @side effects:
+ *            efekty uboczne
+ */
 void check_failed(void) {
     /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
