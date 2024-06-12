@@ -42,8 +42,8 @@ static Bool directionOfNextAlarm;  //True - up, False - down
 static uint8_t eeprom_buffer[20];
 extern int sound_sz_up;
 extern int sound_sz_down;
-extern const unsigned char sound_up[];
-extern const unsigned char sound_down[];
+extern const unsigned char sound_up[21396];
+extern const unsigned char sound_down[16006];
 static Bool disableSound = FALSE;
 static uint32_t cnt = 0;
 static uint32_t sound_offset = 0;
@@ -215,10 +215,10 @@ static void init_ssp(void) {
     PINSEL_ConfigPin(&PinCfg);
     PinCfg.Pinnum = 9;
     PINSEL_ConfigPin(&PinCfg);
-    PinCfg.Funcnum = 0;
-    PinCfg.Portnum = 2;
-    PinCfg.Pinnum = 2;
-    PINSEL_ConfigPin(&PinCfg);
+//    PinCfg.Funcnum = 0;
+//    PinCfg.Portnum = 2;
+//    PinCfg.Pinnum = 2;
+//    PINSEL_ConfigPin(&PinCfg);
 
     SSP_ConfigStructInit(&SSP_ConfigStruct);
 
@@ -267,12 +267,12 @@ void PWM_vInit(void) {
 
     LPC_PINCON->PINSEL4 |= (1U << 0U);              // set PWM1.1 at P2.0
     LPC_PWM1->TCR = (1U << 1U);                     // counter reset
-    LPC_PWM1->PR = (100000000UL - 1U) >> 10U;     // Prescaler ma wartość około 100 000 co daje nam zmiane TC na poziomie 1000Hz
-    LPC_PWM1->MCR = (1U << 1U);           // reset on MR0
-    LPC_PWM1->MR0 = 4U;                // gdy TC bedzie tyle rowne to resetujemy
-    LPC_PWM1->MR1 = 2U;                // wypelnienie 50%
-    LPC_PWM1->LER = (3U << 0U);    // latch MR0 & MR1 //TODO sprawdzic ta zmiane
-    LPC_PWM1->PCR |= ((uint32_t)1U << 9U);           // PWM1 output enable
+    LPC_PWM1->PR = (100000000UL - 1U) >> 10U;    	// Prescaler ma wartość około 100 000 co daje nam zmiane TC na poziomie 1000Hz
+    LPC_PWM1->MCR = (1U << 1U);           			// reset on MR0
+    LPC_PWM1->MR0 = 4U;                				// gdy TC bedzie tyle rowne to resetujemy
+    LPC_PWM1->MR1 = 2U;                				// wypelnienie 50%
+    LPC_PWM1->LER = (3U << 0U);    					// latch MR0 & MR1
+    LPC_PWM1->PCR |= ((uint32_t)1U << 9U);          // PWM1 output enable
     //LPC_PWM1->TCR = (1U << 1U) | (1U << 0U) | (1U << 3U);// counter enable, PWM enable
     LPC_PWM1->TCR = (1U << 0U) | (1U << 3U);    // counter enable, PWM enable //sprawdzic co to w ogole robi
 
@@ -670,7 +670,7 @@ void chooseTime(struct pos map[4][3], int32_t LPC_values[], struct alarm_struct 
         else {}
 
     }
-    if(((x != 0) && (x + (y * 3)) < 12) || ((x + (y * 3)) < 6)) {
+    if(((x != 0) && (x + (y * 3)) < 12) || ((x + (y * 3)) < 6) || ((x + (y * 3)) >= 12)) {
         str[map[y][x].length] = '\0';
         oled_putString(map[y][x].x + toAdd, map[y][x].y, str, OLED_COLOR_BLACK, OLED_COLOR_WHITE);
     }
@@ -1086,25 +1086,11 @@ void activateMotor(void) {
 }
 
 int main(void) {
-    //GPIO_SetDir(0, 5, 0);
-
-
-
-
-
     init_i2c();
     init_ssp();
     eeprom_init();
-
-
-//    rotary_init();
-//    led7seg_init();
-//
-//    pca9532_init();
     joystick_init();
-//    acc_init();
     oled_init();
-//    rgb_init();
     SYSTICK_InternalInit(1);
     SYSTICK_Cmd(ENABLE);
 
