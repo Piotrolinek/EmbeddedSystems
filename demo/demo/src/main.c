@@ -842,7 +842,7 @@ void initTimer0(void) {
     LPC_SC->PCONP |= (1U << 0U); //Power on
     LPC_SC->PCLKSEL0 |= (1U << 2U);
     LPC_TIM0->PR = 0;
-    LPC_TIM0->MR0 = 12500;
+    LPC_TIM0->MR0 = 12499;
     LPC_TIM0->MCR |= (1U << 0U) | (1U << 1U);
     LPC_TIM0->TCR = 0x02;
     LPC_TIM0->TCR = 0x01;
