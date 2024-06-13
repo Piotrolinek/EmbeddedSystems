@@ -131,9 +131,9 @@ static void activateMotor(void);
 
 ///////////////////////////////////////////////////////
 ///LIB FUNCTION HEADERS TO SATISFY MISRA
-uint32_t GPIO_ReadValue(uint8_t);
+uint32_t GPIO_ReadValue(uint8_t portNum);
 
-uint32_t SysTick_Config(uint32_t);
+uint32_t SysTick_Config(uint32_t ticks);
 
 void RTC_Init (LPC_RTC_TypeDef *RTCx);
 ///////////////////////////////////////////////////////
