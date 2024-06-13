@@ -261,7 +261,6 @@ static void init_i2c(void) {
  *  @Note: 			CPU is running @100MHz
  */
 void PWM_vInit(void) {
-    //init PWM
     LPC_SC->PCLKSEL0 &= ~((uint32_t)3U << 12U);     // Ustawienie 00 na bitach 13 i 12
     LPC_SC->PCLKSEL0 |= ((uint32_t)1U << 12U);      // Ustawienie zegara PWM na pełną prędkość procesora
     LPC_SC->PCONP |= (1U << 6U);                    // Włączenie zasilania dla modułu PWM
@@ -274,11 +273,10 @@ void PWM_vInit(void) {
     LPC_PWM1->MR1 = 2U;                				// wypelnienie 50%
     LPC_PWM1->LER = (3U << 0U);    					// latch MR0 & MR1
     LPC_PWM1->PCR |= ((uint32_t)1U << 9U);          // PWM1 output enable
-    //LPC_PWM1->TCR = (1U << 1U) | (1U << 0U) | (1U << 3U);// counter enable, PWM enable
-    LPC_PWM1->TCR = (1U << 0U) | (1U << 3U);    // counter enable, PWM enable //sprawdzic co to w ogole robi
+    LPC_PWM1->TCR = (1U << 0U) | (1U << 3U);        // counter enable, PWM enable //sprawdzic co to w ogole robi
 
-    GPIO_SetDir(2, ((uint32_t)1U << 10U), 1); // To jest kontrolka do lewo
-    GPIO_SetDir(2, ((uint32_t)1U << 11U), 1); // To jest kontrolka do prawo
+    GPIO_SetDir(2, ((uint32_t)1U << 10U), 1);       // spin left
+    GPIO_SetDir(2, ((uint32_t)1U << 11U), 1);       // spin right
 }
 
 
@@ -441,7 +439,7 @@ int32_t get_sample_rate(Bool to_validate) {
  *  @param temp_str	char*,
  *             		char array to write to, of length value + 4 ("xx.x C", where xxx is a value returned by temp_read()).
  *  @returns
- *  @side effects:	For this function to be safe, char* temp_str parameter has to be carefully initialised with proper size, reaching negative value causes loop to break preemptively.
+ *  @side effects:	For this function to be safe, char* temp_str parameter has to be carefully initialized with proper size, reaching negative value causes loop to break preemptively.
  */
 void write_temp_on_screen(unsigned char *temp_str) {
     int32_t temp = temp_read();
@@ -503,7 +501,7 @@ void showOurTemp(void) {
 void showLuxometerReading(void) {
     uint32_t light_val = light_read();
     unsigned char xdd[6];
-    uint32_t_to_str(light_val, xdd); //co
+    uint32_t_to_str(light_val, xdd);
     oled_putString(43, 1, xdd, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
 }
 
@@ -575,8 +573,6 @@ void showPresentTime(struct alarm_struct alarm[], int8_t y) {
 
     for (int8_t i = 1; i >= 0; i--) {
         time_str[i] = (unsigned char)((uint8_t)(hour % 10U) + '0');
-
-
         hour = hour / 10U;
     }
 
@@ -587,8 +583,6 @@ void showPresentTime(struct alarm_struct alarm[], int8_t y) {
 
     for (uint8_t i = 4U; i >= 3U; i--) {
         time_str[i] = (unsigned char)((uint8_t)(minute % 10U) + '0');
-
-
         minute = minute / 10U;
     }
 
@@ -598,21 +592,17 @@ void showPresentTime(struct alarm_struct alarm[], int8_t y) {
     uint8_t sec = LPC_RTC->SEC;
     for (uint8_t i = 7U; i >= 6U; i--) {
         time_str[i] = (unsigned char)((uint8_t)(sec % 10U) + '0');
-
-
         sec = sec / 10U;
     }
     unsigned char alarm_str[8];
     alarm_str[7] = '\0';
     uint8_t min;
     if (y == 3) {
-        //alarm_str[0] = (char)(alarm[1].MODE + '0');
         alarm_str[0] = 'U';
         alarm_str[1] = ' ';
         hour = alarm[1].HOUR;
         min = alarm[1].MIN;
     } else {
-        //alarm_str[0] = (char)(alarm[0].MODE + '0');
         alarm_str[0] = 'D';
         alarm_str[1] = ' ';
         hour = alarm[0].HOUR;
@@ -662,7 +652,6 @@ void showPresentTime(struct alarm_struct alarm[], int8_t y) {
     oled_putString(31, 48, activation, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
 }
 
-
 /*!
  *  @brief    Converts uint32_t value to an char arrow
  *  @param uint32_t value
@@ -700,7 +689,7 @@ void valToString(uint32_t value,unsigned char *str, uint8_t len) {
  *  @param int8_t x
  *            x OLED position
  *  @param int8_t y
- *             y OLED position
+ *            y OLED position
  *  @returns
  *  @side effects:
  *            None.
@@ -850,27 +839,22 @@ Bool JoystickControls(char key, Bool edit,Bool *prevStateJoyRight,Bool *prevStat
  *            efekty uboczne
  */
 void initTimer0(void) {
-    LPC_SC->PCONP |= (1U << 0U); //Wlaczenie zasilania
-
-    //LPC_SC->PCLKSEL0 &= ~(3 << 2);
-
+    LPC_SC->PCONP |= (1U << 0U); //Power on
     LPC_SC->PCLKSEL0 |= (1U << 2U);
-
-
     LPC_TIM0->PR = 0;
-    LPC_TIM0->MR0 = 12500; //xd
+    LPC_TIM0->MR0 = 12500;
     LPC_TIM0->MCR |= (1U << 0U) | (1U << 1U);
-    LPC_TIM0->TCR = 0x02; //reset
-    LPC_TIM0->TCR = 0x01; //wlaczanie timera
+    LPC_TIM0->TCR = 0x02; 
+    LPC_TIM0->TCR = 0x01;
 
     NVIC_EnableIRQ(TIMER0_IRQn);
 }
 
 /*!
- *  @brief    Executing when an Timer) interrupt is called
+ *  @brief    Executing when an Timer0 interrupt is called
  *  @returns  
  *  @side effects:
- *            Execute even if the sount is not correct loaded
+ *            Execute even if the sound is not correctly loaded
  */
 void TIMER0_IRQHandler(void) {
     if (LPC_TIM0->IR & (1U << 0U)) {
@@ -892,14 +876,14 @@ void TIMER0_IRQHandler(void) {
  *            None
  */
 void configTimer2(void) {
-    LPC_SC->PCONP |= ((uint32_t)1U << 22U); // Power up Timer 2
-    LPC_SC->PCLKSEL1 |= ((uint32_t)1U << 12U); //Byla 2
+    LPC_SC->PCONP |= ((uint32_t)1U << 22U);         // Power up Timer 2
+    LPC_SC->PCLKSEL1 |= ((uint32_t)1U << 12U);
     LPC_PINCON->PINSEL0 |= ((uint32_t)3U << 10U);
-    LPC_TIM2->CTCR |= (1U << 0U) | (1U << 2U); // Counter mode
-    LPC_TIM2->PR = 0U; // No prescale
-    LPC_TIM2->CCR = 0U; // Capture on rising edge on CAP2.0
-    LPC_TIM2->TCR = 2U;//Reset  // Bylo 1
-    LPC_TIM2->TCR = 1U;// Start Timer
+    LPC_TIM2->CTCR |= (1U << 0U) | (1U << 2U);      // Counter mode
+    LPC_TIM2->PR = 0U;                              // No prescale
+    LPC_TIM2->CCR = 0U;                             // Capture on rising edge on CAP2.0
+    LPC_TIM2->TCR = 2U;                             //Reset
+    LPC_TIM2->TCR = 1U;                             // Start Timer
 }
 
 /*!
@@ -1214,7 +1198,6 @@ void RTC_IRQHandler(void) {
         cnt = sound_offset;
         sound_to_play = directionOfNextAlarm;
         initTimer0();
-        //Tu nalezy wywolac interrupt do DAC
         prevCount = -1;
         if (directionOfNextAlarm) {
             PWM_Right();
@@ -1265,20 +1248,16 @@ int main(void) {
     Bool prevStateJoyUp = TRUE;
     Bool prevStateJoyDown = TRUE;
 
-
     if ((Bool)SysTick_Config(SystemCoreClock / 1000)) {
         while(1){}; // error
     }
 
     temp_init(&getMsTicks);
 
-
     PWM_vInit();
     Bool prevStateJoyClick = TRUE;
 
-
     int32_t sampleRate = 0;
-
 
     GPIO_SetDir(0, ((uint32_t)1U << 27U), 1);
     GPIO_SetDir(0, ((uint32_t)1U << 28U), 1);
@@ -1289,15 +1268,11 @@ int main(void) {
     GPIO_ClearValue(0, ((uint32_t)1U << 28U)); //LM4811-up/dn
     GPIO_ClearValue(2, ((uint32_t)1U << 13U)); //LM4811-shutdn
 
-
     light_enable();
     light_setMode(LIGHT_MODE_D1); //visible + infrared
     light_setRange(LIGHT_RANGE_64000);
     light_setWidth(LIGHT_WIDTH_16BITS);
     light_setIrqInCycles(LIGHT_CYCLE_1);
-
-
-    //initTimer0();
 
     RTC_Init(LPC_RTC);
     LPC_RTC->YEAR = 2022;
@@ -1313,8 +1288,6 @@ int main(void) {
     LPC_RTC->CIIR = 0;
     NVIC_EnableIRQ(RTC_IRQn);
 
-    //Z przykladu ustawienie wyjcia z DAC
-
     PINSEL_CFG_Type PinCfg;
 
     PinCfg.Funcnum = 2;
@@ -1326,19 +1299,14 @@ int main(void) {
 
     DAC_Init(LPC_DAC);
 
-
-    //int32_t LPC_values[] = {LPC_RTC->YEAR, LPC_RTC->MONTH, LPC_RTC->DOM, LPC_RTC->HOUR, LPC_RTC->MIN, LPC_RTC->SEC};
-
     GPIO_SetDir(0, (1U << 4U), 0);
     GPIO_SetDir(1, ((uint32_t)1U << 31U), 0);
     oled_clearScreen(OLED_COLOR_BLACK);
-
 
     unsigned char naszString[4];
     write_temp_on_screen(naszString);
     oled_putString(1, 0, naszString, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
     showLuxometerReading();
-
 
     PWM_Stop_Mov();
     uint32_t ifCheckTheTemp = 0;
@@ -1364,10 +1332,6 @@ int main(void) {
 
     struct alarm_struct alarm[2] = {{0, 2,  2},
                                     {1, 22, 22}};
-
-//	map[0][0].x = 1;
-//	map[0][0].y = 12;
-//	map[0][0].length = 4;
     struct pos map[5][3] = {
             {{1,  12, 4}, {31, 12, 2}, {49, 12, 2}},
             {{1,  24, 2}, {19, 24, 2}, {37, 24, 2}},
@@ -1378,7 +1342,7 @@ int main(void) {
 
     int8_t eeprom_read_ret_value = read_time_from_eeprom(alarm);
     if (eeprom_read_ret_value != 0) {
-        //obsluga bledu
+        //err handle
     }
     configTimer2();
     while (1) {
@@ -1401,7 +1365,6 @@ int main(void) {
 
         showEditmode(editing);
 
-
         if (!editing) {
             if (JoystickControls('u', FALSE,&prevStateJoyRight,&prevStateJoyLeft,&prevStateJoyUp,&prevStateJoyDown)) {
                 posY += 4U;
@@ -1409,7 +1372,7 @@ int main(void) {
             }
             if (JoystickControls('d', FALSE,&prevStateJoyRight,&prevStateJoyLeft,&prevStateJoyUp,&prevStateJoyDown)) {
                 posY += 6U;
-                posY = posY % 5U;//do poprawy!!!!!!!!!!!!!!
+                posY = posY % 5U;
             }
             if (JoystickControls('l', FALSE,&prevStateJoyRight,&prevStateJoyLeft,&prevStateJoyUp,&prevStateJoyDown)) {
                 posX += 2U;
@@ -1434,34 +1397,27 @@ int main(void) {
             }
         }
 
-
         chooseTime(map, LPC_values, alarm, posX, posY);
         correctDateValues();
         showPresentTime(alarm, posY);
-
 
         ifCheckTheTemp++;
         if ((ifCheckTheTemp % ((uint32_t)1U << 10U)) == 0U) {
             int8_t eeprom_write_ret_value = write_time_to_eeprom(alarm);
             if (eeprom_write_ret_value != 0) {
-                //obsluga bledu
+                //err handle
             }
         }
         showLuxometerReading();
         if ((ifCheckTheTemp % ((uint32_t)1U << 8U)) == 0U) {
             showOurTemp();
         }
-        if ((ifCheckTheTemp % (1U << 3U)) == 0U) {
-            //chooseTime(&line1, LPC_values);
-        }
 
         uint32_t but1 = ((GPIO_ReadValue(0) >> 4U) & (uint32_t)0x01);
         uint32_t but2 = ((GPIO_ReadValue(1) >> 31U) & (uint32_t)0x01);
-        //PWM_Stop_Mov();
         if ((but1 == 0U) || (but2 == 0U)) {
             prevCount = -1;
         }
-
 
         int32_t jeden = ((GPIO_ReadValue(2) & (uint32_t)((uint32_t)1U << 10U)) >> 10U);
         int32_t dwa = ((GPIO_ReadValue(2) & (uint32_t)((uint32_t)1U << 11U)) >> 11U);
@@ -1472,9 +1428,7 @@ int main(void) {
             } else {
                 roleteState = -1;
             }
-
             PWM_Stop_Mov();
-
         }
         activateMotor();
     }
