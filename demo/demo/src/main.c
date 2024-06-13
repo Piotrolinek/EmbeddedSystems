@@ -844,7 +844,7 @@ void initTimer0(void) {
     LPC_TIM0->PR = 0;
     LPC_TIM0->MR0 = 12500;
     LPC_TIM0->MCR |= (1U << 0U) | (1U << 1U);
-    LPC_TIM0->TCR = 0x02; 
+    LPC_TIM0->TCR = 0x02;
     LPC_TIM0->TCR = 0x01;
 
     NVIC_EnableIRQ(TIMER0_IRQn);
@@ -881,7 +881,7 @@ void configTimer2(void) {
     LPC_PINCON->PINSEL0 |= ((uint32_t)3U << 10U);
     LPC_TIM2->CTCR |= (1U << 0U) | (1U << 2U);      // Counter mode
     LPC_TIM2->PR = 0U;                              // No prescale
-    LPC_TIM2->CCR = 0U;                             // Capture on rising edge on CAP2.0
+    LPC_TIM2->CCR = 0U;                             // Capture on rising edge on CAP2.1
     LPC_TIM2->TCR = 2U;                             //Reset
     LPC_TIM2->TCR = 1U;                             // Start Timer
 }
